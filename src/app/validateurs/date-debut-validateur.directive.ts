@@ -18,7 +18,7 @@ export class DateDebutValidateurDirective implements Validator {
         if (dateMaintenant.getTime() > dateDebutMission.getTime()) {
             throw new Error(`La date est antérieure à celle d'aujourd'hui !`);
         }
-        else if (dateMaintenant.getDay() <= dateDebutMission.getDay()
+        else if (dateMaintenant.getDate() <= dateDebutMission.getDate()
             && dateMaintenant.getMonth() < dateDebutMission.getMonth()
             && dateMaintenant.getFullYear() < dateDebutMission.getFullYear()) {
             throw new Error(`Vous n'avez pas le droit d'enregistrer une mission aujourd'hui !`);
