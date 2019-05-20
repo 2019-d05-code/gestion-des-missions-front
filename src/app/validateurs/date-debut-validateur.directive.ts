@@ -24,6 +24,6 @@ export class DateDebutValidateurDirective implements Validator {
             throw new Error(`Vous n'avez pas le droit d'enregistrer une mission aujourd'hui !`);
         }
 
-        throw null;
+        return null;
     }
 }
