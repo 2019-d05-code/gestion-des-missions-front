@@ -10,6 +10,8 @@ import { AuthComponent } from './auth/auth.component';
 import {FormsModule} from "@angular/forms";
 import {StatutConnecteService} from "./auth/statut-connecte.service";
 import {AuthInterceptorService} from "./auth/auth-interceptor.service";
+import { DateDebutValidateurDirective } from './validateurs/date-debut-validateur.directive';
+import { FormatDateValidateurDirective } from './validateurs/format-date-validateur.directive';
 
 const routes: Routes = [
   { path:'tech', component: TechComponent, canActivate:[StatutConnecteService]}, // /tech accessible uniquement si connecté
@@ -22,7 +24,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TechComponent,
-    AuthComponent
+    AuthComponent,
+    DateDebutValidateurDirective,
+    FormatDateValidateurDirective
   ],
   imports: [
     BrowserModule,
