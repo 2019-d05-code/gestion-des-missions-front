@@ -14,10 +14,8 @@ export class DateFinValidateurDirective implements Validator {
             const dateDebut = new Date(dateDebutControl.value);
             const dateFin = new Date(dateFinControl.value);
 
-            console.log(dateDebut + " " + dateFin);
-
             if (dateDebut.getTime() > dateFin.getTime()) {
-                return { date: `La date de fin est antérieure à celle du début !` };
+                return { dateFin: `La date de fin est antérieure à celle du début !` };
             }
         }
 
