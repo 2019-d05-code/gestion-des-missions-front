@@ -7,11 +7,21 @@ import { Validator, NG_VALIDATORS, ValidationErrors, AbstractControl } from '@an
 })
 export class DateFinValidateurDirective implements Validator {
 
-    validate(control: AbstractControl): ValidationErrors {
+    validate(control: AbstractControl): ValidationErrors | null {
+        const dateFinControl = control.get('dateFin');
+        const dateDebutControl = control.get('dateDebut');
+        if (dateFinControl != null) {
+            const dateDebut = new Date(dateDebutControl.value);
+            const dateFin = new Date(dateFinControl.value);
 
-        console.log(control.get('dateFin'));
+            console.log(dateDebut + " " + dateFin);
 
-        throw new Error("Method not implemented.");
+            if (dateDebut.getTime() > dateFin.getTime()) {
+                return { date: `La date de fin est antérieure à celle du début !` };
+            }
+        }
+
+        return null;
     }
 
     constructor() { }
