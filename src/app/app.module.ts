@@ -12,12 +12,14 @@ import { StatutConnecteService } from './auth/statut-connecte.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CreationMissionComponent } from './creation-mission/creation-mission.component';
 import { ConnexionComponent } from './connexion/connexion.component';
+import { ErreurComponent } from './erreur/erreur.component';
 
 const routes: Routes = [
   { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
   { path: 'auth', component: AuthComponent },
   { path: 'creation-mission', component: CreationMissionComponent },
   { path: 'connexion', component: ConnexionComponent },
+  { path: 'erreur', component: ErreurComponent },
   { path: '', redirectTo: '/tech', pathMatch: 'full' },
 ];
 
@@ -28,7 +30,8 @@ const routes: Routes = [
     TechComponent,
     AuthComponent,
     CreationMissionComponent,
-    ConnexionComponent
+    ConnexionComponent,
+    ErreurComponent
   ],
   imports: [
     BrowserModule,
