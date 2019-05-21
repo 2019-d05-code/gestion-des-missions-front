@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TechComponent } from './tech/tech.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AuthComponent } from './auth/auth.component';
@@ -14,11 +14,13 @@ import { DateDebutValidateurDirective } from './validateurs/date-debut-validateu
 import { FormatDateValidateurDirective } from './validateurs/format-date-validateur.directive';
 import { DateFinValidateurDirective } from './validateurs/date-fin-validateur.directive';
 import { FormulaireTestComponent } from './test/formulaire-test/formulaire-test.component';
+import { CreationMissionComponent } from './creation-mission/creation-mission.component';
 
 const routes: Routes = [
-  { path:'tech', component: TechComponent, canActivate:[StatutConnecteService]}, // /tech accessible uniquement si connecté
-  { path:'auth', component: AuthComponent},
-  { path: '', redirectTo: '/tech', pathMatch: 'full'}
+  { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
+  { path: 'auth', component: AuthComponent },
+  { path: '', component: CreationMissionComponent }
+ // { path: '', redirectTo: '/tech', pathMatch: 'full' },
 ];
 
 
@@ -31,6 +33,7 @@ const routes: Routes = [
     FormatDateValidateurDirective,
     DateFinValidateurDirective,
     FormulaireTestComponent
+    CreationMissionComponent
   ],
   imports: [
     BrowserModule,
