@@ -6,7 +6,7 @@
                 <label class="col text-right">Date de début : </label>
                 <input class="col form-control" [(ngModel)]="mission.dateDebut" type="date" name="dateDebut" required
                     #dateDebut="ngModel" />
-                <div *ngIf="createForm.errors && createForm.errors.dateDebut">
+                <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateDebut">
                     {{createForm.errors.dateDebut}}
                 </div>
             </li>
@@ -14,7 +14,7 @@
                 <label class="col text-right">Date de fin : </label>
                 <input class="col form-control" [(ngModel)]="mission.dateFin" type="date" name="dateFin" required
                     #dateFin="ngModel" />
-                <div *ngIf="createForm.errors && createForm.errors.dateFin">
+                <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateFin">
                     {{createForm.errors.dateFin}}
                 </div>
             </li>
