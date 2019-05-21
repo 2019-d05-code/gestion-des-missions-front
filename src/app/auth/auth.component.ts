@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Collegue} from "./auth.domains";
-import {AuthService} from "./auth.service";
-import {Router} from "@angular/router";
+import {Collegue} from './auth.domains';
+import {AuthService} from './auth.service';
+import {Router} from '@angular/router';
 
 /**
  * Formulaire d'authentification.
@@ -26,9 +26,9 @@ import {Router} from "@angular/router";
                 <li>admin@dev.fr / superpass / ROLE_ADMINISTRATEUR, ROLE_UTILISATEUR</li>
                 <li>user@dev.fr / superpass / ROLE_UTILISATEUR</li>
               </ul>
-              
+
             </mdb-card-text>
-            
+
           </mdb-card-body>
         </mdb-card>
         <form>
@@ -53,7 +53,7 @@ import {Router} from "@angular/router";
         </form>
       </mdb-card-body>
     </mdb-card>
-    
+
   `,
   styles: []
 })

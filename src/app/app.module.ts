@@ -1,26 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TechComponent } from './tech/tech.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AuthComponent } from './auth/auth.component';
-
 import { FormsModule } from '@angular/forms';
 import { StatutConnecteService } from './auth/statut-connecte.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CreationMissionComponent } from './creation-mission/creation-mission.component';
+import { ConnexionComponent } from './connexion/connexion.component';
+import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
   { path: 'auth', component: AuthComponent },
-  { path: '', component: CreationMissionComponent },
+  { path: 'creation-mission', component: CreationMissionComponent },
+  { path: 'connexion', component: ConnexionComponent },
+  { path: 'erreur', component: ErreurComponent },
+  { path: '', redirectTo: '/tech', pathMatch: 'full' },
   { path: 'mission/affichage', component: AffichageMissionCollaborateurComponent }
- // { path: '', redirectTo: '/tech', pathMatch: 'full' },
 ];
 
 
@@ -30,9 +32,10 @@ const routes: Routes = [
     TechComponent,
     AuthComponent,
     CreationMissionComponent,
+    ConnexionComponent,
+    ErreurComponent,
     AffichageMissionCollaborateurComponent,
     MenuComponent
-
   ],
   imports: [
     BrowserModule,

@@ -1,65 +1,56 @@
-<h1 class="text-center">Demande de mission</h1>
-
-<ul>
-
+<div class="text-center">
+  <h1>Demande de mission</h1>
   <form (ngSubmit)="valider()" #createForm="ngForm">
-
-    <li class="row">
-      <label class="col">Date de début : </label>
-      <input class="col form-control" [(ngModel)]="mission.dateDebut" type="date" name="dateDebut" required
-        #dateDebut="ngModel" />
-    </li>
-
-    <li class="row">
-      <label class="col">Date de fin : </label>
-      <input class="col form-control" [(ngModel)]="mission.dateFin" type="date" name="dateFin" required
-        #dateFin="ngModel" />
-    </li>
-
-    <li class="row">
-      <label class="col">Nature : </label>
-      <select class="col" id="select">
-        <option value="">(Nature)</option>
-        <option value="">conseil</option>
-        <option value="">expertise</option>
-        <option value="">technique</option>
-        <option value="">formation</option>
-      </select>
-    </li>
-
-    <li class="row">
-      <label class="col">Ville de départ :</label>
-      <input class="col" [(ngModel)]="mission.villeDepart" type="text" name="villeDepart" required
-        #villeDepart="ngModel" />
-    </li>
-
-    <li class="row">
-      <label class="col">Ville d'arrivée :</label>
-      <input class="col" [(ngModel)]="mission.villeArrivee" type="text" name="photoUrl" #villeArrivee="ngModel" />
-    </li>
-
-    <li class="row">
-      <label class="col">Transport : </label>
-      <select class="col" id="select">
-        <option value="">(Transport)</option>
-        <option value="">Avion</option>
-        <option value="">Covoiturage</option>
-        <option value="">Train</option>
-        <option value="">Voiture de service</option>
-      </select>
-    </li>
-
-    <li class="row">
-      <label class="col">Estimation prime :</label>
-      <p class="col">
-        <!--{{mission.nature.tjm}}-->0€</p>
-    </li>
-
-    <li class="row">
-      <button class="btn btn-danger col" (click)="annuler()">Annuler</button>
-      <button class="btn btn-success col" type="submit">Valider</button>
-    </li>
-
+    <ul class="form-group">
+      <li class="row">
+        <label class="col text-right">Date de début : </label>
+        <input class="col form-control" [(ngModel)]="mission.dateDebut" type="date" name="dateDebut" required
+          #dateDebut="ngModel" />
+      </li>
+      <li class="row">
+        <label class="col text-right">Date de fin : </label>
+        <input class="col form-control" [(ngModel)]="mission.dateFin" type="date" name="dateFin" required
+          #dateFin="ngModel" />
+      </li>
+      <li class="row">
+        <label class="col text-right">Nature : </label>
+        <select class="col text-left form-control" id="select">
+          <option value="">(Nature)</option>
+          <option value="">conseil</option>
+          <option value="">expertise</option>
+          <option value="">technique</option>
+          <option value="">formation</option>
+        </select>
+      </li>
+      <li class="row">
+        <label class="col text-right">Ville de départ :</label>
+        <input class="col text-left form-control" [(ngModel)]="mission.villeDepart" type="text" name="villeDepart" required
+          #villeDepart="ngModel" />
+      </li>
+      <li class="row">
+        <label class="col text-right">Ville d'arrivée :</label>
+        <input class="col text-left form-control" [(ngModel)]="mission.villeArrivee" type="text" name="photoUrl"
+          #villeArrivee="ngModel" />
+      </li>
+      <li class="row">
+        <label class="col text-right">Transport : </label>
+        <select class="col text-left form-control" id="select">
+          <option value="">(Transport)</option>
+          <option value="">Avion</option>
+          <option value="">Covoiturage</option>
+          <option value="">Train</option>
+          <option value="">Voiture de service</option>
+        </select>
+      </li>
+      <li class="row">
+        <label class="col text-right">Estimation prime :</label>
+        <p class="col text-left">
+          <!--{{mission.nature.tjm}}-->0€</p>
+      </li>
+      <li class="row justify-content-center">
+        <button class=" btn btn-danger float-right" (click)="annuler()">Annuler</button>
+        <button class="btn btn-success float-left" type="submit">Valider</button>
+      </li>
+    </ul>
   </form>
-
-</ul>
+</div>
