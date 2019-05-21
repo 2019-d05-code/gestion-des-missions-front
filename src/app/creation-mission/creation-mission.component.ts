@@ -12,7 +12,6 @@ export class CreationMissionComponent implements OnInit {
     mission: Mission = new Mission(null, null, null, null, null, null, null);
     transport: any = {};
 
-
     constructor() {
         this.transport = [{
             name_id: 0,
