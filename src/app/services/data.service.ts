@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Subject, Observable } from 'rxjs';
-import { tap } from "rxjs/operators";
+import { tap } from 'rxjs/operators';
 
 import { Mission } from '../modeles/Mission';
 
@@ -35,10 +35,10 @@ export class DataService {
       'villeArrivee': nouvelleMission.villeArrivee,
       'transport': nouvelleMission.transport,
       'statut': nouvelleMission.statut
-    }
+    };
     return this._http.post<Mission>(`${URL_BACKEND}/missions`, body, { withCredentials: true })
       .pipe(tap(mission => {
-        this.publish(mission)
+        this.publish(mission);
       }));
   }
 }
