@@ -13,15 +13,15 @@ export class DateDebutValidateurDirective implements Validator {
         const nombreMillisecondesMaintenant = Date.now();
         const dateMaintenant = new Date();
         dateMaintenant.setTime(nombreMillisecondesMaintenant);
-        const dateDebutMission = control.value;
+        const dateDebutMission = new Date(control.value);
 
-        if (dateMaintenant.getTime() > dateDebutMission.getTime()) {
-            throw new Error(`La date est antérieure à celle d'aujourd'hui !`);
+        if (dateMaintenant.getFullYear() == dateDebutMission.getFullYear()
+            && dateMaintenant.getMonth() == dateDebutMission.getMonth()
+            && dateMaintenant.getDate() == dateDebutMission.getDate()) {
+            return { date: `Vous n'avez pas le droit d'enregistrer une mission aujourd'hui !` };
         }
-        else if (dateMaintenant.getDate() <= dateDebutMission.getDate()
-            && dateMaintenant.getMonth() < dateDebutMission.getMonth()
-            && dateMaintenant.getFullYear() < dateDebutMission.getFullYear()) {
-            throw new Error(`Vous n'avez pas le droit d'enregistrer une mission aujourd'hui !`);
+        else if (dateMaintenant.getTime() > dateDebutMission.getTime()) {
+            return { date: `La date est antérieure à celle d'aujourd'hui !` };
         }
 
         return null;
