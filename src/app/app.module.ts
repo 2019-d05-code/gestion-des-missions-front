@@ -3,19 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TechComponent } from './tech/tech.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AuthComponent } from './auth/auth.component';
-import { FormsModule } from "@angular/forms";
-import { StatutConnecteService } from "./auth/statut-connecte.service";
-import { AuthInterceptorService } from "./auth/auth-interceptor.service";
+
+import { FormsModule } from '@angular/forms';
+import { StatutConnecteService } from './auth/statut-connecte.service';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { CreationMissionComponent } from './creation-mission/creation-mission.component';
+import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
   { path: 'auth', component: AuthComponent },
-  { path: '', component: CreationMissionComponent }
+  { path: '', component: CreationMissionComponent },
+  { path: 'mission/affichage', component: AffichageMissionCollaborateurComponent }
  // { path: '', redirectTo: '/tech', pathMatch: 'full' },
 ];
 
@@ -25,7 +29,10 @@ const routes: Routes = [
     AppComponent,
     TechComponent,
     AuthComponent,
-    CreationMissionComponent
+    CreationMissionComponent,
+    AffichageMissionCollaborateurComponent,
+    MenuComponent
+
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,40 @@
+<p>
+  affichage-mission-collaborateur works!
+</p>
+
+<div class="container">
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Date de début</th>
+        <th scope="col">Date de fin</th>
+        <th scope="col">Nature</th>
+        <th scope="col">Départ</th>
+        <th scope="col">Arrivée</th>
+        <th scope="col">Transport</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--*ngFor="mission in listeMission"-->
+      <ng-container *ngFor="let mission of listeMission">
+        <tr>
+          <td>mission.dateDebut</td>
+          <td>mission.dateFin</td>
+          <td>mission.nature</td>
+          <td>mission.villeDepart</td>
+          <td>mission.villeArrivee</td>
+          <td>mission.statut</td>
+          <td>smile</td>
+        </tr>
+      </ng-container>
+
+    </tbody>
+  </table>
+
+  <button routerLink="" routerLinkActive="active-link">Nouvelle Mission</button>
+
+
+</div>
