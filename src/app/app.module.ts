@@ -15,14 +15,17 @@ import { DateDebutValidateurDirective } from './validateurs/date-debut-validateu
 import { CreationMissionComponent } from './creation-mission/creation-mission.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { ErreurComponent } from './erreur/erreur.component';
+import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
-    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
-    { path: 'auth', component: AuthComponent },
-    { path: 'creation-mission', component: CreationMissionComponent },
-    { path: 'connexion', component: ConnexionComponent },
-    { path: 'erreur', component: ErreurComponent },
-    { path: '', redirectTo: '/tech', pathMatch: 'full' }
+  { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
+  { path: 'auth', component: AuthComponent },
+  { path: 'creation-mission', component: CreationMissionComponent },
+  { path: 'connexion', component: ConnexionComponent },
+  { path: 'erreur', component: ErreurComponent },
+  { path: '', redirectTo: '/tech', pathMatch: 'full' },
+  { path: 'mission/affichage', component: AffichageMissionCollaborateurComponent }
 ];
 
 
@@ -37,6 +40,8 @@ const routes: Routes = [
         DateFinValidateurDirective,
         FormatDateValidateurDirective,
         DateDebutValidateurDirective,
+        AffichageMissionCollaborateurComponent,
+        MenuComponent
     ],
     imports: [
         BrowserModule,
