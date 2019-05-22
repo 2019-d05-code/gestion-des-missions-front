@@ -22,7 +22,7 @@ export class DataService {
     }
 
     voirMission(id: number): Observable<Mission> {
-        return this._http.get<Mission>(`${URL_BACKEND}missions?id=${id}`, { withCredentials: true });
+        return this._http.get<Mission>(`${URL_BACKEND}mission?id=${id}`, { withCredentials: true });
     }
 
     ajouterMission(nouvelleMission: Mission): Observable<Mission> {
@@ -40,7 +40,7 @@ export class DataService {
     }
 
     recupererMission(): Observable<Mission[]> {
-        return this._http.get<Mission[]>(`${URL_BACKEND}mission/affichage`, { withCredentials: true })
+        return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeMission.next(lisMis)));
 
     }
