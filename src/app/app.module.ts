@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'creation-mission', component: CreationMissionComponent },
     { path: 'erreur', component: ErreurComponent },
     { path: '', redirectTo: '/tech', pathMatch: 'full' },
-    { path: 'mission/affichage', component: AffichageMissionCollaborateurComponent }
+    { path: 'mission', component: AffichageMissionCollaborateurComponent }
 ];
 
 
