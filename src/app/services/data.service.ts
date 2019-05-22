@@ -25,6 +25,12 @@ export class DataService {
         return this._http.get<Mission>(`${URL_BACKEND}missions?id=${id}`, { withCredentials: true });
     }
 
+    recupererMission(): Observable<Mission[]> {
+        return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
+            .pipe(tap(lisMis => this._listeMission.next(lisMis)));
+
+    }
+
     ajouterMission(nouvelleMission: Mission): Observable<Mission> {
         const body = {
             'dateDebut': nouvelleMission.dateDebut,
@@ -39,10 +45,8 @@ export class DataService {
             }));
     }
 
-    recupererMission(): Observable<Mission[]> {
-        return this._http.get<Mission[]>(`${URL_BACKEND}mission/affichage`, { withCredentials: true })
-            .pipe(tap(lisMis => this._listeMission.next(lisMis)));
-
+    modifierMission(mission: Mission): Observable<Mission> {
+        return null;
     }
 
 }
