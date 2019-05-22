@@ -3,7 +3,7 @@ pipeline {
     environment {
         GH_ORG = "2019-d05-code"
         APP_REPO = "gestion-des-missions-front"
-        BACKEND_PROD = "https://missions-back.cleverapps.io/"
+        BACKEND_PROD = "https://missions.cleverapps.io"
     }
     stages {
         stage('install') {
