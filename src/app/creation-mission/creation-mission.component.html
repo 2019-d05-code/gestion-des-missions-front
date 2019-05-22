@@ -20,12 +20,13 @@
             </li>
             <li class="row">
                 <label class="col text-right">Nature : </label>
-                <select class="col text-left form-control" id="select">
-                    <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
-                    <option value="">conseil</option>
-                    <option value="">expertise</option>
-                    <option value="">technique</option>
-                    <option value="">formation</option>
+                <select class="col form-control" id="select">
+                    <optgroup label="-- Sélectionez la nature de la mission">
+                        <option>conseil</option>
+                        <option>expertise</option>
+                        <option>technique</option>
+                        <option>formation</option>
+                    </optgroup>
                 </select>
             </li>
             <li class="row">
@@ -44,7 +45,7 @@
                     #transport_id="ngModel" name="transport">
                     <optgroup label="-- Choisissez un type de transport">
                         <option *ngFor="let tran of transport" [value]="tran.name_id">{{tran.name}}</option>
-
+                    </optgroup>
                 </select>
             </li>
             <li class="row">

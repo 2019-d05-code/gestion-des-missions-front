@@ -42,6 +42,7 @@ export class CreationMissionComponent implements OnInit {
                 (error: Error) => { alert(`${error.name} : ${error.message}`); },
                 () => { }
             );
+        this._dataService.recupererMission();
     }
 
     ngOnInit() {
