@@ -17,7 +17,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit
   {
     this._serv.recupererMission()
     .subscribe( coll => {this.listeMission = coll; },
-      err => {alert(err.error); } );
+        (error: Error) => { alert(`${error.name} : ${error.message}`); } );
   }
 
   modifierMission() {}

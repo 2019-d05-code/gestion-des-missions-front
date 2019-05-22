@@ -15,7 +15,7 @@ const URL_BACKEND = environment.baseUrl;
 export class DataService {
 
   private _subjectMission = new Subject<Mission>();
-  
+
   private _listeMission = new Subject<Mission[]>();
 
   constructor(private _http: HttpClient) { }
@@ -46,7 +46,7 @@ export class DataService {
 
   recupererMission(): Observable<Mission[]>
   {
-    return this._http.get<Mission[]>(`${URL_BACKEND}/mission/affichage`, { withCredentials: true })
+    return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
     .pipe(tap (lisMis => this._listeMission.next(lisMis) ) );
 
   }
