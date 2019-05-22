@@ -1,0 +1,38 @@
+<p>
+    manager-validation works!
+  </p>
+
+  <div class="container">
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Date de début</th>
+          <th scope="col">Date de fin</th>
+          <th scope="col">Nature</th>
+          <th scope="col">Départ</th>
+          <th scope="col">Arrivée</th>
+          <th scope="col">Transport</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let mission of listeMission">
+          <tr>
+            <td>{{mission.dateDebut}}</td>
+            <td>{{mission.dateFin}}</td>
+            <td>{{mission.nature}}</td>
+            <td>{{mission.villeDepart}}</td>
+            <td>{{mission.villeArrivee}}</td>
+            <td>{{mission.transport}}</td>
+            <td>
+                <img src="https://dictionary.cambridge.org/images/thumb/check_noun_002_06440.jpg?version=4.0.80" height="20" width="20" (click)="valider()"/>
+                <img src="https://cdn.pixabay.com/photo/2013/07/13/10/33/cross-157492__340.png" height="20" width="20" (click)="refuser()"/>
+            </td>
+          </tr>
+        </ng-container>
+
+      </tbody>
+    </table>
+
+  </div>
