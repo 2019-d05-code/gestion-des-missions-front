@@ -42,7 +42,6 @@
                 <label class="col text-right">Transport : </label>
                 <select class="col form-control" id="selectTransport" [(ngModel)]="transport.name_id"
                     #transport_id="ngModel" name="transport">
-
                     <option value="">Choisissez un type de transport</option>
                     <optgroup label="-- Transport">
                         <option *ngFor="let tran of transport" [value]="tran.name_id">{{tran.name}}</option>
