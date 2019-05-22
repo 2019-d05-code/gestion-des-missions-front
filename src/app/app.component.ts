@@ -8,8 +8,8 @@ import { Collegue } from './auth/auth.domains';
  * Composant principal de l'application.
  */
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
   <nav>
     <app-menu></app-menu>
   </nav>
@@ -25,33 +25,33 @@ import { Collegue } from './auth/auth.domains';
     </div>
     <router-outlet></router-outlet>
   `,
-  styles: []
+    styles: []
 })
 export class AppComponent implements OnInit {
 
-  collegueConnecte: Observable<Collegue>;
+    collegueConnecte: Observable<Collegue>;
 
-  constructor(private _authSrv: AuthService, private _router: Router) {
+    constructor(private _authSrv: AuthService, private _router: Router) {
 
-  }
+    }
 
-  /**
-   * Action déconnecter collègue.
-   */
-  seDeconnecter() {
-    this._authSrv.seDeconnecter().subscribe(
-      value => this._router.navigate(['/auth'])
-    );
-  }
+    /**
+     * Action déconnecter collègue.
+     */
+    seDeconnecter() {
+        this._authSrv.seDeconnecter().subscribe(
+            value => this._router.navigate(['/connexion'])
+        );
+    }
 
-  /**
-   * A l'initialisation, le composant s'abonne au flux du collègue courant connecté.
-   *
-   * Celui lui permet de rester à jour en fonction des connexions et déconnexions.
-   */
-  ngOnInit(): void {
+    /**
+     * A l'initialisation, le composant s'abonne au flux du collègue courant connecté.
+     *
+     * Celui lui permet de rester à jour en fonction des connexions et déconnexions.
+     */
+    ngOnInit(): void {
 
-    this.collegueConnecte = this._authSrv.collegueConnecteObs;
-  }
+        this.collegueConnecte = this._authSrv.collegueConnecteObs;
+    }
 
 }
