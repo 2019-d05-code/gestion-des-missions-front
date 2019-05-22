@@ -17,12 +17,13 @@
       <!--*ngFor="mission in listeMission"-->
       <ng-container *ngFor="let mission of listeMission">
         <tr>
-          <td>mission.dateDebut</td>
-          <td>mission.dateFin</td>
-          <td>mission.nature</td>
-          <td>mission.villeDepart</td>
-          <td>mission.villeArrivee</td>
-          <td>mission.statut</td>
+          <td>{{mission.dateDebut}}</td>
+          <td>{{mission.dateFin}}</td>
+          <td>{{mission.nature}}</td>
+          <td>{{mission.villeDepart}}</td>
+          <td>{{mission.villeArrivee}}</td>
+          <td>{{mission.transport}}</td>
+          <td>{{mission.statut}}</td>
           <td>smile</td>
         </tr>
       </ng-container>
@@ -30,7 +31,7 @@
     </tbody>
   </table>
 
-  <button class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle Mission</button>
+  <button routerLink="/creation-mission">Nouvelle Mission</button>
 
 
 </div>
