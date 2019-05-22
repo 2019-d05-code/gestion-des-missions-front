@@ -21,7 +21,7 @@
             <li class="row">
                 <label class="col text-right">Nature : </label>
                 <select class="col text-left form-control" id="select">
-                    <option value="">(Nature)</option>
+                    <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
                     <option value="">conseil</option>
                     <option value="">expertise</option>
                     <option value="">technique</option>
@@ -42,8 +42,7 @@
                 <label class="col text-right">Transport : </label>
                 <select class="col form-control" id="selectTransport" [(ngModel)]="transport.name_id"
                     #transport_id="ngModel" name="transport">
-                    <option value="">Choisissez un type de transport</option>
-                    <optgroup label="-- Transport">
+                    <optgroup label="-- Choisissez un type de transport">
                         <option *ngFor="let tran of transport" [value]="tran.name_id">{{tran.name}}</option>
 
                 </select>
@@ -54,7 +53,8 @@
                     <!--{{mission.nature.tjm}}-->0€</p>
             </li>
             <li class="row justify-content-center">
-                <button class=" btn btn-danger float-right" routerLink="mission/affichage">Annuler</button>
+                <button class=" btn btn-danger float-right" routerLink="/mission/affichage"
+                    routerLinkActive="active-link">Annuler</button>
                 <button class=" btn btn-success float-left" type="submit">Valider</button>
             </li>
         </ul>

@@ -1,54 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
 import { Mission } from '../modeles/Mission';
-
 import { environment } from '../../environments/environment';
 const URL_BACKEND = environment.baseUrl;
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DataService {
 
-  private _subjectMission = new Subject<Mission>();
-  
-  private _listeMission = new Subject<Mission[]>();
+    private _subjectMission = new Subject<Mission>();
 
-  constructor(private _http: HttpClient) { }
+    private _listeMission = new Subject<Mission[]>();
 
-  publish(data: Mission) {
-    this._subjectMission.next(data);
-  }
+    constructor(private _http: HttpClient) { }
 
-  voirMission(id: number): Observable<Mission> {
-    return this._http.get<Mission>(`${URL_BACKEND}/missions?id=${id}`, {withCredentials : true});
-  }
+    publish(data: Mission) {
+        this._subjectMission.next(data);
+    }
 
-  ajouterMission(nouvelleMission: Mission): Observable<Mission> {
-    const body = {
-      'dateDebut': nouvelleMission.dateDebut,
-      'dateFin': nouvelleMission.dateFin,
-      'nature': nouvelleMission.nature,
-      'villeDepart': nouvelleMission.villeDepart,
-      'villeArrivee': nouvelleMission.villeArrivee,
-      'transport': nouvelleMission.transport,
-      'statut': nouvelleMission.statut
-    };
-    return this._http.post<Mission>(`${URL_BACKEND}/missions`, body, { withCredentials: true })
-      .pipe(tap(mission => {
-        this.publish(mission);
-      }));
-  }
+    voirMission(id: number): Observable<Mission> {
+        return this._http.get<Mission>(`${URL_BACKEND}missions?id=${id}`, { withCredentials: true });
+    }
 
-  recupererMission(): Observable<Mission[]>
-  {
-    return this._http.get<Mission[]>(`${URL_BACKEND}/mission/affichage`, { withCredentials: true })
-    .pipe(tap (lisMis => this._listeMission.next(lisMis) ) );
+    ajouterMission(nouvelleMission: Mission): Observable<Mission> {
+        const body = {
+            'dateDebut': nouvelleMission.dateDebut,
+            'dateFin': nouvelleMission.dateFin,
+            'villeDepart': nouvelleMission.villeDepart,
+            'villeArrivee': nouvelleMission.villeArrivee,
+            'transport': nouvelleMission.transport,
+        };
+        return this._http.post<Mission>(`${URL_BACKEND}mission`, body, { withCredentials: true })
+            .pipe(tap(mission => {
+                this.publish(mission);
+            }));
+    }
 
-  }
+    recupererMission(): Observable<Mission[]> {
+        return this._http.get<Mission[]>(`${URL_BACKEND}mission/affichage`, { withCredentials: true })
+            .pipe(tap(lisMis => this._listeMission.next(lisMis)));
+
+    }
 
 }
