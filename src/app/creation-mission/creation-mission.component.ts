@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Mission } from '../modeles/Mission';
+import { DataService } from '../services/data.service';
+import { Transport } from '../modeles/Transport';
 
 @Component({
     selector: 'app-creation-mission',
@@ -9,34 +11,31 @@ import { Mission } from '../modeles/Mission';
 })
 export class CreationMissionComponent implements OnInit {
 
-    mission: Mission = new Mission(null, null, null, null, null, null, null);
     transport: any = {};
+    mission: Mission = new Mission(null, null, null, null, null, null, null);
 
-    constructor() {
+    constructor(private _dataService: DataService) {
         this.transport = [{
             name_id: 0,
-            name: '-- Transport --'
-        }, {
-            name_id: 1,
             name: 'Avion'
         }, {
-            name_id: 2,
+            name_id: 1,
             name: 'Covoiturage'
         }, {
-            name_id: 3,
+            name_id: 2,
             name: 'Train'
         }, {
-            name_id: 4,
+            name_id: 3,
             name: 'Voiture de service'
-        }]
+        }];
     }
 
     valider() {
-        return null;
-    }
 
-    annuler() {
-        return null;
+        this.mission.transport = Transport[this.transport.name_id];
+        this._dataService.ajouterMission(this.mission)
+            .subscribe(nouvelleMission => { this.mission = nouvelleMission; },
+                (error: Error) => { alert(`${error.name} : ${error.message}`); });
     }
 
     ngOnInit() {
