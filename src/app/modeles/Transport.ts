@@ -1,1 +1,1 @@
-export enum Transport { Avion, Covoiturage, Train, VoitureDeService };
+export enum Transport { Avion, Covoiturage, Train, VoitureDeService }
