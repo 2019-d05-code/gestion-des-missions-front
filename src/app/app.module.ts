@@ -16,6 +16,7 @@ import { CreationMissionComponent } from './creation-mission/creation-mission.co
 import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
+import { ModifiMissionCollaborateurComponent } from './modifi-mission-collaborateur/modifi-mission-collaborateur.component';
 
 const routes: Routes = [
     { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
@@ -38,7 +39,8 @@ const routes: Routes = [
         FormatDateValidateurDirective,
         DateDebutValidateurDirective,
         AffichageMissionCollaborateurComponent,
-        MenuComponent
+        MenuComponent,
+        ModifiMissionCollaborateurComponent
     ],
     imports: [
         BrowserModule,
