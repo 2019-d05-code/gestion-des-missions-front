@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let mission of listeMission">
+        <ng-container *ngFor="let mission of listeMission, let i=index">
           <tr>
             <td>{{mission.dateDebut}}</td>
             <td>{{mission.dateFin}}</td>
@@ -26,8 +26,8 @@
             <td>{{mission.villeArrivee}}</td>
             <td>{{mission.transport}}</td>
             <td>
-                <img src="https://dictionary.cambridge.org/images/thumb/check_noun_002_06440.jpg?version=4.0.80" height="20" width="20" (click)="valider(mission.id)"/>
-                <img src="https://cdn.pixabay.com/photo/2013/07/13/10/33/cross-157492__340.png" height="20" width="20" (click)="refuser(mission.id)"/>
+                <img (click)="valider(i)" src="https://dictionary.cambridge.org/images/thumb/check_noun_002_06440.jpg?version=4.0.80" height="20" width="20" />
+                <img (click)="refuser(i)" src="https://cdn.pixabay.com/photo/2013/07/13/10/33/cross-157492__340.png" height="20" width="20" />
             </td>
           </tr>
         </ng-container>
