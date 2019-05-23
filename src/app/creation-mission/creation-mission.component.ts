@@ -3,6 +3,7 @@ import { Mission } from '../modeles/Mission';
 import { DataService } from '../services/data.service';
 import { Transport } from '../modeles/Transport';
 import { Router } from '@angular/router';
+import { Nature } from '../modeles/Nature';
 
 @Component({
     selector: 'app-creation-mission',
@@ -16,7 +17,7 @@ export class CreationMissionComponent implements OnInit {
     mission: Mission = new Mission(null, null, null, null, null, null, null);
 
     constructor(private _dataService: DataService, private router: Router) {
-        this.transport = [{
+        this.transports = [{
             name_id: 0,
             name: 'Avion'
         }, {
@@ -52,15 +53,15 @@ export class CreationMissionComponent implements OnInit {
     valider() {
 
         this.mission.transport = Transport[this.transports.name_id];
-        this.mission.nature = Transport[this.natures.name_id];
+        this.mission.nature = Nature[this.natures.name_id];
         this._dataService.ajouterMission(this.mission)
-            .subscribe (
+            .subscribe(
                 nouvelleMission => {
                     this.mission = nouvelleMission;
                     this.router.navigate(['/mission']);
-            },
+                },
                 (error: Error) => { alert(`${error.name} : ${error.message}`); },
-                () => {}
+                () => { }
             );
 
     }
