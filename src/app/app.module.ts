@@ -18,13 +18,15 @@ import { AffichageMissionCollaborateurComponent } from './affichage-mission-coll
 import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
-    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
     { path: 'connexion', component: AuthComponent },
-    { path: 'creation-mission', component: CreationMissionComponent },
-    { path: 'erreur', component: ErreurComponent },
-    { path: '', redirectTo: '/tech', pathMatch: 'full' },
-    { path: 'mission', component: AffichageMissionCollaborateurComponent }
+    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
+    { path: '', redirectTo: '/connexion', pathMatch: 'full' },
+    { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
+    { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
+    { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [StatutConnecteService] }
 ];
+
 
 
 @NgModule({
