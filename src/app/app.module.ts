@@ -17,6 +17,7 @@ import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
 import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
+import { ManagerGuard } from './manager-validation/manager-guard';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
@@ -25,7 +26,7 @@ const routes: Routes = [
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
-    { path: 'manager', component: ManagerValidationComponent, canActivate: [StatutConnecteService] }
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] }
 ];
 
 
@@ -49,7 +50,7 @@ const routes: Routes = [
         RouterModule.forRoot(routes),
         HttpClientModule,
         MDBBootstrapModule.forRoot(),
-        FormsModule
+        FormsModule,
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
