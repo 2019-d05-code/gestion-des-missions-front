@@ -7,7 +7,7 @@ export class Mission {
     constructor(
         public dateDebut: Date,
         public dateFin: Date,
-        public nature: Nature,
+        public nature: string,
         public villeDepart: string,
         public villeArrivee: string,
         public transport: string,

@@ -4,8 +4,6 @@ li
 }
 
 .error {
-    color: white;
-    background-color: red;
+    color: red;
     font-size: 1.2em;
-    border-radius: 8px;
 }
