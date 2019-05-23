@@ -10,7 +10,6 @@ import { Profil } from '../modeles/Profil';
 export class ManagerGuard implements CanActivate
 {
     connecte: Collaborateur;
-    actionSub: Subscription;
 
     constructor(
         private router: Router,

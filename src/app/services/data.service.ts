@@ -53,6 +53,11 @@ export class DataService {
             .pipe(tap(lisMis => this._listeManager.next(lisMis)));
     }
 
+    recupererMissionCollegue(idColl: number): Observable<MissionManager[]> {
+        return this._http.get<MissionManager[]>(`${URL_BACKEND}collegue/${idColl}`, { withCredentials: true })
+            .pipe(tap(lisMis => this._listeManager.next(lisMis)));
+    }
+
     changerStatutMission(missionStatut): Observable<Mission> {
         return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true })
     }

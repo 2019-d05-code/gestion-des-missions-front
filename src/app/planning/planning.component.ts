@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
+import { DataService } from '../services/data.service';
+import { MissionManager } from '../modeles/Mission';
+import { Collaborateur } from '../modeles/Collaborateur';
+import { AuthService } from '../auth/auth.service';
+import { connect } from 'tls';
 
 @Component({
     selector: 'app-planning',
@@ -11,9 +16,22 @@ export class PlanningComponent implements OnInit {
     CalendarView = CalendarView;
     viewDate: Date = new Date();
 
-    constructor() { }
+    listeMission: MissionManager[];
+    connecte: Collaborateur;
 
-    ngOnInit() { }
+    constructor(private _serv:DataService, private _authSrv: AuthService) { }
+
+    ngOnInit()
+    {
+        this._authSrv.recupererCollConn().subscribe(
+            (valeurObtenue) => {this.connecte = valeurObtenue; },
+            error => {alert(error.error); },
+            () => {});
+    //pas ici                           ne donne pas l'id du collegue!!!!
+    this._serv.recupererMissionCollegue(1)
+    .subscribe( coll => {this.listeMission = coll; },
+        (error: Error) => { alert(`${error.name} : ${error.message}`); } );
+    }
 
     locale = 'fr';
 	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
