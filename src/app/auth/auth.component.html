@@ -26,8 +26,8 @@
         <form>
             <div class="md-form">
                 <div class="row">
-                    <i class="fa fa-envelope prefix grey-text col-1"></i>
-                    <div class="offset-1 col-11">
+                    <i class="fa fa-envelope prefix grey-text col-3 col-lg-1"></i>
+                    <div class="offset-3 col-9 offset-lg-1 col-lg-11">
                         <input type="text" [validateSuccess]="false" data-error="Une adresse email est requise"
                             id="defaultForm-email" class="form-control" name="email" mdbInputDirective
                             [(ngModel)]="collegue.email" required>
@@ -40,8 +40,8 @@
 
             <div class="md-form">
                 <div class="row">
-                    <i class="fa fa-lock prefix grey-text col-1"></i>
-                    <div class="offset-1 col-11">
+                    <i class="fa fa-lock prefix grey-text col-3 col-lg-1"></i>
+                    <div class="offset-3 col-9 offset-lg-1 col-lg-11">
                         <input type="password" id="defaultForm-pass" [validateSuccess]="false"
                             data-error="Un mot de passe est requis" name="motDePasse" class="form-control"
                             mdbInputDirective [(ngModel)]="collegue.motDePasse" required>
