@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TechComponent } from './tech/tech.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AuthComponent } from './auth/auth.component';
@@ -16,15 +16,18 @@ import { CreationMissionComponent } from './creation-mission/creation-mission.co
 import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
+import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 
 const routes: Routes = [
-    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
     { path: 'connexion', component: AuthComponent },
-    { path: 'creation-mission', component: CreationMissionComponent },
-    { path: 'erreur', component: ErreurComponent },
-    { path: '', redirectTo: '/tech', pathMatch: 'full' },
-    { path: 'mission', component: AffichageMissionCollaborateurComponent }
+    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
+    { path: '', redirectTo: '/connexion', pathMatch: 'full' },
+    { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
+    { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
+    { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [StatutConnecteService] }
 ];
+
 
 
 @NgModule({
@@ -38,7 +41,8 @@ const routes: Routes = [
         FormatDateValidateurDirective,
         DateDebutValidateurDirective,
         AffichageMissionCollaborateurComponent,
-        MenuComponent
+        MenuComponent,
+        ManagerValidationComponent
     ],
     imports: [
         BrowserModule,

@@ -19,7 +19,9 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         (error: Error) => { alert(`${error.name} : ${error.message}`); } );
   }
 
-    modifierMission() { }
+    modifierMission(mission) {
+        this._serv.modifierMission(mission);
+    }
 
     supprimerMission() { }
 

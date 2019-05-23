@@ -51,7 +51,7 @@
                 <label class="col text-right">Transport : </label>
                 <select class="col form-control" id="selectTransport" [(ngModel)]="transports.name_id"
                     #transport_id="ngModel" name="transport" required>
-                    <optgroup label="-- Choisissez un type de transport">
+                    <optgroup label="-- Choisissez un type de transport"></optgroup>
                         <option *ngFor="let transport of transports" [value]="transport.name_id">
                             {{transport.name}}
                         </option>
