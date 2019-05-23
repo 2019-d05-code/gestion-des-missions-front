@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators'; è
+import { catchError, map, tap } from 'rxjs/operators';
 
 /**
  * Collègue anonyme.
