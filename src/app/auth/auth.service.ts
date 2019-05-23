@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Subject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 /**

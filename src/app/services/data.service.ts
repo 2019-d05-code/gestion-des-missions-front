@@ -30,16 +30,17 @@ export class DataService {
     recupererMission(): Observable<Mission[]> {
         return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeMission.next(lisMis)));
-
     }
 
     ajouterMission(nouvelleMission: Mission): Observable<Mission> {
         const body = {
             'dateDebut': nouvelleMission.dateDebut,
             'dateFin': nouvelleMission.dateFin,
+            'nature': nouvelleMission.nature,
             'villeDepart': nouvelleMission.villeDepart,
             'villeArrivee': nouvelleMission.villeArrivee,
             'transport': nouvelleMission.transport,
+            'statut': nouvelleMission.statut
         };
         return this._http.post<Mission>(`${URL_BACKEND}mission`, body, { withCredentials: true })
             .pipe(tap(mission => {
