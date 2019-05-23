@@ -26,7 +26,10 @@ const routes: Routes = [
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
-    { path: 'manager', component: ManagerValidationComponent, canActivate: [StatutConnecteService] }
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [StatutConnecteService] },
+    { path: 'modifcollab/:id', canActivate: [StatutConnecteService],
+        component: ModifiMissionCollaborateurComponent
+    }
 ];
 
 

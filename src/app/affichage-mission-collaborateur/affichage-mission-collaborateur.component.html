@@ -23,13 +23,30 @@
                     <td>{{mission.villeArrivee}}</td>
                     <td>{{mission.transport}}</td>
                     <td>{{mission.statut}}</td>
-                    <td>smile</td>
+
+                    <td>
+                        <div *ngIf="mission.statut=='INITIALE' ; else valide">
+                            <button routerLink="/modifcollab/{{mission.id}}" class="btn"><i id="btnright" class="fa fa-check-square"></i></button> <button
+                                class="btn"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div>
+                            <ng-template #valide>
+                                <button class="btn"><i id="btnright" class="fa fa-eye"></i></button>
+                            </ng-template>
+                        </div>
+
+
+                    </td>
+
+
                 </tr>
             </ng-container>
         </tbody>
     </table>
     <button class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle
         Mission</button>
+
+
 
 
 </div>

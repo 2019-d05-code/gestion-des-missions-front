@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { Mission, MissionManager, MissionStatut } from '../modeles/Mission';
 
 import { environment } from '../../environments/environment';
+import { MissionDto } from '../modeles/MissionDto';
 const URL_BACKEND = environment.baseUrl;
 
 @Injectable({
@@ -14,8 +15,9 @@ const URL_BACKEND = environment.baseUrl;
 export class DataService {
 
     private _subjectMission = new Subject<Mission>();
-    private _listeMission = new Subject<Mission[]>();
+    private _listeMission = new Subject<MissionDto[]>();
     private _listeManager = new Subject<MissionManager[]>();
+    private _listMissionForModif = new Subject<MissionDto>();
 
     constructor(private _http: HttpClient) { }
 
@@ -27,8 +29,8 @@ export class DataService {
         return this._http.get<Mission>(`${URL_BACKEND}missions?id=${id}`, { withCredentials: true });
     }
 
-    recupererMission(): Observable<Mission[]> {
-        return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
+    recupererMission(): Observable<MissionDto[]> {
+        return this._http.get<MissionDto[]>(`${URL_BACKEND}mission`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeMission.next(lisMis)));
 
     }
@@ -53,10 +55,17 @@ export class DataService {
     }
 
     changerStatutMission(missionStatut): Observable<Mission> {
-        return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true })
+        return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true });
     }
 
-    modifierMission(mission: Mission): Observable<Mission> {
+    modifierMission(mission: Mission): Observable<MissionDto> {
         return null;
+    }
+    recupererMissionAvecId( id: string ): Observable<MissionDto>{
+        return this._http.get<MissionDto>(`${URL_BACKEND}{id}`, { withCredentials: true }).pipe(
+            tap(miss => {
+              this._listMissionForModif.next(miss);
+            })
+          );
     }
 }
