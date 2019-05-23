@@ -4,8 +4,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Collaborateur } from '../modeles/Collaborateur';
 
 /**
  * Collègue anonyme.
@@ -22,6 +23,7 @@ const COLLEGUE_ANONYME = new Collegue({});
 })
 export class AuthService {
 
+    private connect = new Subject<Collaborateur>();
     /**
      * Flux du collègue connecté. Les abonnés sont notifiés dès qu'une connexion ou une déconnexion a lieu.
      *
@@ -105,5 +107,12 @@ export class AuthService {
             .pipe(
                 tap(col => this.collegueConnecteSub.next(COLLEGUE_ANONYME))
             );
+    }
+
+
+    // recupere les donnée du collegues connecter
+    recupererCollConn(): Observable<Collaborateur> {
+        return this._http.get<Collaborateur>(`${environment.baseUrl}me`, { withCredentials: true })
+            .pipe(tap(coll => this.connect.next(coll)));
     }
 }

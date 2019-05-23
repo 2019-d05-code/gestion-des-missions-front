@@ -50,7 +50,7 @@ const routes: Routes = [
         RouterModule.forRoot(routes),
         HttpClientModule,
         MDBBootstrapModule.forRoot(),
-        FormsModule
+        FormsModule,
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
