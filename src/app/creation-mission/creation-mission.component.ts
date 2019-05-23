@@ -10,11 +10,12 @@ import { Transport } from '../modeles/Transport';
 })
 export class CreationMissionComponent implements OnInit {
 
-    transport: any = {};
+    transports: any = {};
+    natures: any = {};
     mission: Mission = new Mission(null, null, null, null, null, null, null);
 
     constructor(private _dataService: DataService) {
-        this.transport = [{
+        this.transports = [{
             name_id: 0,
             name: 'Avion'
         }, {
@@ -27,6 +28,20 @@ export class CreationMissionComponent implements OnInit {
             name_id: 3,
             name: 'Voiture de service'
         }];
+
+        this.natures = [{
+            name_id: 0,
+            name: 'Conseil'
+        }, {
+            name_id: 1,
+            name: 'Expertise'
+        }, {
+            name_id: 2,
+            name: 'Technique'
+        }, {
+            name_id: 3,
+            name: 'Formation'
+        }];
     }
 
     annuler() {
@@ -35,7 +50,8 @@ export class CreationMissionComponent implements OnInit {
 
     valider() {
 
-        this.mission.transport = Transport[this.transport.name_id];
+        this.mission.transport = Transport[this.transports.name_id];
+        this.mission.nature = Transport[this.natures.name_id];
         this._dataService.ajouterMission(this.mission)
             .subscribe
             (nouvelleMission => { this.mission = nouvelleMission; },

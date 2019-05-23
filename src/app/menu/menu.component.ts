@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -9,14 +9,17 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
+    @Input() collegueConnecte;
+
     constructor(private _authSrv: AuthService, private _router: Router) { }
 
     seDeconnecter() {
         this._authSrv.seDeconnecter().subscribe(
-            value => this._router.navigate(['/connexion'])
+            () => this._router.navigate(['/connexion'])
         );
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 
 }
