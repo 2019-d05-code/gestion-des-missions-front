@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TechComponent } from './tech/tech.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AuthComponent } from './auth/auth.component';
@@ -16,6 +16,7 @@ import { CreationMissionComponent } from './creation-mission/creation-mission.co
 import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
+import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
@@ -40,7 +41,8 @@ const routes: Routes = [
         FormatDateValidateurDirective,
         DateDebutValidateurDirective,
         AffichageMissionCollaborateurComponent,
-        MenuComponent
+        MenuComponent,
+        ManagerValidationComponent
     ],
     imports: [
         BrowserModule,

@@ -11,7 +11,7 @@ import { Statut } from '../modeles/Statut';
 export class ManagerValidationComponent implements OnInit
 {
     listeMission: MissionManager[];
-    miss: MissionStatut;
+    miss: MissionStatut = new MissionStatut(null, null);
     statut: any = {};
 
   constructor(private _serv:DataService) { }
@@ -23,22 +23,30 @@ export class ManagerValidationComponent implements OnInit
         (error: Error) => { alert(`${error.name} : ${error.message}`); } );
   }
 
-  valider(id: number)
+  valider(i: number)
   {
-    this.miss.id = id;
-    this.miss.statut = Statut.VALIDEE;
+    // traitement du patch
+    this.miss.id = this.listeMission[i].id;
+    this.miss.statut = 2;
     this._serv.changerStatutMission(this.miss).subscribe( miss => {alert('envoyer');},
         (error: Error) => { alert(`${error.name} : ${error.message}`); } ,
         () => {}  );
+
+    // traitement du rafraichissemsnt de la page
+    this.ngOnInit();
   }
 
-  refuser(id: number)
+  refuser(i: number)
   {
-    this.miss.id = id;
-    this.miss.statut = Statut.REJETEE;
+    // traitement du patch
+    this.miss.id = this.listeMission[i].id;
+    this.miss.statut = 3;
     this._serv.changerStatutMission(this.miss).subscribe( miss => {alert('envoyer'); },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } ,
         () => {}  );
+
+    // traitement du rafraichissemsnt de la page
+    this.ngOnInit();
   }
 
 }
