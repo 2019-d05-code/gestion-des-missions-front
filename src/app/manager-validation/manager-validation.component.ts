@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Mission, MissionManager, MissionStatut } from '../modeles/Mission';
+import { Statut } from '../modeles/Statut';
 
 @Component({
   selector: 'app-manager-validation',
@@ -11,6 +12,7 @@ export class ManagerValidationComponent implements OnInit
 {
     listeMission: MissionManager[];
     miss: MissionStatut;
+    statut: any = {};
 
   constructor(private _serv:DataService) { }
 
@@ -24,8 +26,8 @@ export class ManagerValidationComponent implements OnInit
   valider(id: number)
   {
     this.miss.id = id;
-    this.miss.statut = 2;
-    this._serv.changerStatutMission(this.miss).subscribe( miss => {},
+    this.miss.statut = Statut.VALIDEE;
+    this._serv.changerStatutMission(this.miss).subscribe( miss => {alert('envoyer');},
         (error: Error) => { alert(`${error.name} : ${error.message}`); } ,
         () => {}  );
   }
@@ -33,8 +35,8 @@ export class ManagerValidationComponent implements OnInit
   refuser(id: number)
   {
     this.miss.id = id;
-    this.miss.statut = 3;
-    this._serv.changerStatutMission(this.miss).subscribe( miss => {},
+    this.miss.statut = Statut.REJETEE;
+    this._serv.changerStatutMission(this.miss).subscribe( miss => {alert('envoyer'); },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } ,
         () => {}  );
   }
