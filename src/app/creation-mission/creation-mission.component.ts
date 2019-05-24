@@ -4,6 +4,8 @@ import { DataService } from '../services/data.service';
 import { Transport } from '../modeles/Transport';
 import { Router } from '@angular/router';
 import { Nature } from '../modeles/Nature';
+import { Collaborateur } from '../modeles/Collaborateur';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
     selector: 'app-creation-mission',
@@ -14,9 +16,12 @@ export class CreationMissionComponent implements OnInit {
 
     transports: any = {};
     natures: any = {};
-    mission: Mission = new Mission(null, null, null, null, null, null, null);
 
-    constructor(private _dataService: DataService, private router: Router) {
+    mission: Mission = new Mission(null, null, null, null, null, null, null, null);
+    connecte: Collaborateur;
+
+
+    constructor(private _dataService: DataService, private router: Router, private _authSrv: AuthService) {
         this.transports = [{
             name_id: 0,
             name: 'Avion'
@@ -54,6 +59,7 @@ export class CreationMissionComponent implements OnInit {
 
         this.mission.transport = Transport[this.transports.name_id];
         this.mission.nature = Nature[this.natures.name_id];
+        this.mission.emailColl = this.connecte.email;
         this._dataService.ajouterMission(this.mission)
             .subscribe(
                 nouvelleMission => {
@@ -66,6 +72,11 @@ export class CreationMissionComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit()
+    {
+        this._authSrv.recupererCollConn().subscribe(
+            (valeurObtenue) => {this.connecte = valeurObtenue; },
+            error => {alert(error.error); },
+            () => {});
     }
 }
