@@ -11,7 +11,8 @@ export class Mission {
         public villeDepart: string,
         public villeArrivee: string,
         public transport: string,
-        public statut: Statut
+        public statut: Statut,
+        public emailColl: string,
     ) { }
 }
 
