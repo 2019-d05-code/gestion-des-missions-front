@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { DataService } from '../services/data.service';
 import { MissionManager } from '../modeles/Mission';
-import { Collaborateur } from '../modeles/Collaborateur';
+import { Collaborateur, CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
-import { connect } from 'tls';
 
 @Component({
     selector: 'app-planning',
@@ -17,7 +16,7 @@ export class PlanningComponent implements OnInit {
     viewDate: Date = new Date();
 
     listeMission: MissionManager[];
-    connecte: Collaborateur;
+    connecte: CollConn;
 
     constructor(private _serv:DataService, private _authSrv: AuthService) { }
 
@@ -28,7 +27,7 @@ export class PlanningComponent implements OnInit {
             error => {alert(error.error); },
             () => {});
     //pas ici                           ne donne pas l'id du collegue!!!!
-    this._serv.recupererMissionCollegue(1)
+    this._serv.recupererMissionCollegue(this.connecte.email)
     .subscribe( coll => {this.listeMission = coll; },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } );
     }

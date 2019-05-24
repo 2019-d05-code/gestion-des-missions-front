@@ -40,7 +40,8 @@ export class DataService {
             'villeDepart': nouvelleMission.villeDepart,
             'villeArrivee': nouvelleMission.villeArrivee,
             'transport': nouvelleMission.transport,
-            'statut': nouvelleMission.statut
+            'statut': nouvelleMission.statut,
+            'emailColl': nouvelleMission.emailColl
         };
         return this._http.post<Mission>(`${URL_BACKEND}mission`, body, { withCredentials: true })
             .pipe(tap(mission => {
@@ -53,8 +54,9 @@ export class DataService {
             .pipe(tap(lisMis => this._listeManager.next(lisMis)));
     }
 
-    recupererMissionCollegue(idColl: number): Observable<MissionManager[]> {
-        return this._http.get<MissionManager[]>(`${URL_BACKEND}collegue/${idColl}`, { withCredentials: true })
+
+    recupererMissionCollegue(email: string): Observable<MissionManager[]> {
+        return this._http.get<MissionManager[]>(`${URL_BACKEND}collegue/${email}`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeManager.next(lisMis)));
     }
 
