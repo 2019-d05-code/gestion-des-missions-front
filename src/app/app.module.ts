@@ -16,6 +16,7 @@ import { CreationMissionComponent } from './creation-mission/creation-mission.co
 import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
+import { ModifiMissionCollaborateurComponent } from './modifi-mission-collaborateur/modifi-mission-collaborateur.component';
 import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 import { ManagerGuard } from './manager-validation/manager-guard';
 import { PlanningComponent } from './planning/planning.component';
@@ -30,8 +31,13 @@ const routes: Routes = [
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
-    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
-    { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] }
+    { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
+
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard]  },
+    { path: 'modifcollab/:id', canActivate: [StatutConnecteService],
+        component: ModifiMissionCollaborateurComponent
+    }
+
 ];
 
 
@@ -48,6 +54,7 @@ const routes: Routes = [
         DateDebutValidateurDirective,
         AffichageMissionCollaborateurComponent,
         MenuComponent,
+        ModifiMissionCollaborateurComponent,
         ManagerValidationComponent,
         PlanningComponent
     ],

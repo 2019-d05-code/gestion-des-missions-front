@@ -8,35 +8,35 @@
     <p>{{mission.dateDebut}}</p>
     <p>{{mission.dateFin}}</p>
 </ng-container>
+<br />
 
+<div class="row">
+    <button class="btn btn-light" (click)="anneePrecedente()"><i class="fa fa-angle-double-left"></i></button>
 
+    <button class="btn btn-light" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        <i class="fa fa-angle-left"></i>
+    </button>
 
-<div class="row text-center">
-    <div class="col-md-4">
-        <div class="btn-group">
-            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenMonthViewDay()">
-                Mois Précédent
-            </div>
-            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenMonthViewDay()">
-                Mois Suivant
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-    </div>
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en'  }}</h3>
+
+    <button class="btn btn-light" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        <i class="fa fa-angle-right"></i>
+    </button>
+
+    <button class="btn btn-light" (click)="anneeSuivante()"><i class="fa fa-angle-double-right"></i></button>
 </div>
+
 <br />
 <div [ngSwitch]="view">
-    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-        [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"  [events]="events"
+    [weekStartsOn]="weekStartsOn">
     </mwl-calendar-month-view>
+    <!-- [locale]="locale"-->
 
 </div>
-
+<!--
 <div class="cal-month-view">
     <mwl-calendar-month-view-header [days]="columnHeaders" [locale]="locale"
         (columnHeaderClicked)="columnHeaderClicked.emit($event)" [customTemplate]="headerTemplate">
@@ -80,3 +80,4 @@
         </div>
     </div>
 </div>
+-->
