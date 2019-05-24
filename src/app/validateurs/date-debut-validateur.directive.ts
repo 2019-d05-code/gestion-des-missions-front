@@ -19,7 +19,7 @@ export class DateDebutValidateurDirective implements Validator {
         dateMaintenant.setTime(nombreMillisecondesMaintenant);
 
         let avionChar = '';
-        let messageRetour: string;
+        let messageRetour: string = '';
 
         if (dateDebutMissionControl != null) {
             const dateDebutMission = new Date(dateDebutMissionControl.value);
@@ -46,7 +46,10 @@ export class DateDebutValidateurDirective implements Validator {
                     messageRetour = `${avionChar}`;
                 }
             }
-            return { dateDebut: messageRetour };
+
+            if (messageRetour.length > 0) {
+                return { dateDebut: messageRetour };
+            }
         }
         return null;
     }

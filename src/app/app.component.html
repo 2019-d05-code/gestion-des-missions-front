@@ -1,0 +1,23 @@
+<head class="row text-center">
+    <div class="col-12">
+        <div class="jumbotron">
+            <h2 class="h1 h1-responsive">Gestion des Missions</h2>
+            <div *ngIf="!(collegueConnecte | async).estAnonyme()">
+                <span>{{(collegueConnecte | async).email}}</span>
+                <span>({{(collegueConnecte | async).roles}})</span>
+            </div>
+        </div>
+    </div>
+</head>
+
+<nav class="row">
+    <div class="col-12">
+        <app-menu [collegueConnecte]="collegueConnecte"></app-menu>
+    </div>
+</nav>
+
+<main class="row text-center">
+    <div class="col-12">
+        <router-outlet></router-outlet>
+    </div>
+</main>

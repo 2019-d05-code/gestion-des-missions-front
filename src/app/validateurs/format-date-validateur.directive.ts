@@ -12,7 +12,7 @@ export class FormatDateValidateurDirective implements Validator {
         const shortDate = dateAvantTraitement.ToString(`dd/MM/YYYY`);
 
         if (dateAvantTraitement === shortDate) {
-            throw new Error(`Le format de la date n'est pas valide !`);
+            return { formatDate: `La date de fin est antérieure à celle du début !` };
         }
 
         return null;

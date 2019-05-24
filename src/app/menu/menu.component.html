@@ -1,39 +1,28 @@
-<div class="container">
-    <div class="row">
-
-        <div class="col">
-            <button class="btn btn-light" routerLink="/accueil" routerLinkActive="active-link">Accueil</button>
-        </div>
-
-        <div class="col">
-            <button class="btn btn-light" routerLink="/mission" routerLinkActive="active-link">Gestion des
-                missions</button>
-        </div>
-
-        <div class="col">
-            <button class="btn btn-light" routerLink="/planning" routerLinkActive="active-link">Planning des
-                mission</button>
-        </div>
-
-        <div class="col">
-            <button class="btn btn-light" routerLink="/prime" routerLinkActive="active-link">Prime</button>
-        </div>
-
-        <div class="col">
-            <button class="btn btn-light" routerLink="/note" routerLinkActive="active-link">Saisie des notes de
-                frais</button>
-        </div>
-
-
-        <div class="col  align-self-end">
-            <button class="btn btn-dark" routerLink="/connexion" routerLinkActive="active-link">Connexion</button>
-            <button class="btn btn-dark" (click)=seDeconnecter()>Deconnexion</button>
-        </div>
-
+<div class="row text-center">
+    <div class="col-12 col-lg-2 bouton no-float">
+        <a class="link align-self-center" routerLink="/accueil" routerLinkActive="active-link">Accueil</a>
     </div>
-
-
-
-
-
+    <div class="col-12 col-lg-2 bouton no-float">
+        <a class="link" routerLink="/mission" routerLinkActive="active-link">Gestion des
+            missions</a>
+    </div>
+    <div class="col-12 col-lg-2 bouton no-float">
+        <a class="link" routerLink="/planning" routerLinkActive="active-link">Planning des
+            mission</a>
+    </div>
+    <div class="col-12 col-lg-2 bouton no-float">
+        <a class="link" routerLink="/prime" routerLinkActive="active-link">Prime</a>
+    </div>
+    <div class="col-12 col-lg-2 bouton no-float">
+        <a class="link" routerLink="/note" routerLinkActive="active-link">Saisie des notes de
+            frais</a>
+    </div>
+    <div class="col-12 col-lg-2 bouton no-float">
+        <div *ngIf="(collegueConnecte | async).estAnonyme()">
+            <a class="link" routerLink="/connexion" routerLinkActive="active-link">Connexion</a>
+        </div>
+        <div *ngIf="!(collegueConnecte | async).estAnonyme()">
+            <a class="link" (click)=seDeconnecter()>Deconnexion</a>
+        </div>
+    </div>
 </div>
