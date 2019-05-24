@@ -4,7 +4,7 @@ import { DataService } from '../services/data.service';
 import { Transport } from '../modeles/Transport';
 import { Router } from '@angular/router';
 import { Nature } from '../modeles/Nature';
-import { Collaborateur } from '../modeles/Collaborateur';
+import { Collaborateur, CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class CreationMissionComponent implements OnInit {
     natures: any = {};
 
     mission: Mission = new Mission(null, null, null, null, null, null, null, null);
-    connecte: Collaborateur;
+    connecte: CollConn;
 
 
     constructor(private _dataService: DataService, private router: Router, private _authSrv: AuthService) {
