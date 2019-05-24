@@ -14,7 +14,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
  id: string;
 
 
-    constructor(private _serv: DataService,private route: ActivatedRoute) { }
+    constructor(private _serv: DataService, private route: ActivatedRoute) { }
 
   ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
