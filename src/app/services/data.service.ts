@@ -60,14 +60,21 @@ export class DataService {
     }
 
     modifierMission(id: Number, mission: MissionDto): Observable<MissionDto> {
-        console.log (mission);
+        console.log(mission);
         return this._http.patch<MissionDto>(`${URL_BACKEND}mission/${id}`, mission, { withCredentials: true });
     }
-    recupererMissionAvecId( id: Number ): Observable<MissionDto>{
+    recupererMissionAvecId(id: Number): Observable<MissionDto> {
         return this._http.get<MissionDto>(`${URL_BACKEND}mission/${id}`, { withCredentials: true }).pipe(
             tap(miss => {
-              this._listMissionForModif.next(miss);
+                this._listMissionForModif.next(miss);
             })
-          );
+        );
     }
+
+    supremeMission(id: Number): Observable<MissionDto> {
+        return this._http.delete<MissionDto>(`${URL_BACKEND}mission/${id}`, { withCredentials: true });
+
+    }
+
+
 }

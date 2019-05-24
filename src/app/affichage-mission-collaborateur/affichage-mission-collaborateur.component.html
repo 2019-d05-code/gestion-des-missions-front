@@ -24,14 +24,32 @@
                     <td>{{mission.transport}}</td>
                     <td>{{mission.statut}}</td>
                     <td>
-                        <div *ngIf="mission.statut=='INITIALE' ; else valide">
-                            <button routerLink="/modifcollab/{{mission.id}}" class="btn"><i id="btnright" class="fa fa-check-square"></i></button> <button
-                                class="btn"><i class="fa fa-trash"></i></button>
+                        <div *ngIf="mission.statut == 'INITIALE' ">
+                            <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
+                                    class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                class="btn btn-link" (click)="supprimerMission()"><i class="fa fa-trash"></i></button>
                         </div>
-                        <div>
-                            <ng-template #valide>
-                                <button class="btn"><i id="btnright" class="fa fa-eye"></i></button>
-                            </ng-template>
+                        <div *ngIf="mission.statut == 'REJETEE'">
+                            <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
+                                    class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                class="btn btn-link" (click)="supprimerMission()" ><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION' && mission.nature =='CONGEE PAYEE' ">
+
+                            <button class="btn btn-link"><i id="btnright" class="fa fa-eye"
+                                    aria-hidden="true"></i></button>
+
+                        </div>
+                        <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION'  ">
+
+                            <button class="btn btn-link"><i id="btnright" class="fa fa-pencil"
+                                    aria-hidden="true"></i></button>
+
+                        </div>
+                        <div *ngIf="mission.statut == 'VALIDEE'">
+
+                            <button class="btn btn-link" (click)="supprimerMission()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
                         </div>
 
 
@@ -42,6 +60,7 @@
 
         </tbody>
     </table>
-    <button class="btn btn-primary"  routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle Mission</button>
+    <button class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle
+        Mission</button>
 
 </div>
