@@ -11,22 +11,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
     listeMission: MissionDto[];
- id: string;
+    id: Number;
 
 
     constructor(private _serv: DataService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-        this.id = this.route.snapshot.paramMap.get('id');
-        this._serv.recupererMission()
+
+        this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+        this._serv.recupererListeMissions()
     .subscribe( coll => {this.listeMission = coll;
     },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } );
   }
 
-    modifierMission(mission) {
-        this._serv.modifierMission(mission);
-    }
+
 
     supprimerMission() { }
 

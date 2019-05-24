@@ -26,10 +26,10 @@ export class DataService {
     }
 
     voirMission(id: number): Observable<Mission> {
-        return this._http.get<Mission>(`${URL_BACKEND}missions?id=${id}`, { withCredentials: true });
+        return this._http.get<Mission>(`${URL_BACKEND}mission?id=${id}`, { withCredentials: true });
     }
 
-    recupererMission(): Observable<MissionDto[]> {
+    recupererListeMissions(): Observable<MissionDto[]> {
         return this._http.get<MissionDto[]>(`${URL_BACKEND}mission`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeMission.next(lisMis)));
     }
@@ -59,11 +59,12 @@ export class DataService {
         return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true });
     }
 
-    modifierMission(mission: Mission): Observable<MissionDto> {
-        return null;
+    modifierMission(id: Number, mission: MissionDto): Observable<MissionDto> {
+        console.log (mission);
+        return this._http.patch<MissionDto>(`${URL_BACKEND}mission/${id}`, mission, { withCredentials: true });
     }
-    recupererMissionAvecId( id: string ): Observable<MissionDto>{
-        return this._http.get<MissionDto>(`${URL_BACKEND}{id}`, { withCredentials: true }).pipe(
+    recupererMissionAvecId( id: Number ): Observable<MissionDto>{
+        return this._http.get<MissionDto>(`${URL_BACKEND}mission/${id}`, { withCredentials: true }).pipe(
             tap(miss => {
               this._listMissionForModif.next(miss);
             })

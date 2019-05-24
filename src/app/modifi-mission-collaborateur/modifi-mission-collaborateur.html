@@ -1,21 +1,21 @@
 <div class="text-center">
-        <h2>Demande de mission</h2>
-        <form appDateFinValidateur appDateDebutValidateur (ngSubmit)="valider()" #createForm="ngForm">
+        <h2>modification de mission</h2>
+        <form appDateFinValidateur appDateDebutValidateur (ngSubmit)="valider()" #modifForm="ngForm">
             <ul class="form-group">
                 <li class="row">
                     <label class="col text-right">Date de début : </label>
                     <input class="col form-control" [(ngModel)]="mission.dateDebut" type="date" name="dateDebut" required
                         #dateDebut="ngModel" />
-                    <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateDebut">
-                        {{createForm.errors.dateDebut}}
+                    <div class="col-12 error" *ngIf="modifForm.errors && modifForm.errors.dateDebut">
+                        {{modifForm.errors.dateDebut}}
                     </div>
                 </li>
                 <li class="row">
                     <label class="col text-right">Date de fin : </label>
                     <input class="col form-control" [(ngModel)]="mission.dateFin" type="date" name="dateFin" required
                         #dateFin="ngModel" />
-                    <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateFin">
-                        {{createForm.errors.dateFin}}
+                    <div class="col-12 error" *ngIf="modifForm.errors && modifForm.errors.dateFin">
+                        {{modifForm.errors.dateFin}}
                     </div>
                 </li>
                 <li class="row">
@@ -56,7 +56,7 @@
                 <li class="row justify-content-center">
                     <button class=" btn btn-danger float-right" routerLink="/mission"
                         routerLinkActive="active-link">Annuler</button>
-                    <button class=" btn btn-success float-left" type="submit">Valider</button>
+                    <button class=" btn btn-success float-left" [disabled]="modifForm.invalid" type="submit">Valider</button>
                 </li>
             </ul>
         </form>
