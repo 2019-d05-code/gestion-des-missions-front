@@ -2,8 +2,8 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th scope="col">Date de début</th>
-                <th scope="col">Date de fin</th>
+                <th scope="col">Date de début<button class="btn" (click)="trierMissionDateDebut()"></button></th>
+                <th scope="col">Date de fin<button class="btn" (click)="trierMissionDateFin()"></button></th>
                 <th scope="col">Nature</th>
                 <th scope="col">Départ</th>
                 <th scope="col">Arrivée</th>
@@ -14,7 +14,13 @@
         </thead>
         <tbody>
             <!--*ngFor="mission in listeMission"-->
+            <div [ngSwitch]="trierPar">
+                <div *ngSwitchCase="date de début">{{trierMissionDateDebut}}</div>
+                <div *ngSwitchCase="date de fin">{{trierMissionDateFin}}</div>
+                <div *ngSwitchDefault=""></div>
+            </div>
             <ng-container *ngFor="let mission of listeMission">
+
                 <tr>
                     <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
                     <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
@@ -26,8 +32,10 @@
                 </tr>
             </ng-container>
 
+
         </tbody>
     </table>
 
-    <button class="btn btn-primary"  routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle Mission</button>
+    <button class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle
+        Mission</button>
 </div>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Mission, MissionManager, MissionStatut } from '../modeles/Mission';
+import { Mission, MissionManager } from '../modeles/Mission';
 
 import { environment } from '../../environments/environment';
 const URL_BACKEND = environment.baseUrl;
@@ -23,11 +23,12 @@ export class DataService {
         this._subjectMission.next(data);
     }
 
+
     voirMission(id: number): Observable<Mission> {
-        return this._http.get<Mission>(`${URL_BACKEND}missions?id=${id}`, { withCredentials: true });
+        return this._http.get<Mission>(`${URL_BACKEND}mission?id=${id}`, { withCredentials: true });
     }
 
-    recupererMission(): Observable<Mission[]> {
+    recupererListeMissions(): Observable<Mission[]> {
         return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeMission.next(lisMis)));
     }
@@ -54,7 +55,7 @@ export class DataService {
     }
 
     changerStatutMission(missionStatut): Observable<Mission> {
-        return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true })
+        return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true });
     }
 
     modifierMission(mission: Mission): Observable<Mission> {
