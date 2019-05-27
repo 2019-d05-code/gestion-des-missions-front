@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MissionDto } from '../modeles/MissionDto';
 import { Transport } from '../modeles/Transport';
 import { Nature } from '../modeles/Nature';
+import { NomNature } from '../modeles/NomNature';
 
 @Component({
     selector: 'app-modifi-mission-collaborateur',
