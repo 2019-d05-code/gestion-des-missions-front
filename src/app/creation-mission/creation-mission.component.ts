@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Nature } from '../modeles/Nature';
 import { Collaborateur, CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
+import { NomNature } from '../modeles/NomNature';
 
 @Component({
     selector: 'app-creation-mission',
@@ -58,7 +59,7 @@ export class CreationMissionComponent implements OnInit {
     valider() {
 
         this.mission.transport = Transport[this.transports.name_id];
-        this.mission.nature = Nature[this.natures.name_id];
+        this.mission.nature = NomNature[this.natures.name_id];
         this.mission.emailColl = this.connecte.email;
         this._dataService.ajouterMission(this.mission)
             .subscribe(
@@ -72,11 +73,10 @@ export class CreationMissionComponent implements OnInit {
 
     }
 
-    ngOnInit()
-    {
+    ngOnInit() {
         this._authSrv.recupererCollConn().subscribe(
-            (valeurObtenue) => {this.connecte = valeurObtenue; },
-            error => {alert(error.error); },
-            () => {});
+            (valeurObtenue) => { this.connecte = valeurObtenue; },
+            error => { alert(error.error); },
+            () => { });
     }
 }

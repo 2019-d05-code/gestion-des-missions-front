@@ -22,7 +22,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         this.updateMission();
     }
 
-    supprimerMission(id:number): void {
+    supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
             this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 1000);
@@ -35,49 +35,49 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     updateMission(): void {
         this._serv.recupererListeMissionsDto().subscribe(coll => {
-        this.listeMissionDto = coll;
+            this.listeMissionDto = coll;
         },
             (error: Error) => { alert(`${error.name} : ${error.message}`); });
     }
 
     trierMissionDateDebutAsc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missiona.dateDebut).getTime() - new Date(missionb.dateDebut).getTime());
             }
         );
         this.tri('dateDebutAsc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     trierMissionDateFinAsc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missiona.dateFin).getTime() - new Date(missionb.dateFin).getTime());
             }
         );
         this.tri('dateFinAsc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     trierMissionDateDebutDesc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missionb.dateDebut).getTime() - new Date(missiona.dateDebut).getTime());
             }
         );
         this.tri('dateDebutDesc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     trierMissionDateFinDesc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missionb.dateFin).getTime() - new Date(missiona.dateFin).getTime());
             }
         );
         this.tri('dateFinDesc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     tri(valeur: string) {
