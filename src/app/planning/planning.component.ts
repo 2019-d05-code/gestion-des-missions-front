@@ -6,7 +6,7 @@ import { DataService } from '../services/data.service';
 import { MissionManager } from '../modeles/Mission';
 import { CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const colors: any = {
@@ -18,8 +18,8 @@ const colors: any = {
 @Component({
     selector: 'app-planning',
     templateUrl: './planning.component.html',
-    styles: ['./planning.componant.css'],
-    providers: [ { provide: CalendarDateFormatter, useClass: CustomDateFormatter } ]
+    styles: [], //'./planning.componant.css'
+    providers: [{ provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class PlanningComponent implements OnInit {
     // - attribut foncrionnel -
@@ -31,61 +31,62 @@ export class PlanningComponent implements OnInit {
     CalendarView = CalendarView;
     viewDate: Date = new Date();
     activeDayIsOpen: boolean = true;
-    refresh: Subject<any> = new Subject();
     locale = 'fr';
     weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
     weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+    events: Observable<CalendarEvent[]>;
 
-    constructor(private _serv: DataService, private _authSrv: AuthService)
+    constructor(private _serv: DataService, private _authSrv: AuthService) { }
+
+    ngOnInit()
     {
         // recuperation du collegue connecte
         this._authSrv.recupererCollConn().subscribe(
-            (valeurObtenue) => { this.connecte = valeurObtenue; },
+            (valeurObtenue) => {
+            this.connecte = valeurObtenue;
+            this.afficherMission();
+            },
             error => { alert(`${error.name} : ${error.message}`); },
             () => { });
     }
 
-    ngOnInit() {
+    afficherMission() {
         // recuperation de la liste des missions du collegue
-        this._serv.recupererMissionCollegue(this.connecte.email) //this.connecte.email
-            /*.subscribe(coll => { this.listeMission = coll; },
-                (error: Error) => { alert(`${error.name} : ${error.message}`); });*/
-            .pipe( map(
-            liste => liste.map(mission => {
-                let couleur = colors.yellow;
-                if (mission.nature === 'Congé')
-                { couleur = colors.red; }
-                else {couleur = colors.blue; }
+        this.events = this._serv.recupererMissionCollegue(this.connecte.email)
+            .pipe(map(
+                liste => liste.map(mission => {
+                    let couleur = colors.yellow;
+                    if (mission.nature === 'Congé') { couleur = colors.red; }
+                    else { couleur = colors.blue; }
 
-                // ajout des evenement dans le calendrier
-                return <CalendarEvent>{
-                    start: startOfDay(mission.dateDebut),
-                    end: endOfDay(mission.dateFin),
-                    title: `${mission.nature}`,
-                    color: couleur,
-                };
-           })
+                    // ajout des evenement dans le calendrier
+                    return <CalendarEvent>{
+                        start: startOfDay(mission.dateDebut),
+                        end: endOfDay(mission.dateFin),
+                        title: `${mission.nature}`,
+                        color: couleur,
+                    };
+                })
             ));
 
+    }
 
-}
 
+    setView(view: CalendarView) {
+        this.view = view;
+    }
 
-setView(view: CalendarView) {
-    this.view = view;
-}
+    closeOpenMonthViewDay() {
+        this.activeDayIsOpen = false;
+    }
 
-closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-}
+    anneeSuivante() {
+        this.viewDate = addYears(this.viewDate, 1);
+    }
 
-anneeSuivante() {
-    this.viewDate = addYears(this.viewDate, 1);
-}
-
-anneePrecedente() {
-    this.viewDate = subYears(this.viewDate, 1);
-}
+    anneePrecedente() {
+        this.viewDate = subYears(this.viewDate, 1);
+    }
 
 }
 
