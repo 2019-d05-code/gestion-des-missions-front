@@ -35,7 +35,7 @@ const routes: Routes = [
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard]  },
-    { path: 'modifcollab/:id', component: ModifiMissionCollaborateurComponent, canActivate: [StatutConnecteService] }
+    { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] }
 
 ];
 
