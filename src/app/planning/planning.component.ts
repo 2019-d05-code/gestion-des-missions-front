@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarView, DAYS_OF_WEEK, CalendarEvent } from 'angular-calendar';
+import { CalendarView, DAYS_OF_WEEK, CalendarEvent, CalendarDateFormatter } from 'angular-calendar';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { addYears, subYears, startOfDay, endOfDay } from 'date-fns';
 import { DataService } from '../services/data.service';
 import { MissionManager } from '../modeles/Mission';
@@ -17,7 +18,8 @@ const colors: any = {
 @Component({
     selector: 'app-planning',
     templateUrl: './planning.component.html',
-    styles: []
+    styles: ['./planning.componant.css'],
+    providers: [ { provide: CalendarDateFormatter, useClass: CustomDateFormatter } ]
 })
 export class PlanningComponent implements OnInit {
     // - attribut foncrionnel -
