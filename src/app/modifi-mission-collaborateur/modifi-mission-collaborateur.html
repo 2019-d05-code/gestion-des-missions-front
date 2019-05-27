@@ -40,10 +40,10 @@
             </li>
             <li class="row">
                 <label class="col text-right">Transport : </label>
-                <select class="col form-control" id="selectTransport" [(ngModel)]="transport.name_id"
-                    #transport_id="ngModel" name="transport">
+                <select class="col form-control" id="selectTransport" [(ngModel)]="transports.name_id"
+                    #transport_id="ngModel" name="transport" required>
                     <optgroup label="-- Choisissez un type de transport">
-                        <option *ngFor="let tran of transport" [value]="tran.name_id">{{tran.name}}</option>
+                        <option *ngFor="let tran of transports" [value]="tran.name_id">{{tran.name}}</option>
                     </optgroup>
                 </select>
             </li>
