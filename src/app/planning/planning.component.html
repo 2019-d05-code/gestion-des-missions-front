@@ -1,0 +1,36 @@
+<p>
+    planning works!
+</p>
+
+<h1>Planning des Missions</h1>
+
+<ng-container *ngFor="let mission of listeMission, let i=index">
+    <p>{{mission.dateDebut}}</p>
+    <p>{{mission.dateFin}}</p>
+</ng-container>
+<br />
+
+<div class="row">
+    <button class="btn btn-light" (click)="anneePrecedente()"><i class="fa fa-angle-double-left"></i></button>
+
+    <button class="btn btn-light" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        <i class="fa fa-angle-left"></i>
+    </button>
+
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle')  }}</h3>
+
+    <button class="btn btn-light" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        <i class="fa fa-angle-right"></i>
+    </button>
+
+    <button class="btn btn-light" (click)="anneeSuivante()"><i class="fa fa-angle-double-right"></i></button>
+</div>
+
+<br />
+<div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"  [events]="events | async"
+    [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (beforeViewRender)="beforeMonthViewRender($event)">
+    </mwl-calendar-month-view>
+</div>

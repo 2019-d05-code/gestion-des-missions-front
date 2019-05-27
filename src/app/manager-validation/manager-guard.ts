@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Collaborateur, CollConn } from '../modeles/Collaborateur';
 import { Profil } from '../modeles/Profil';
 import { map, tap } from 'rxjs/operators';
 
@@ -26,7 +27,8 @@ export class ManagerGuard implements CanActivate {
 
     }
 
-    verification(element) {
-        return element === Profil.Manager;
+    verification(element)
+    {
+        return  element ===  Profil.Manager;
     }
 }
