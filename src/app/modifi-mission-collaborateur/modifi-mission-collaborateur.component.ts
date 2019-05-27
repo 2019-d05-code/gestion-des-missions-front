@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MissionDto } from '../modeles/MissionDto';
 import { Transport } from '../modeles/Transport';
 import { Nature } from '../modeles/Nature';
+import { NomNature } from '../modeles/NomNature';
 
 @Component({
   selector: 'app-modifi-mission-collaborateur',
@@ -48,7 +49,7 @@ this.natures = [{
 valider() {
 
     this.mission.transport = Transport[this.transport.name_id];
-    this.mission.nature = Nature[this.natures.name_id];
+    this.mission.nature = NomNature[this.natures.name_id];
     this.mission.id = this.id;
     this._dataService.modifierMission(this.id, this.mission)
         .subscribe(

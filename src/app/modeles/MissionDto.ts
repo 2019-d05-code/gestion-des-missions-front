@@ -1,5 +1,6 @@
 import { Statut } from './Statut';
 import { Nature } from './Nature';
+import { NomNature } from './NomNature';
 
 
 
