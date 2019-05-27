@@ -22,7 +22,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         this.updateMission();
     }
 
-    supprimerMission(id:number): void {
+    supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
             this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 1000);
@@ -35,7 +35,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     updateMission(): void {
         this._serv.recupererListeMissionsDto().subscribe(coll => {
-        this.listeMissionDto = coll;
+            this.listeMissionDto = coll;
         },
             (error: Error) => { alert(`${error.name} : ${error.message}`); });
     }
