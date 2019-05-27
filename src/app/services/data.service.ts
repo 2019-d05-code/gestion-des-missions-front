@@ -70,6 +70,7 @@ export class DataService {
         console.log(mission);
         return this._http.patch<MissionDto>(`${URL_BACKEND}mission/${id}`, mission, { withCredentials: true });
     }
+
     recupererMissionAvecId(id: Number): Observable<MissionDto> {
         return this._http.get<MissionDto>(`${URL_BACKEND}mission/${id}`, { withCredentials: true }).pipe(
             tap(miss => {
@@ -78,7 +79,7 @@ export class DataService {
         );
     }
 
-    supremeMission(id: Number): Observable<MissionDto> {
+    supprimerMission(id: Number): Observable<MissionDto> {
         return this._http.delete<MissionDto>(`${URL_BACKEND}mission/${id}`, { withCredentials: true });
 
     }
