@@ -16,7 +16,7 @@ import { CreationMissionComponent } from './creation-mission/creation-mission.co
 import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
-import { ModifiMissionCollaborateurComponent } from './modifi-mission-collaborateur/modifi-mission-collaborateur.component';
+import { ModifierMissionCollaborateurComponent } from './modifier-mission-collaborateur/modifier-mission-collaborateur.component';
 import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 import { ManagerGuard } from './manager-validation/manager-guard';
 import { PlanningComponent } from './planning/planning.component';
@@ -53,7 +53,7 @@ const routes: Routes = [
         DateDebutValidateurDirective,
         AffichageMissionCollaborateurComponent,
         MenuComponent,
-        ModifiMissionCollaborateurComponent,
+        ModifierMissionCollaborateurComponent,
         ManagerValidationComponent,
         PlanningComponent,
         AccueilComponent
@@ -66,8 +66,9 @@ const routes: Routes = [
         FormsModule,
         BrowserAnimationsModule,
         CalendarModule.forRoot({
-        provide: DateAdapter,
-        useFactory: adapterFactory })
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        })
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
