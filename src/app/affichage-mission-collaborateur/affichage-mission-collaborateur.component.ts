@@ -12,12 +12,11 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     constructor(private _serv: DataService) { }
 
-  ngOnInit()
-  {
-    this._serv.recupererMission()
-    .subscribe( coll => {this.listeMission = coll; },
-        (error: Error) => { alert(`${error.name} : ${error.message}`); } );
-  }
+    ngOnInit() {
+        this._serv.recupererMission()
+            .subscribe(coll => { this.listeMission = coll; },
+                (error: Error) => { alert(`${error.name} : ${error.message}`); });
+    }
 
     modifierMission(mission) {
         this._serv.modifierMission(mission);

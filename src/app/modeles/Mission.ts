@@ -1,6 +1,5 @@
 import { Nature } from './Nature';
 import { Statut } from './Statut';
-import { Transport } from './Transport';
 
 export class Mission {
 
