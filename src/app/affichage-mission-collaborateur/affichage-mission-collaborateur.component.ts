@@ -42,43 +42,43 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     }
 
     trierMissionDateDebutAsc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missiona.dateDebut).getTime() - new Date(missionb.dateDebut).getTime());
             }
         );
         this.tri('dateDebutAsc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     trierMissionDateFinAsc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missiona.dateFin).getTime() - new Date(missionb.dateFin).getTime());
             }
         );
         this.tri('dateFinAsc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     trierMissionDateDebutDesc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missionb.dateDebut).getTime() - new Date(missiona.dateDebut).getTime());
             }
         );
         this.tri('dateDebutDesc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     trierMissionDateFinDesc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
                 return (new Date(missionb.dateFin).getTime() - new Date(missiona.dateFin).getTime());
             }
         );
         this.tri('dateFinDesc');
-        return this.listeMission;
+        return this.listeMissionDto;
     }
 
     tri(valeur: string) {

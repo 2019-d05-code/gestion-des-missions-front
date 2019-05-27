@@ -69,7 +69,6 @@ export class DataService {
 
     changerStatutMission(missionStatut): Observable<Mission> {
         return this._http.patch<Mission>(`${URL_BACKEND}manager`, missionStatut, { withCredentials: true });
-
     }
 
     modifierMission(id: Number, mission: MissionDto): Observable<MissionDto> {
@@ -89,6 +88,4 @@ export class DataService {
         return this._http.delete<MissionDto>(`${URL_BACKEND}mission/${id}`, { withCredentials: true });
 
     }
-
-
 }
