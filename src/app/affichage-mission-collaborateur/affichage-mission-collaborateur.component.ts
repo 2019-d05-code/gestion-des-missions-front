@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
-import { triggerAsyncId } from 'async_hooks';
 import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,8 +18,8 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     trierPar = '';
 
     ngOnInit() {
-       this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-      this.updateMission();
+        this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+        this.updateMission();
     }
 
     supprimerMission() {
@@ -29,16 +28,17 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             setTimeout(() => this.messageOk = undefined, 1000);
             this.updateMission();
         },
-          (err: Error) => {
-             alert(`${err.name} : ${err.message}`);
-          } );
+            (err: Error) => {
+                alert(`${err.name} : ${err.message}`);
+            });
     }
 
     updateMission(): void {
-        this._serv.recupererListeMissionsDto().subscribe( coll => {this.listeMissionDto = coll;
+        this._serv.recupererListeMissionsDto().subscribe(coll => {
+        this.listeMissionDto = coll;
         },
-            (error: Error) => { alert(`${error.name} : ${error.message}`); } );
-      }
+            (error: Error) => { alert(`${error.name} : ${error.message}`); });
+    }
 
     trierMissionDateDebutAsc() {
         this.listeMission.sort(
@@ -80,7 +80,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         return this.listeMission;
     }
 
-    tri(valeur:string) {
+    tri(valeur: string) {
         this.trierPar = valeur;
     }
 }
