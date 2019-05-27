@@ -36,16 +36,17 @@ export class PlanningComponent implements OnInit {
     weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
     weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
 
-    constructor(private _serv: DataService, private _authSrv: AuthService) { }
-
-    ngOnInit() {
+    constructor(private _serv: DataService, private _authSrv: AuthService)
+    {
         // recuperation du collegue connecte
         this._authSrv.recupererCollConn().subscribe(
             (valeurObtenue) => { this.connecte = valeurObtenue; },
             error => { alert(`${error.name} : ${error.message}`); },
             () => { });
+    }
 
-        // recuperation de la liste des misison du collegue
+    ngOnInit() {
+        // recuperation de la liste des missions du collegue
         this._serv.recupererMissionCollegue(this.connecte.email) //this.connecte.email
             /*.subscribe(coll => { this.listeMission = coll; },
                 (error: Error) => { alert(`${error.name} : ${error.message}`); });*/
