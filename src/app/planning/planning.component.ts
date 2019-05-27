@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarView, DAYS_OF_WEEK, CalendarEvent, CalendarDateFormatter } from 'angular-calendar';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { CalendarView, DAYS_OF_WEEK, CalendarEvent, CalendarDateFormatter,
+    CalendarMonthViewBeforeRenderEvent } from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { addYears, subYears, startOfDay, endOfDay } from 'date-fns';
 import { DataService } from '../services/data.service';
@@ -17,8 +18,10 @@ const colors: any = {
 
 @Component({
     selector: 'app-planning',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     templateUrl: './planning.component.html',
-    styles: [], //'./planning.componant.css'
+    styles: [`.bg-we {background-color: aliceblue}`], //'./planning.componant.css'
     providers: [{ provide: CalendarDateFormatter, useClass: CustomDateFormatter }]
 })
 export class PlanningComponent implements OnInit {
@@ -33,7 +36,7 @@ export class PlanningComponent implements OnInit {
     activeDayIsOpen: boolean = true;
     locale = 'fr';
     weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-    weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+    weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
     events: Observable<CalendarEvent[]>;
 
     constructor(private _serv: DataService, private _authSrv: AuthService) { }
@@ -59,7 +62,7 @@ export class PlanningComponent implements OnInit {
                     if (mission.nature === 'Congé') { couleur = colors.red; }
                     else { couleur = colors.blue; }
 
-                    // ajout des evenement dans le calendrier
+                    // ajout des evenements dans le calendrier
                     return <CalendarEvent>{
                         start: startOfDay(mission.dateDebut),
                         end: endOfDay(mission.dateFin),
@@ -70,6 +73,15 @@ export class PlanningComponent implements OnInit {
             ));
 
     }
+
+    beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
+        renderEvent.body.forEach(day => {
+          const dayOfMonth = day.date.getDay(); //getDate();
+          if (dayOfMonth === 0 || dayOfMonth === 6) {
+            day.cssClass = 'bg-we';
+          }
+        });
+      }
 
 
     setView(view: CalendarView) {
