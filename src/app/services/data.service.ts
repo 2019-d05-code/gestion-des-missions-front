@@ -32,7 +32,7 @@ export class DataService {
 
 
     recupererListeMissions(): Observable<Mission[]> {
-        return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
+        return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true });
     }
 
     recupererListeMissionsDto(): Observable<MissionDto[]> {

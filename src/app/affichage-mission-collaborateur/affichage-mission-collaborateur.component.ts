@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
 import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -22,7 +23,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         this.updateMission();
     }
 
-    supprimerMission(id:number): void {
+    supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
             this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 1000);
@@ -35,7 +36,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     updateMission(): void {
         this._serv.recupererListeMissionsDto().subscribe(coll => {
-        this.listeMissionDto = coll;
+            this.listeMissionDto = coll;
         },
             (error: Error) => { alert(`${error.name} : ${error.message}`); });
     }
@@ -82,5 +83,37 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     tri(valeur: string) {
         this.trierPar = valeur;
+    }
+
+    trierMissionStatutAsc() {
+        this.listeMission.sort(
+            (missiona: Mission, missionb: Mission) => {
+                if (missiona.statut.toString < missionb.statut.toString) {
+                    return -1;
+                } else if (missiona.statut.toString > missionb.statut.toString) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        );
+        this.tri('StatutAsc');
+        return this.listeMission;
+    }
+
+    trierMissionStatutDesc() {
+        this.listeMission.sort(
+            (missiona: Mission, missionb: Mission) => {
+                if (missiona.statut.toString > missionb.statut.toString) {
+                    return -1;
+                } else if (missiona.statut.toString < missionb.statut.toString) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        );
+        this.tri('StatutDesc');
+        return this.listeMission;
     }
 }
