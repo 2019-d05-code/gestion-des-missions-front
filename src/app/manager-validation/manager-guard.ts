@@ -1,37 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { Subscription } from 'rxjs';
-import { Collaborateur } from '../modeles/Collaborateur';
+import { Observable } from 'rxjs';
 import { Profil } from '../modeles/Profil';
+import { map, tap } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })
-export class ManagerGuard implements CanActivate
-{
-    connecte: Collaborateur;
-    actionSub: Subscription;
+export class ManagerGuard implements CanActivate {
 
     constructor(
         private router: Router,
         private _authSrv: AuthService
-    ) {}
+    ) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
-    {
-    this._authSrv.recupererCollConn().subscribe(
-        (valeurObtenue) => {this.connecte = valeurObtenue; },
-        error => {alert(error.error); },
-        () => {});
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-    if (
-      this._authSrv.verifierAuthentification() ||
-      (this.connecte.profil === Profil.Manager) === false
-    ) {
-        this.router.navigate(['/erreur']);
-        return false;
+        return this._authSrv.recupererCollConn()
+            .pipe(
+                tap(console.log),
+                map(collConn => collConn.roles.some(el => this.verification(el)))
+                ,
+                tap(console.log)
+            );
 
     }
-        return true;
+
+    verification(element) {
+        return element === Profil.Manager;
     }
 }

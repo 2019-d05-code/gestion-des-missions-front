@@ -2,28 +2,43 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
 import { triggerAsyncId } from 'async_hooks';
+import { MissionDto } from '../modeles/MissionDto';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
     templateUrl: './affichage-mission-collaborateur.component.html',
-    styles: []
+    styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
+    listeMissionDto: MissionDto[];
+    id: Number;
+    messageOk: string;
     listeMission: Mission[] = new Array<Mission>();
-    constructor(private _serv: DataService) { }
+    constructor(private _serv: DataService, private router: Router, private route: ActivatedRoute) { }
     trierPar = '';
 
     ngOnInit() {
-        this._serv.recupererListeMissions()
-            .subscribe(coll => { this.listeMission = coll; },
-                (error: Error) => { alert(`${error.name} : ${error.message}`); });
+       this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+      this.updateMission();
     }
 
-    modifierMission(mission) {
-        this._serv.modifierMission(mission);
+    supprimerMission() {
+        this._serv.supremeMission(this.id).subscribe(() => {
+            this.messageOk = 'Supprime of Mission successful';
+            setTimeout(() => this.messageOk = undefined, 1000);
+            this.updateMission();
+        },
+          (err: Error) => {
+             alert(`${err.name} : ${err.message}`);
+          } );
     }
 
-    supprimerMission() { }
+    updateMission(): void {
+        this._serv.recupererListeMissionsDto().subscribe( coll => {this.listeMissionDto = coll;
+        },
+            (error: Error) => { alert(`${error.name} : ${error.message}`); } );
+      }
 
     trierMissionDateDebutAsc() {
         this.listeMission.sort(

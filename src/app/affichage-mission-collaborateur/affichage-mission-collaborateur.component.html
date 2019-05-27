@@ -23,13 +23,44 @@
                     <td>{{mission.villeArrivee}}</td>
                     <td>{{mission.transport}}</td>
                     <td>{{mission.statut}}</td>
+                    <td>
+                        <div *ngIf="mission.statut == 'INITIALE' ">
+                            <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
+                                    class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                class="btn btn-link" (click)="supprimerMission()"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div *ngIf="mission.statut == 'REJETEE'">
+                            <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
+                                    class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                class="btn btn-link" (click)="supprimerMission()" ><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION' && mission.nature =='CONGEE PAYEE' ">
+
+                            <button class="btn btn-link"><i id="btnright" class="fa fa-eye"
+                                    aria-hidden="true"></i></button>
+
+                        </div>
+                        <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION'  ">
+
+                            <button class="btn btn-link"><i id="btnright" class="fa fa-pencil"
+                                    aria-hidden="true"></i></button>
+
+                        </div>
+                        <div *ngIf="mission.statut == 'VALIDEE'">
+
+                            <button class="btn btn-link" (click)="supprimerMission()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                        </div>
+
+
+                    </td>
+
                 </tr>
             </ng-container>
 
 
         </tbody>
     </table>
-
     <button class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle
         Mission</button>
 </div>
