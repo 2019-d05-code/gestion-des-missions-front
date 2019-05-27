@@ -7,7 +7,7 @@ import { DataService } from '../services/data.service';
 import { MissionManager } from '../modeles/Mission';
 import { CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const colors: any = {
@@ -76,13 +76,12 @@ export class PlanningComponent implements OnInit {
 
     beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
         renderEvent.body.forEach(day => {
-          const dayOfMonth = day.date.getDay(); //getDate();
+          const dayOfMonth = day.date.getDay();
           if (dayOfMonth === 0 || dayOfMonth === 6) {
             day.cssClass = 'bg-we';
           }
         });
       }
-
 
     setView(view: CalendarView) {
         this.view = view;
