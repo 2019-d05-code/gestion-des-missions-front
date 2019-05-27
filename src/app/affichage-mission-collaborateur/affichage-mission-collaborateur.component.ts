@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
+import { triggerAsyncId } from 'async_hooks';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -30,6 +31,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
                 return (new Date(missiona.dateDebut).getTime() - new Date(missionb.dateDebut).getTime());
             }
         );
+        this.tri('dateDebutAsc');
         return this.listeMission;
     }
 
@@ -39,6 +41,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
                 return (new Date(missiona.dateFin).getTime() - new Date(missionb.dateFin).getTime());
             }
         );
+        this.tri('dateFinAsc');
         return this.listeMission;
     }
 
@@ -48,6 +51,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
                 return (new Date(missionb.dateDebut).getTime() - new Date(missiona.dateDebut).getTime());
             }
         );
+        this.tri('dateDebutDesc');
         return this.listeMission;
     }
 
@@ -57,18 +61,11 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
                 return (new Date(missionb.dateFin).getTime() - new Date(missiona.dateFin).getTime());
             }
         );
+        this.tri('dateFinDesc');
         return this.listeMission;
     }
 
-    tri() {
-        if (this.trierMissionDateDebutAsc) {
-            this.trierPar = 'dateDebutAsc';
-        } else if (this.trierMissionDateDebutDesc) {
-            this.trierPar = 'dateDebutDesc';
-        } else if (this.trierMissionDateFinAsc) {
-            this.trierPar = 'dateFinAsc';
-        } else if (this.trierMissionDateFinDesc) {
-            this.trierPar = 'dateFinDesc';
-        }
+    tri(valeur:string) {
+        this.trierPar = valeur;
     }
 }

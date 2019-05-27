@@ -2,8 +2,8 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th scope="col"><i class="fas fa-sort-down" (click)="trierMissionDateDebutAsc()"></i> Date de début <i class="fas fa-sort-up" (click)="trierMissionDateDebutDesc()"></i></th>
-                <th scope="col"><i class="fas fa-sort-down" (click)="trierMissionDateFinAsc()"></i> Date de fin <i class="fas fa-sort-up" (click)="trierMissionDateFinDesc()"></i></th>
+                <th scope="col"><i [hidden]="trierPar=='dateDebutAsc'" class="fas fa-sort-down" (click)="trierMissionDateDebutAsc()"></i> Date de début <i [hidden]="trierPar=='dateDebutDesc'" class="fas fa-sort-up" (click)="trierMissionDateDebutDesc()"></i></th>
+                <th scope="col"><i [hidden]="trierPar=='dateFinAsc'" class="fas fa-sort-down" (click)="trierMissionDateFinAsc()"></i> Date de fin <i [hidden]="trierPar=='dateFinDesc'" class="fas fa-sort-up" (click)="trierMissionDateFinDesc()"></i></th>
                 <th scope="col">Nature</th>
                 <th scope="col">Départ</th>
                 <th scope="col">Arrivée</th>
@@ -13,12 +13,6 @@
             </tr>
         </thead>
         <tbody>
-            <!--*ngFor="mission in listeMission"-->
-            <div [ngSwitch]="trierPar">
-                <div *ngSwitchCase="'dateDebut'">{{trierMissionDateDebutAsc()}}</div>
-                <div *ngSwitchCase="'dateFin'">{{trierMissionDateFinAsc()}}</div>
-                <div *ngSwitchDefault=""></div>
-            </div>
             <ng-container *ngFor="let mission of listeMission">
 
                 <tr>
