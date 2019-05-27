@@ -19,6 +19,10 @@ import { MenuComponent } from './menu/menu.component';
 import { ModifiMissionCollaborateurComponent } from './modifi-mission-collaborateur/modifi-mission-collaborateur.component';
 import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 import { ManagerGuard } from './manager-validation/manager-guard';
+import { PlanningComponent } from './planning/planning.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
@@ -27,6 +31,7 @@ const routes: Routes = [
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
 
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard]  },
     { path: 'modifcollab/:id', canActivate: [StatutConnecteService],
@@ -50,7 +55,8 @@ const routes: Routes = [
         AffichageMissionCollaborateurComponent,
         MenuComponent,
         ModifiMissionCollaborateurComponent,
-        ManagerValidationComponent
+        ManagerValidationComponent,
+        PlanningComponent
     ],
     imports: [
         BrowserModule,
@@ -58,6 +64,10 @@ const routes: Routes = [
         HttpClientModule,
         MDBBootstrapModule.forRoot(),
         FormsModule,
+        BrowserAnimationsModule,
+        CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory })
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
