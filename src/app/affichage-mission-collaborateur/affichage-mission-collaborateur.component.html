@@ -2,8 +2,8 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th scope="col">Date de début<button class="btn" (click)="trierMissionDateDebut()"></button></th>
-                <th scope="col">Date de fin<button class="btn" (click)="trierMissionDateFin()"></button></th>
+                <th scope="col"><i class="fas fa-sort-down" (click)="trierMissionDateDebutAsc()"></i> Date de début <i class="fas fa-sort-up" (click)="trierMissionDateDebutDesc()"></i></th>
+                <th scope="col"><i class="fas fa-sort-down" (click)="trierMissionDateFinAsc()"></i> Date de fin <i class="fas fa-sort-up" (click)="trierMissionDateFinDesc()"></i></th>
                 <th scope="col">Nature</th>
                 <th scope="col">Départ</th>
                 <th scope="col">Arrivée</th>
@@ -15,8 +15,8 @@
         <tbody>
             <!--*ngFor="mission in listeMission"-->
             <div [ngSwitch]="trierPar">
-                <div *ngSwitchCase="date de début">{{trierMissionDateDebut}}</div>
-                <div *ngSwitchCase="date de fin">{{trierMissionDateFin}}</div>
+                <div *ngSwitchCase="'dateDebut'">{{trierMissionDateDebutAsc()}}</div>
+                <div *ngSwitchCase="'dateFin'">{{trierMissionDateFinAsc()}}</div>
                 <div *ngSwitchDefault=""></div>
             </div>
             <ng-container *ngFor="let mission of listeMission">

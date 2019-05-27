@@ -8,7 +8,7 @@ import { Mission } from '../modeles/Mission';
     styles: []
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
-    listeMission: Mission[] = new Array<Mission> ();
+    listeMission: Mission[] = new Array<Mission>();
     constructor(private _serv: DataService) { }
     trierPar = '';
 
@@ -24,28 +24,51 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     supprimerMission() { }
 
-    trierMissionDateDebut() {
+    trierMissionDateDebutAsc() {
         this.listeMission.sort(
             (missiona: Mission, missionb: Mission) => {
-                return (missiona.dateDebut.getTime() - missionb.dateDebut.getTime());
+                return (new Date(missiona.dateDebut).getTime() - new Date(missionb.dateDebut).getTime());
             }
         );
+        return this.listeMission;
     }
 
-    trierMissionDateFin() {
+    trierMissionDateFinAsc() {
         this.listeMission.sort(
             (missiona: Mission, missionb: Mission) => {
-                return (missiona.dateFin.getTime() - missionb.dateFin.getTime());
+                return (new Date(missiona.dateFin).getTime() - new Date(missionb.dateFin).getTime());
             }
         );
+        return this.listeMission;
+    }
+
+    trierMissionDateDebutDesc() {
+        this.listeMission.sort(
+            (missiona: Mission, missionb: Mission) => {
+                return (new Date(missionb.dateDebut).getTime() - new Date(missiona.dateDebut).getTime());
+            }
+        );
+        return this.listeMission;
+    }
+
+    trierMissionDateFinDesc() {
+        this.listeMission.sort(
+            (missiona: Mission, missionb: Mission) => {
+                return (new Date(missionb.dateFin).getTime() - new Date(missiona.dateFin).getTime());
+            }
+        );
+        return this.listeMission;
     }
 
     tri() {
-        if (this.trierMissionDateDebut) {
-            this.trierPar = 'date de début';
-        } else if (this.trierMissionDateDebut) {
-            this.trierPar = 'date de fin';
+        if (this.trierMissionDateDebutAsc) {
+            this.trierPar = 'dateDebutAsc';
+        } else if (this.trierMissionDateDebutDesc) {
+            this.trierPar = 'dateDebutDesc';
+        } else if (this.trierMissionDateFinAsc) {
+            this.trierPar = 'dateFinAsc';
+        } else if (this.trierMissionDateFinDesc) {
+            this.trierPar = 'dateFinDesc';
         }
     }
-
 }
