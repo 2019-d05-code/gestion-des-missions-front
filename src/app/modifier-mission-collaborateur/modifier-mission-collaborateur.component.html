@@ -20,32 +20,44 @@
             </li>
             <li class="row">
                 <label class="col text-right">Nature : </label>
-                <select class="col text-left form-control" id="selectNature" [ngModelOptions]="{updateOn:'blur'}"
-                    [(ngModel)]="natures.name_id" #nature_id="ngModel" name="nature" required>
+                <select class="col text-left form-control" id="nature" [ngModelOptions]="{updateOn:'blur'}"
+                    [(ngModel)]="nature" #nature_id="ngModel" name="nature" required>
                     <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
                     <option *ngFor="let nature of natures" [value]="nature.name_id">
                         {{nature.name}}
                     </option>
                 </select>
+                <div class="col-12 error" *ngIf="nature_id.invalid">
+                    Le champ doit être sélectionné !
+                </div>
             </li>
             <li class="row">
                 <label class="col text-right">Ville de départ :</label>
                 <input class="col text-left form-control" [(ngModel)]="mission.villeDepart" type="text"
                     name="villeDepart" required #villeDepart="ngModel" />
+                <div class="col-12 error" *ngIf="villeDepart.pristine || (villeDepart.dirty && villeDepart.invalid)">
+                    Le champ doit être rempli !
+                </div>
             </li>
             <li class="row">
                 <label class="col text-right">Ville d'arrivée :</label>
                 <input class="col text-left form-control" [(ngModel)]="mission.villeArrivee" type="text"
                     name="villeArrivee" #villeArrivee="ngModel" />
+                <div class="col-12 error" *ngIf="villeArrivee.pristine || (villeArrivee.dirty && villeArrivee.invalid)">
+                    Le champ doit être rempli !
+                </div>
             </li>
             <li class="row">
                 <label class="col text-right">Transport : </label>
-                <select class="col form-control" id="selectTransport" [(ngModel)]="transports.name_id"
-                    #transport_id="ngModel" name="transport" required>
+                <select class="col form-control" id="transport" [(ngModel)]="transport" #transport_id="ngModel"
+                    name="transport" required>
                     <optgroup label="-- Choisissez un type de transport">
                         <option *ngFor="let tran of transports" [value]="tran.name_id">{{tran.name}}</option>
                     </optgroup>
                 </select>
+                <div class="col-12 error" *ngIf="transport_id.invalid">
+                    Le champ doit être sélectionné !
+                </div>
             </li>
             <li class="row">
                 <label class="col text-right">Estimation prime :</label>
