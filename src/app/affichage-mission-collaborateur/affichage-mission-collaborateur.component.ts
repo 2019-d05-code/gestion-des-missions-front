@@ -22,9 +22,9 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         this.updateMission();
     }
 
-    supprimerMission() {
-        this._serv.supremeMission(this.id).subscribe(() => {
-            this.messageOk = 'Supprime of Mission successful';
+    supprimerMission(id:number): void {
+        this._serv.supprimerMission(id).subscribe(() => {
+            this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 1000);
             this.updateMission();
         },
