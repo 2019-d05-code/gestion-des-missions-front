@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
 
     /**
      * A l'initialisation, le composant s'abonne au flux du collègue courant connecté.
-     *
      * Celui lui permet de rester à jour en fonction des connexions et déconnexions.
      */
     ngOnInit(): void {
