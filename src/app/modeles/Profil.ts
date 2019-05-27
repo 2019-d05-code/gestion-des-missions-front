@@ -1,6 +1,6 @@
 export enum Profil {
 
-  Employé,
-  Manager,
-  Administrateur
+  Employé = 'ROLE_EMPLOYE',
+  Manager = 'ROLE_MANAGER',
+  Administrateur = 'ROLE_ADMINISTRATEUR'
 }
