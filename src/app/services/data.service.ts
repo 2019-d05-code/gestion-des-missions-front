@@ -33,6 +33,7 @@ export class DataService {
 
     recupererListeMissions(): Observable<Mission[]> {
         return this._http.get<Mission[]>(`${URL_BACKEND}mission`, { withCredentials: true })
+    }
 
     recupererListeMissionsDto(): Observable<MissionDto[]> {
         return this._http.get<MissionDto[]>(`${URL_BACKEND}mission`, { withCredentials: true })
@@ -60,7 +61,6 @@ export class DataService {
         return this._http.get<MissionManager[]>(`${URL_BACKEND}manager`, { withCredentials: true })
             .pipe(tap(lisMis => this._listeManager.next(lisMis)));
     }
-
 
     recupererMissionCollegue(email: string): Observable<MissionManager[]> {
         return this._http.get<MissionManager[]>(`${URL_BACKEND}collegue/${email}`, { withCredentials: true })
