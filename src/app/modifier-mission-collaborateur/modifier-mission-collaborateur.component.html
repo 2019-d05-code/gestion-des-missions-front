@@ -35,7 +35,7 @@
                 <label class="col text-right">Ville de départ :</label>
                 <input class="col text-left form-control" [(ngModel)]="mission.villeDepart" type="text"
                     name="villeDepart" required #villeDepart="ngModel" />
-                <div class="col-12 error" *ngIf="villeDepart.pristine || (villeDepart.dirty && villeDepart.invalid)">
+                <div class="col-12 error" *ngIf="villeDepart.dirty && villeDepart.invalid">
                     Le champ doit être rempli !
                 </div>
             </li>
@@ -43,7 +43,7 @@
                 <label class="col text-right">Ville d'arrivée :</label>
                 <input class="col text-left form-control" [(ngModel)]="mission.villeArrivee" type="text"
                     name="villeArrivee" #villeArrivee="ngModel" />
-                <div class="col-12 error" *ngIf="villeArrivee.pristine || (villeArrivee.dirty && villeArrivee.invalid)">
+                <div class="col-12 error" *ngIf="villeArrivee.dirty && villeArrivee.invalid">
                     Le champ doit être rempli !
                 </div>
             </li>
