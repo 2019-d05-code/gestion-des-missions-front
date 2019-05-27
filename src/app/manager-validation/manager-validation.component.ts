@@ -18,6 +18,11 @@ export class ManagerValidationComponent implements OnInit
 
   ngOnInit()
   {
+    this.afficherListe ();
+  }
+
+  afficherListe ()
+  {
     this._serv.recupererMissionManager()
     .subscribe( coll => {this.listeMission = coll; },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } );
@@ -28,12 +33,11 @@ export class ManagerValidationComponent implements OnInit
     // traitement du patch
     this.miss.id = this.listeMission[i].id;
     this.miss.statut = 2;
-    this._serv.changerStatutMission(this.miss).subscribe( miss => {alert('envoyer');},
+    this._serv.changerStatutMission(this.miss).subscribe( miss => {
+        alert('envoyer');
+        this.afficherListe (); },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } ,
         () => {}  );
-
-    // traitement du rafraichissemsnt de la page
-    this.ngOnInit();
   }
 
   refuser(i: number)
@@ -41,12 +45,11 @@ export class ManagerValidationComponent implements OnInit
     // traitement du patch
     this.miss.id = this.listeMission[i].id;
     this.miss.statut = 3;
-    this._serv.changerStatutMission(this.miss).subscribe( miss => {alert('envoyer'); },
+    this._serv.changerStatutMission(this.miss).subscribe( miss => {
+        this.afficherListe ();
+        alert('envoyer'); },
         (error: Error) => { alert(`${error.name} : ${error.message}`); } ,
         () => {}  );
-
-    // traitement du rafraichissemsnt de la page
-    this.ngOnInit();
   }
 
 }
