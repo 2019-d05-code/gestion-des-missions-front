@@ -1,0 +1,71 @@
+<h1>Gestion des notes de frais</h1>
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-9">Date de début</div>
+                            <div class="col-3">
+                                <div class="row">
+                                    <i [hidden]="trierPar=='dateDebutDesc'" class="fas fa-sort-up"
+                                        (click)="trierMissionDateDebutDesc()"></i>
+                                </div>
+                                <div class="row">
+                                    <i [hidden]="trierPar=='dateDebutAsc'" class="fas fa-sort-down"
+                                        (click)="trierMissionDateDebutAsc()"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-9">Date de fin</div>
+                            <div class="col-3">
+                                <div class="row">
+                                    <i [hidden]="trierPar=='dateFinDesc'" class="fas fa-sort-up"
+                                        (click)="trierMissionDateFinDesc()"></i>
+                                </div>
+                                <div class="row">
+                                    <i [hidden]="trierPar=='dateFinAsc'" class="fas fa-sort-down"
+                                        (click)="trierMissionDateFinAsc()"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col">Nature</th>
+                <th scope="col">Départ</th>
+                <th scope="col">Arrivée</th>
+                <th scope="col">Transport</th>
+                <th scope="col">Frais</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let mission of listeMissionFrais">{{action(mission)}}
+
+                <tr>
+                    <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
+                    <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
+                    <td>{{mission.nature}}</td>
+                    <td>{{mission.villeDepart}}</td>
+                    <td>{{mission.villeArrivee}}</td>
+                    <td>{{mission.transport}}</td>
+                    <td>{{mission.frais}} €</td>
+                    <td *ngIf="missionEchue">
+                        <div class="row">
+                            <button class="btn btn-primary">Saisir une note de
+                                frais</button><button>exporter en PDF</button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+
+
+        </tbody>
+    </table>
+</div>

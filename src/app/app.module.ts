@@ -24,51 +24,51 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AccueilComponent } from './accueil/accueil.component';
+import { GestionNoteFraisComponent } from './gestion-note-frais/gestion-note-frais.component';
 
 const routes: Routes = [
-    { path: 'connexion', component: AuthComponent },
-    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
-    { path: '', redirectTo: '/connexion', pathMatch: 'full' },
-    { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
-    { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
-    { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
-    { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
-    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard]  },
-    { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] }
-
+    { path: 'connexion', component: AuthComponent },
+    { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
+    { path: '', redirectTo: '/connexion', pathMatch: 'full' },
+    { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
+    { path: 'frais', component: GestionNoteFraisComponent, canActivate: [StatutConnecteService] },
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
+    { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
+    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
 ];
-
-
 
 @NgModule({
     declarations: [
+        AccueilComponent,
+        AffichageMissionCollaborateurComponent,
         AppComponent,
-        TechComponent,
         AuthComponent,
         CreationMissionComponent,
-        ErreurComponent,
-        DateFinValidateurDirective,
-        FormatDateValidateurDirective,
         DateDebutValidateurDirective,
-        AffichageMissionCollaborateurComponent,
+        DateFinValidateurDirective,
+        ErreurComponent,
+        FormatDateValidateurDirective,
+        GestionNoteFraisComponent,
+        ManagerValidationComponent,
         MenuComponent,
         ModifierMissionCollaborateurComponent,
-        ManagerValidationComponent,
         PlanningComponent,
-        AccueilComponent
+        TechComponent,
     ],
     imports: [
-        BrowserModule,
-        RouterModule.forRoot(routes),
-        HttpClientModule,
-        MDBBootstrapModule.forRoot(),
-        FormsModule,
         BrowserAnimationsModule,
+        BrowserModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory
-        })
+        }),
+        FormsModule,
+        HttpClientModule,
+        MDBBootstrapModule.forRoot(),
+        RouterModule.forRoot(routes),
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
