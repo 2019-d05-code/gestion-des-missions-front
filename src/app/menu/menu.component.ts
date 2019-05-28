@@ -27,12 +27,9 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
 
         this._authSrv.collegueConnecteObs.subscribe(col => {
-            console.log(col);
             this.collegueConnecte = col;
             this.roleAdmin = col.roles.some(el => el === Profil.Administrateur);
             this.roleManager = col.roles.some(el => el === Profil.Manager);
-            console.log(this.roleAdmin);
-            console.log(this.roleManager);
         });
     }
 
