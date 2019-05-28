@@ -1,7 +1,3 @@
-<p>
-    planning works!
-</p>
-
 <h1>Planning des Missions</h1>
 
 <ng-container *ngFor="let mission of listeMission, let i=index">
@@ -30,7 +26,7 @@
 
 <br />
 <div [ngSwitch]="view">
-    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"  [events]="events | async"
-    [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (beforeViewRender)="beforeMonthViewRender($event)">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events | async"
+        [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (beforeViewRender)="beforeMonthViewRender($event)">
     </mwl-calendar-month-view>
 </div>
