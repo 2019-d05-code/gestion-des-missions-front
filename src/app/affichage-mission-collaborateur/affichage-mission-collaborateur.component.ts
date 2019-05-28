@@ -32,8 +32,6 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
         });
-
-
     }
 
     supprimerMission(id: number): void {
