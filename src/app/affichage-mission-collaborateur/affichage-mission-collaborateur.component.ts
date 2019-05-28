@@ -86,11 +86,14 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     }
 
     trierMissionStatutAsc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
-                if (missiona.statut.toString < missionb.statut.toString) {
+
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
+
+                if (missiona.statut < missionb.statut) {
+                    console.log(missionb.statut.toString);
                     return -1;
-                } else if (missiona.statut.toString > missionb.statut.toString) {
+                } else if (missiona.statut > missionb.statut) {
                     return 1;
                 } else {
                     return 0;
@@ -102,11 +105,11 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     }
 
     trierMissionStatutDesc() {
-        this.listeMission.sort(
-            (missiona: Mission, missionb: Mission) => {
-                if (missiona.statut.toString > missionb.statut.toString) {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
+                if (missiona.statut > missionb.statut) {
                     return -1;
-                } else if (missiona.statut.toString < missionb.statut.toString) {
+                } else if (missiona.statut < missionb.statut) {
                     return 1;
                 } else {
                     return 0;

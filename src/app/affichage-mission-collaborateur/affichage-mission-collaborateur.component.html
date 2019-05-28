@@ -2,14 +2,6 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-<<<<<<< HEAD
-                <th scope="col"><i [hidden]="trierPar=='dateDebutAsc'" class="fas fa-sort-down"
-                        (click)="trierMissionDateDebutAsc()"></i> Date de début <i [hidden]="trierPar=='dateDebutDesc'"
-                        class="fas fa-sort-up" (click)="trierMissionDateDebutDesc()"></i></th>
-                <th scope="col"><i [hidden]="trierPar=='dateFinAsc'" class="fas fa-sort-down"
-                        (click)="trierMissionDateFinAsc()"></i> Date de fin <i [hidden]="trierPar=='dateFinDesc'"
-                        class="fas fa-sort-up" (click)="trierMissionDateFinDesc()"></i></th>
-=======
                 <th scope="col">
                     <div class="col">
                         <div class="row">
@@ -44,14 +36,26 @@
                         </div>
                     </div>
                 </th>
->>>>>>> 60a945b71489eff761db8ee681be7d6d013debcb
                 <th scope="col">Nature</th>
                 <th scope="col">Départ</th>
                 <th scope="col">Arrivée</th>
                 <th scope="col">Transport</th>
-                <th scope="col"><i [hidden]="trierPar=='StatutAsc'" class="fas fa-sort-down"
-                        (click)="trierMissionStatutAsc()"></i>Statut<i [hidden]="trierPar=='Statutdesc'"
-                        class="fas fa-sort-up" (click)="trierMissionStatutDesc()"></i></th>
+                <th scope="col">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-9">Statut</div>
+                            <div class="col-3">
+                                <div class="row">
+                                    <i [hidden]="trierPar=='StatutAsc'" class="fas fa-sort-up"
+                                        (click)="trierMissionStatutAsc()"></i>
+                                </div>
+                                <div class="row"><i [hidden]="trierPar=='StatutDesc'" class="fas fa-sort-down"
+                                        (click)="trierMissionStatutDesc()"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
                 <!-- <th scope="col">Action</th> -->
             </tr>
         </thead>
