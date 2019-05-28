@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -90,5 +91,40 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
 
     tri(valeur: string) {
         this.trierPar = valeur;
+    }
+
+    trierMissionStatutAsc() {
+
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
+
+                if (missiona.statut < missionb.statut) {
+                    console.log(missionb.statut.toString);
+                    return -1;
+                } else if (missiona.statut > missionb.statut) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        );
+        this.tri('StatutAsc');
+        return this.listeMission;
+    }
+
+    trierMissionStatutDesc() {
+        this.listeMissionDto.sort(
+            (missiona: MissionDto, missionb: MissionDto) => {
+                if (missiona.statut > missionb.statut) {
+                    return -1;
+                } else if (missiona.statut < missionb.statut) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        );
+        this.tri('StatutDesc');
+        return this.listeMission;
     }
 }
