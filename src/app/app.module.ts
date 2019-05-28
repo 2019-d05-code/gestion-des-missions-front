@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TechComponent } from './tech/tech.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
@@ -27,24 +26,20 @@ import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
-    { path: 'tech', component: TechComponent, canActivate: [StatutConnecteService] }, // /tech accessible uniquement si connecté
     { path: '', redirectTo: '/connexion', pathMatch: 'full' },
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
-    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard]  },
+    { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
     { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] }
 
 ];
 
-
-
 @NgModule({
     declarations: [
         AppComponent,
-        TechComponent,
         AuthComponent,
         CreationMissionComponent,
         ErreurComponent,
