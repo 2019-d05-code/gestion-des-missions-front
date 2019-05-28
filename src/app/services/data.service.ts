@@ -62,9 +62,9 @@ export class DataService {
             .pipe(tap(lisMis => this._listeManager.next(lisMis)));
     }
 
-    recupererMissionCollegue(email: string): Observable<MissionManager[]> {
-        return this._http.get<MissionManager[]>(`${URL_BACKEND}collegue/${email}`, { withCredentials: true })
-            .pipe(tap(lisMis => this._listeManager.next(lisMis)));
+    recupererMissionCollegue(email: string): Observable<MissionDto[]> {
+        return this._http.get<MissionDto[]>(`${URL_BACKEND}collegue/${email}`, { withCredentials: true })
+            .pipe(tap(lisMis => this._listeMission.next(lisMis)));
     }
 
     changerStatutMission(missionStatut): Observable<Mission> {
