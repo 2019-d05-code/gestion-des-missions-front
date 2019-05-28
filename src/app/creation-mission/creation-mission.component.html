@@ -1,79 +1,96 @@
-<div class="text-center">
-    <h2>Demande de mission</h2>
-    <form appDateDebutValidateur appDateFinValidateur (ngSubmit)="valider()" #createForm="ngForm">
-        <ul class="form-group">
-            <li class="row">
-                <label class="col text-right">Date de début : </label>
-                <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}" [(ngModel)]="mission.dateDebut"
-                    type="date" name="dateDebut" #dateDebut="ngModel" required />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9 col-sm-12 mb-4 d-flex justify-content-center">
+            <div class="container-fluid text-center">
+                <!-- <div class="text-center"> -->
+                <h2>Demande de mission</h2>
+                <form appDateDebutValidateur appDateFinValidateur (ngSubmit)="valider()" #createForm="ngForm">
+                    <ul class="form-group">
+                        <li class="row">
+                            <label class="col text-right">Date de début : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="mission.dateDebut" type="date" name="dateDebut" #dateDebut="ngModel"
+                                required />
 
-                <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateDebut">
-                    {{createForm.errors.dateDebut}}
-                </div>
-            </li>
-            <li class="row">
-                <label class="col text-right">Date de fin : </label>
-                <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}" [(ngModel)]="mission.dateFin" type="date" name="dateFin"
-                    #dateFin="ngModel" required />
-                <br>
-                <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateFin">
-                    {{createForm.errors.dateFin}}
-                </div>
-            </li>
-            <br>
-            <li class="row">
-                <label class="col text-right">Nature : </label>
-                <select class="col text-left form-control" id="selectNature" [ngModelOptions]="{updateOn:'blur'}"                                                                                                                                                   [(ngModel)]="natures.name_id"
-                    #nature_id="ngModel" name="nature" required>
-                    <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
-                    <option *ngFor="let nature of natures" [value]="nature.name_id">
-                        {{nature.name}}
-                    </option>
-                </select>
-                <div class="col-12 error" *ngIf="nature_id.invalid">
-                    Le champ doit être sélectionné !
-                </div>
-            </li>
-            <li class="row">
-                <label class="col text-right">Ville de départ :</label>
-                <input class="col text-left form-control" [ngModelOptions]="{updateOn:'blur'}" [(ngModel)]="mission.villeDepart" type="text"
-                    name="villeDepart" required #villeDepart="ngModel" required />
-                <div class="col-12 error" *ngIf="villeDepart.pristine || (villeDepart.dirty && villeDepart.invalid)">
-                    Le champ doit être rempli !
-                </div>
-            </li>
-            <li class="row">
-                <label class="col text-right">Ville d'arrivée :</label>
-                <input class="col text-left form-control" [ngModelOptions]="{updateOn:'blur'}" [(ngModel)]="mission.villeArrivee" type="text"
-                    name="villeArrivee" #villeArrivee="ngModel" required />
-                <div class="col-12 error" *ngIf="villeArrivee.pristine || (villeArrivee.dirty && villeArrivee.invalid)">
-                    Le champ doit être rempli !
-                </div>
-            </li>
-            <li class="row">
-                <label class="col text-right">Transport : </label>
-                <select class="col form-control" id="selectTransport"  [ngModelOptions]="{updateOn:'blur'}" [(ngModel)]="transports.name_id"
-                    #transport_id="ngModel" name="transport" required>
-                    <optgroup label="-- Choisissez un type de transport"></optgroup>
-                    <option *ngFor="let transport of transports" [value]="transport.name_id">
-                        {{transport.name}}
-                    </option>
-                </select>
-                <div class="col-12 error" *ngIf="transport_id.invalid">
-                    Le champ doit être sélectionné !
-                </div>
-            </li>
-            <li class="row">
-                <label class="col text-right">Estimation prime :</label>
-                <p class="col text-left">
-                    <!--{{mission.nature.tjm}}-->0€</p>
-            </li>
-            <li class="row justify-content-center">
-                <button class=" btn btn-danger float-right" routerLink="/mission"
-                    routerLinkActive="active-link">Annuler</button>
-                <button class=" btn btn-success float-left" type="submit"
-                    [disabled]="createForm.invalid">Valider</button>
-            </li>
-        </ul>
-    </form>
+                            <div class="col-12 error"
+                                *ngIf="createForm.errors && createForm.errors.dateDebut && dateDebut.dirty">
+                                {{createForm.errors.dateDebut}}
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Date de fin : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="mission.dateFin" type="date" name="dateFin" #dateFin="ngModel" required />
+                            <br>
+                            <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateFin">
+                                {{createForm.errors.dateFin}}
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Nature : </label>
+                            <select class="col text-left form-control" id="nature" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="nature" #nature_id="ngModel" name="nature" required>
+                                <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
+                                <option *ngFor="let nature of natures" [value]="nature.name_id">
+                                    {{nature.name}}
+                                </option>
+                            </select>
+                            <div class="col-12 error" *ngIf="nature_id.invalid && nature_id.dirty">
+                                Le champ doit être sélectionné !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Ville de départ :</label>
+                            <input class="col text-left form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="mission.villeDepart" type="text" name="villeDepart" required
+                                #villeDepart="ngModel" required />
+                            <div class="col-12 error" *ngIf="(villeDepart.dirty && villeDepart.invalid)">
+                                Le champ doit être rempli !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Ville d'arrivée :</label>
+                            <input class="col text-left form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="mission.villeArrivee" type="text" name="villeArrivee"
+                                #villeArrivee="ngModel" required />
+                            <div class="col-12 error" *ngIf="(villeArrivee.dirty && villeArrivee.invalid)">
+                                Le champ doit être rempli !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Transport : </label>
+                            <select class="col form-control" id="selectTransport" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="transports.name_id" #transport_id="ngModel" name="transport" required>
+                                <optgroup label="-- Choisissez un type de transport"></optgroup>
+                                <option *ngFor="let transport of transports" [value]="transport.name_id">
+                                    {{transport.name}}
+                                </option>
+                            </select>
+                            <div class="col-12 error" *ngIf="transport_id.invalid && transport_id.dirty">
+                                Le champ doit être sélectionné !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Estimation prime :</label>
+                            <p class="col text-left">
+                                <!--{{mission.nature.tjm}}-->0€</p>
+                        </li>
+                        <br>
+                        <li class="row justify-content-center">
+                            <button class=" btn btn-danger float-right" routerLink="/mission"
+                                routerLinkActive="active-link">Annuler</button>
+                            <button class=" btn btn-success float-left" type="submit"
+                                [disabled]="createForm.invalid">Valider</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
