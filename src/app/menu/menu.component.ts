@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { Profil } from '../modeles/Profil';
+import { CollConn } from '../modeles/Collaborateur';
 
 @Component({
     selector: 'app-menu',
@@ -9,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-    @Input() collegueConnecte;
+    @Input() collegueConnecte: CollConn;
+    roleAdmin = false;
+    roleManager = false;
 
     constructor(private _authSrv: AuthService, private _router: Router) { }
 
@@ -20,6 +24,8 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.roleAdmin = this.collegueConnecte.roles.some(el => el === Profil.Administrateur);
+        this.roleManager = this.collegueConnecte.roles.some(el => el === Profil.Manager);
     }
 
 }
