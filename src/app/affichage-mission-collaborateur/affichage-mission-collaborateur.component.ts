@@ -3,6 +3,10 @@ import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
 import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Collegue } from '../auth/auth.domains';
+import { AuthService } from '../auth/auth.service';
+import { CollConn } from '../modeles/Collaborateur';
 import { stringify } from '@angular/compiler/src/util';
 
 @Component({
@@ -11,34 +15,38 @@ import { stringify } from '@angular/compiler/src/util';
     styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
-    listeMissionDto: MissionDto[];
     id: Number;
     messageOk: string;
-    listeMission: Mission[] = new Array<Mission>();
-    constructor(private _serv: DataService, private router: Router, private route: ActivatedRoute) { }
     trierPar = '';
 
+    listeMission: Mission[] = new Array<Mission>();
+    listeMissionDto: MissionDto[];
+
+    collegue: CollConn = new CollConn(null, null, null);
+
+    constructor(private _serv: DataService, private router: Router, private route: ActivatedRoute,
+        private authentificationService: AuthService) { }
+
     ngOnInit() {
-        this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-        this.updateMission();
+        this.authentificationService.recupererCollConn().subscribe(collegue => {
+            this.collegue = collegue;
+            this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+            this.updateMission(this.collegue.email);
+        });
     }
 
     supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
             this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 1000);
-            this.updateMission();
-        },
-            (err: Error) => {
-                alert(`${err.name} : ${err.message}`);
-            });
+            this.updateMission(this.collegue.email);
+        });
     }
 
-    updateMission(): void {
-        this._serv.recupererListeMissionsDto().subscribe(coll => {
+    updateMission(email: string): void {
+        this._serv.recupererMissionCollegue(email).subscribe(coll => {
             this.listeMissionDto = coll;
-        },
-            (error: Error) => { alert(`${error.name} : ${error.message}`); });
+        });
     }
 
     trierMissionDateDebutAsc() {
