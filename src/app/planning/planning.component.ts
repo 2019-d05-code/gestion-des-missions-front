@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { CalendarView, DAYS_OF_WEEK, CalendarEvent, CalendarDateFormatter,
-    CalendarMonthViewBeforeRenderEvent } from 'angular-calendar';
+import {
+    CalendarView, DAYS_OF_WEEK, CalendarEvent, CalendarDateFormatter,
+    CalendarMonthViewBeforeRenderEvent
+} from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { addYears, subYears, startOfDay, endOfDay } from 'date-fns';
 import { DataService } from '../services/data.service';
@@ -41,15 +43,14 @@ export class PlanningComponent implements OnInit {
 
     constructor(private _serv: DataService, private _authSrv: AuthService) { }
 
-    ngOnInit()
-    {
+    ngOnInit() {
         // recuperation du collegue connecte
         this._authSrv.recupererCollConn().subscribe(
             (valeurObtenue) => {
-            this.connecte = valeurObtenue;
-            this.afficherMission();
+                this.connecte = valeurObtenue;
+                this.afficherMission();
             },
-            error => { alert(`${error.name} : ${error.message}`); },
+            error => { },
             () => { });
     }
 
@@ -76,12 +77,12 @@ export class PlanningComponent implements OnInit {
 
     beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
         renderEvent.body.forEach(day => {
-          const dayOfMonth = day.date.getDay();
-          if (dayOfMonth === 0 || dayOfMonth === 6) {
-            day.cssClass = 'bg-we';
-          }
+            const dayOfMonth = day.date.getDay();
+            if (dayOfMonth === 0 || dayOfMonth === 6) {
+                day.cssClass = 'bg-we';
+            }
         });
-      }
+    }
 
     setView(view: CalendarView) {
         this.view = view;

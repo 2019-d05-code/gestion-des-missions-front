@@ -39,17 +39,13 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 1000);
             this.updateMission(this.collegue.email);
-        },
-            (err: Error) => {
-                alert(`${err.name} : ${err.message}`);
-            });
+        });
     }
 
     updateMission(email: string): void {
         this._serv.recupererMissionCollegue(email).subscribe(coll => {
             this.listeMissionDto = coll;
-        },
-            (error: Error) => { alert(`${error.name} : ${error.message}`); });
+        });
     }
 
     trierMissionDateDebutAsc() {

@@ -72,7 +72,7 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
                 this.transport = Transport[this.mission.transport];
                 this.nature = NomNature[this.mission.nature];
             },
-                (error: Error) => { alert(`${error.name} : ${error.message}`); });
+                (error: Error) => { });
     }
 }
 
