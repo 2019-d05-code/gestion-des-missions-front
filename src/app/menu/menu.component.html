@@ -1,6 +1,7 @@
 <div *ngIf="!collegueConnecte.estAnonyme()">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/accueil">Accueil</a>
@@ -24,8 +25,10 @@
                     <a class="nav-link" routerLink="/manager">Validation des missions</a>
                 </li>
             </ul>
-        </div>
+        </links>
 
-        <a class="navbar-brand btn btn-red" (click)=seDeconnecter()>Se déconnecter</a>
-    </nav>
+        <mdb-navbar-brand>
+            <a class="navbar-brand btn btn-red" (click)=seDeconnecter()>Se déconnecter</a>
+        </mdb-navbar-brand>
+    </mdb-navbar>
 </div>
