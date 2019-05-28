@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Mission } from '../modeles/Mission';
+import { Mission, MissionSansStatus } from '../modeles/Mission';
 import { DataService } from '../services/data.service';
 import { Transport } from '../modeles/Transport';
 import { Router } from '@angular/router';
@@ -17,8 +17,9 @@ export class CreationMissionComponent implements OnInit {
 
     transports: any = {};
     natures: any = {};
+    nature: any;
 
-    mission: Mission = new Mission(null, null, null, null, null, null, null, null);
+    mission: MissionSansStatus = new MissionSansStatus(null, null, null, null, null, null, null);
     connecte: CollConn;
 
 
@@ -59,7 +60,7 @@ export class CreationMissionComponent implements OnInit {
     valider() {
 
         this.mission.transport = Transport[this.transports.name_id];
-        this.mission.nature = NomNature[this.natures.name_id];
+        this.mission.nature = NomNature[this.nature];
         this.mission.emailColl = this.connecte.email;
         this._dataService.ajouterMission(this.mission)
             .subscribe(

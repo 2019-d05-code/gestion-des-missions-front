@@ -17,6 +17,19 @@ export class Mission {
     ) { }
 }
 
+export class MissionSansStatus {
+
+    constructor(
+        public dateDebut: Date,
+        public dateFin: Date,
+        public nature: string,
+        public villeDepart: string,
+        public villeArrivee: string,
+        public transport: string,
+        public emailColl: string,
+    ) { }
+}
+
 export class MissionManager {
 
     constructor(
