@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="jumbotron">
                 <h2 class="h1 h1-responsive">Gestion des Missions</h2>
-                <div *ngIf="coll.estAnonyme()">
+                <div *ngIf="!coll.estAnonyme()">
                     <span>{{coll.email}}</span>
                     <span>{{coll.roles}}</span>
                 </div>
@@ -12,7 +12,7 @@
         </div>
     </head>
 
-    <app-menu [collegueConnecte]="coll"></app-menu>
+    <app-menu></app-menu>
 
 </ng-container>
 

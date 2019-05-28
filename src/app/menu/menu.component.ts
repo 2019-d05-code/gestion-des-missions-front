@@ -3,6 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { Profil } from '../modeles/Profil';
 import { CollConn } from '../modeles/Collaborateur';
+import { Collegue } from '../auth/auth.domains';
 
 @Component({
     selector: 'app-menu',
@@ -11,7 +12,7 @@ import { CollConn } from '../modeles/Collaborateur';
 })
 export class MenuComponent implements OnInit {
 
-    @Input() collegueConnecte: CollConn;
+    collegueConnecte: Collegue;
     roleAdmin = false;
     roleManager = false;
 
@@ -24,8 +25,15 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.roleAdmin = this.collegueConnecte.roles.some(el => el === Profil.Administrateur);
-        this.roleManager = this.collegueConnecte.roles.some(el => el === Profil.Manager);
+
+        this._authSrv.collegueConnecteObs.subscribe(col => {
+            console.log(col);
+            this.collegueConnecte = col;
+            this.roleAdmin = col.roles.some(el => el === Profil.Administrateur);
+            this.roleManager = col.roles.some(el => el === Profil.Manager);
+            console.log(this.roleAdmin);
+            console.log(this.roleManager);
+        });
     }
 
 }

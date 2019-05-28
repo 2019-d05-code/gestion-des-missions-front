@@ -13,7 +13,7 @@ import { Collaborateur, CollConn } from '../modeles/Collaborateur';
  *
  * @type {Collegue}
  */
-const COLLEGUE_ANONYME = new Collegue({});
+const COLLEGUE_ANONYME = new Collegue({ roles: [] });
 
 /**
  * Service de gestion de l'authentification.
