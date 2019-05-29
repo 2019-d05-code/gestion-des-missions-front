@@ -26,7 +26,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
-    { path: '', redirectTo: '/connexion', pathMatch: 'full' },
+    { path: '**', redirectTo: '/connexion', pathMatch: 'full' },
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
