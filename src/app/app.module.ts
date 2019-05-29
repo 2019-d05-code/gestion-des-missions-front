@@ -12,7 +12,6 @@ import { DateFinValidateurDirective } from './validateurs/date-fin-validateur.di
 import { FormatDateValidateurDirective } from './validateurs/format-date-validateur.directive';
 import { DateDebutValidateurDirective } from './validateurs/date-debut-validateur.directive';
 import { CreationMissionComponent } from './creation-mission/creation-mission.component';
-import { ErreurComponent } from './erreur/erreur.component';
 import { AffichageMissionCollaborateurComponent } from './affichage-mission-collaborateur/affichage-mission-collaborateur.component';
 import { MenuComponent } from './menu/menu.component';
 import { ModifierMissionCollaborateurComponent } from './modifier-mission-collaborateur/modifier-mission-collaborateur.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
     { path: '**', redirectTo: '/connexion', pathMatch: 'full' },
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
-    { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
@@ -42,7 +40,6 @@ const routes: Routes = [
         AppComponent,
         AuthComponent,
         CreationMissionComponent,
-        ErreurComponent,
         DateFinValidateurDirective,
         FormatDateValidateurDirective,
         DateDebutValidateurDirective,
