@@ -58,31 +58,30 @@
                                 </div>
                             </div>
                         </div>
+                    </th>
+                    <th scope="col">Prime</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let mission of listeMissionDto">
 
-                    </div>
-                </th>
-                <th scope="col">Prime</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let mission of listeMissionDto">
-
-                <tr>
-                    <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
-                    <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
-                    <td>{{mission.nature}}</td>
-                    <td>{{mission.villeDepart}}</td>
-                    <td>{{mission.villeArrivee}}</td>
-                    <td>{{mission.transport}}</td>
-                    <td>{{mission.statut}}</td>
-                    <td>{{mission.prime}}€</td>
-                    <td>
-                        <div *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'">
-                            <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
-                                    class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-link"
-                                (click)="supprimerMission(mission.id)"><i class="fa fa-trash"></i></button>
-                        </div>
-                        <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION' && mission.nature =='CONGEE PAYEE' ">
+                    <tr>
+                        <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
+                        <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
+                        <td>{{mission.nature}}</td>
+                        <td>{{mission.villeDepart}}</td>
+                        <td>{{mission.villeArrivee}}</td>
+                        <td>{{mission.transport}}</td>
+                        <td>{{mission.statut}}</td>
+                        <td>{{mission.prime}}€</td>
+                        <td>
+                            <div *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'">
+                                <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
+                                        class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                    class="btn btn-link" (click)="supprimerMission(mission.id)"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+                            <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION' && mission.nature =='CONGEE PAYEE' ">
 
 
                                 <button class="btn btn-link"><i id="btnright" class="fa fa-eye"
