@@ -47,7 +47,8 @@ export class DataService {
             'villeDepart': nouvelleMission.villeDepart,
             'villeArrivee': nouvelleMission.villeArrivee,
             'transport': nouvelleMission.transport,
-            'emailColl': nouvelleMission.emailColl
+            'emailColl': nouvelleMission.emailColl,
+            'prime': nouvelleMission.prime
         };
         return this._http.post<MissionSansStatus>(`${URL_BACKEND}mission`, body, { withCredentials: true })
             .pipe(tap(mission => {

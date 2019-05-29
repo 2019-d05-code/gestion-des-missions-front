@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </th>
-                <!-- <th scope="col">Action</th> -->
+                <th scope="col">Prime</th>
             </tr>
         </thead>
         <tbody>
@@ -70,6 +70,7 @@
                     <td>{{mission.villeArrivee}}</td>
                     <td>{{mission.transport}}</td>
                     <td>{{mission.statut}}</td>
+                    <td>{{mission.prime}}€</td>
                     <td>
                         <div *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'">
                             <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"

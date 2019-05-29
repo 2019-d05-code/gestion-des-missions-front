@@ -78,8 +78,13 @@
                         <br>
                         <li class="row">
                             <label class="col text-right">Estimation prime :</label>
-                            <p class="col text-left">
-                                <!--{{mission.nature.tjm}}-->0€</p>
+                            <div class="col text-left"> <input class="form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                    [(ngModel)]="mission.prime" type="text" name="prime" #prime="ngModel" required /> <pre> €</pre>
+                            </div>
+                            <div class="col-12 error" *ngIf="(prime.dirty && prime.invalid)">
+                                Le champ doit être rempli !
+                            </div>
+
                         </li>
                         <br>
                         <li class="row justify-content-center">
