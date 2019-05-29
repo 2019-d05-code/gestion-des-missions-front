@@ -3,11 +3,9 @@ import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
 import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
-import { stringify } from '@angular/compiler/src/util';
+import { Absence } from '../modeles/Absence';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -15,15 +13,16 @@ import { stringify } from '@angular/compiler/src/util';
     styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
+    // - attribut -
     id: Number;
     messageOk: string;
     trierPar = '';
-
     listeMission: Mission[] = new Array<Mission>();
     listeMissionDto: MissionDto[];
-
+    listeAbsence: Absence[];
     collegue: CollConn = new CollConn(null, null, null);
 
+    // - constructeur et données d'initialisation de la page -
     constructor(private _serv: DataService, private router: Router, private route: ActivatedRoute,
         private authentificationService: AuthService) { }
 
@@ -32,9 +31,12 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.collegue = collegue;
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
+            this.afficherAbsence(this.collegue.email);
+            this.listeMissionDto.concat(this.listeAbsence); //concatener les deux et faire la transformation abscence -> mission
         });
     }
 
+    // - methode appelant les requetes du back -
     supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
             this.messageOk = 'Suppression de la mission réussie';
@@ -49,6 +51,17 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
         });
     }
 
+    afficherAbsence(email: string)
+    {
+        this.authentificationService.verifierAuthentificationAbs().subscribe(//connecterAbsence(this.collegue.email, 'superpass').subscribe(
+            col => {},
+            err => {alert(`${err.name} : ${err.message}`);});
+        this._serv.recupererListesAbscence(email).subscribe(abs => {
+            this.listeAbsence = abs;
+        });
+    }
+
+    // - fonction de tri -
     trierMissionDateDebutAsc() {
         this.listeMissionDto.sort(
             (missiona: MissionDto, missionb: MissionDto) => {
