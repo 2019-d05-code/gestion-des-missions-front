@@ -71,7 +71,6 @@ export class DataService {
     }
 
     modifierMission(id: Number, mission: MissionDto): Observable<MissionDto> {
-        console.log(mission);
         return this._http.patch<MissionDto>(`${URL_BACKEND}mission/${id}`, mission, { withCredentials: true });
     }
 

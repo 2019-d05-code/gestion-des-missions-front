@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { Subscription, Observable } from 'rxjs';
-import { Collaborateur, CollConn } from '../modeles/Collaborateur';
+import { Observable } from 'rxjs';
 import { Profil } from '../modeles/Profil';
-import { map, tap } from 'rxjs/operators';
-
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ManagerGuard implements CanActivate {
@@ -19,16 +17,12 @@ export class ManagerGuard implements CanActivate {
 
         return this._authSrv.recupererCollConn()
             .pipe(
-                tap(console.log),
                 map(collConn => collConn.roles.some(el => this.verification(el)))
-                ,
-                tap(console.log)
             );
 
     }
 
-    verification(element)
-    {
-        return  element ===  Profil.Manager;
+    verification(element) {
+        return element === Profil.Manager;
     }
 }

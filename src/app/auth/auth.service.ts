@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Collaborateur, CollConn } from '../modeles/Collaborateur';
+import { CollConn } from '../modeles/Collaborateur';
 
 /**
  * Collègue anonyme.
