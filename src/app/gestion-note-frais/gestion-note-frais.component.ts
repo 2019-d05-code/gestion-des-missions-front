@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FraisService } from './frais.service';
-import { MissionFrais, Mission } from '../modeles/Mission';
+import { MissionFrais } from '../modeles/Mission';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
 import { DataService } from '../services/data.service';
 import { MissionDto } from '../modeles/MissionDto';
-import { Frais } from '../modeles/Frais';
 
 @Component({
     selector: 'app-gestion-note-frais',
@@ -20,7 +19,7 @@ export class GestionNoteFraisComponent implements OnInit {
     trierPar = '';
     collegue: CollConn = new CollConn(null, null, null);
     listeMissionDto: MissionDto[];
-    missionEchue: boolean;
+    missionEchue = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -51,6 +50,7 @@ export class GestionNoteFraisComponent implements OnInit {
             null,
             'manager@dev.fr'
         ));
+
 
         this._authentificationService.recupererCollConn().subscribe(collegue => {
             this.collegue = collegue;
@@ -109,11 +109,10 @@ export class GestionNoteFraisComponent implements OnInit {
         this.trierPar = valeur;
     }
 
-    action(mission: Mission): void {
-        if ((new Date(mission.dateFin).getTime() - Date.now()) < 0) {
+    afficherAction(mission: MissionFrais): void {
+        this.missionEchue = false;
+        if (new Date(mission.dateFin).getTime() > new Date().getTime()) {
             this.missionEchue = true;
-        } else {
-            this.missionEchue = false;
         }
     }
 }

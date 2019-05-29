@@ -25,6 +25,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AccueilComponent } from './accueil/accueil.component';
 import { GestionNoteFraisComponent } from './gestion-note-frais/gestion-note-frais.component';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { SaisieNoteFraisComponent } from './gestion-note-frais/saisie-note-frais.component';
 
 const routes: Routes = [
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
@@ -33,6 +35,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/connexion', pathMatch: 'full' },
     { path: 'erreur', component: ErreurComponent, canActivate: [StatutConnecteService] },
     { path: 'frais', component: GestionNoteFraisComponent, canActivate: [StatutConnecteService] },
+    { path: 'frais/:missionId', component: SaisieNoteFraisComponent, canActivate: [StatutConnecteService] },
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
@@ -56,6 +59,7 @@ const routes: Routes = [
         MenuComponent,
         ModifierMissionCollaborateurComponent,
         PlanningComponent,
+        SaisieNoteFraisComponent,
         TechComponent,
     ],
     imports: [

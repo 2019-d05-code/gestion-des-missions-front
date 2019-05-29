@@ -1,0 +1,16 @@
+.btn .far  {
+    border: none;
+    color:red;
+    padding: 4px 4px;
+    font-size: 16px;
+    cursor: pointer;
+    background: none;
+  }
+
+ .btn .fas {
+    border: none;
+    color:green;
+    padding: 4px 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
