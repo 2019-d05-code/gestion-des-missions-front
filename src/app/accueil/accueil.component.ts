@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
     <img src="http://bleuchalou.b.l.pic.centerblog.net/c2730e27.gif" heigth="400" width="400">
 
     <h1>
-      Bienvenue {{collegueConnecte.nom}} {{collegueConnecte.prenom}}
+      Bienvenue {{collegueConnecte.nom | uppercase}} {{collegueConnecte.prenom | lowercase}}
     </h1>
 
     <div>
