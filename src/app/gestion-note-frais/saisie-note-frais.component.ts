@@ -5,8 +5,6 @@ import { DataService } from '../services/data.service';
 import { AuthService } from '../auth/auth.service';
 import { MissionFrais } from '../modeles/Mission';
 
-import { MDBModalRef } from 'ng-uikit-pro-standard';
-
 @Component({
     selector: 'app-saisie-note-frais',
     templateUrl: './saisie-note-frais.component.html',
@@ -23,7 +21,6 @@ export class SaisieNoteFraisComponent implements OnInit {
         private _authentificationService: AuthService,
         private _serv: DataService,
         private _fraisService: FraisService,
-        public modalRef: MDBModalRef,
         private router: Router,
     ) { }
 

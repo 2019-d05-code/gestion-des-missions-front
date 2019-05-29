@@ -6,14 +6,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Collaborateur, CollConn } from '../modeles/Collaborateur';
+import { CollConn } from '../modeles/Collaborateur';
 
 /**
  * Collègue anonyme.
  *
  * @type {Collegue}
  */
-const COLLEGUE_ANONYME = new Collegue({});
+const COLLEGUE_ANONYME = new Collegue({ roles: [] });
 
 /**
  * Service de gestion de l'authentification.
@@ -112,7 +112,7 @@ export class AuthService {
 
     // recupere les donnée du collegues connecter
     recupererCollConn(): Observable<CollConn> {
-        return this._http.get<CollConn>(`${environment.baseUrl}me`, { withCredentials: true })
-            .pipe(tap(coll => this.connect.next(coll)));
+        return this._http.get<any>(`${environment.baseUrl}me`, { withCredentials: true })
+            .pipe(map(col => new CollConn(col.email, col.nom, col.prenom, col.roles)));
     }
 }

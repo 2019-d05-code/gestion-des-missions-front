@@ -12,7 +12,7 @@ import { NomNature } from '../modeles/NomNature';
 })
 export class ModifierMissionCollaborateurComponent implements OnInit {
     id: Number;
-    mission: MissionDto = new MissionDto(null, null, null, null, null, null, null, null);
+    mission: MissionDto = new MissionDto(null, null, null, null, null, null, null, null, null);
     natures: any = {};
     transports: any = {};
 

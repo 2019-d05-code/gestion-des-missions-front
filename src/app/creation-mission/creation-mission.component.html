@@ -1,3 +1,5 @@
+<h1>Demande de Mission</h1>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-9 col-sm-12 mb-4 d-flex justify-content-center">
@@ -78,8 +80,13 @@
                         <br>
                         <li class="row">
                             <label class="col text-right">Estimation prime :</label>
-                            <p class="col text-left">
-                                <!--{{mission.nature.tjm}}-->0€</p>
+                            <div class="col text-left"> <input class="form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                    [(ngModel)]="mission.prime" type="text" name="prime" #prime="ngModel" required /> <pre> €</pre>
+                            </div>
+                            <div class="col-12 error" *ngIf="(prime.dirty && prime.invalid)">
+                                Le champ doit être rempli !
+                            </div>
+
                         </li>
                         <br>
                         <li class="row justify-content-center">

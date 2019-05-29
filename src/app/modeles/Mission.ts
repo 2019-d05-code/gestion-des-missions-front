@@ -39,6 +39,7 @@ export class MissionSansStatus {
         public villeArrivee: string,
         public transport: string,
         public emailColl: string,
+        public prime: Number,
     ) { }
 }
 

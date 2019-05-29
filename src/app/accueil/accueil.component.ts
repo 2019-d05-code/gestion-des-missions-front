@@ -1,22 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { Collegue } from '../auth/auth.domains';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
-  selector: 'app-accueil',
-  template: `
-    <p>
-      A finir de completer plus tard
-    </p>
+    selector: 'app-accueil',
+    template: `
+    <img src="http://bleuchalou.b.l.pic.centerblog.net/c2730e27.gif" heigth="400" width="400">
 
-    <img src="http://bleuchalou.b.l.pic.centerblog.net/c2730e27.gif" heigth="500" width="500">
+    <h1>
+      Bienvenue {{collegueConnecte.nom | uppercase}} {{collegueConnecte.prenom | lowercase}}
+    </h1>
+
+    <div>
+    Tu es ici sur l'application de gestion des missions !
+    </div>
 
   `,
-  styles: []
+    styles: []
 })
 export class AccueilComponent implements OnInit {
 
-  constructor() { }
+    collegueConnecte: Collegue;
 
-  ngOnInit() {
-  }
+    constructor(private _authSrv: AuthService) { }
+
+    ngOnInit() {
+        this._authSrv.collegueConnecteObs.subscribe(col => {
+            this.collegueConnecte = col;
+        });
+    }
 
 }

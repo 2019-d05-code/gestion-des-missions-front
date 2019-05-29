@@ -1,17 +1,20 @@
-<head class="row text-center">
-    <div class="col-12">
-        <div class="jumbotron">
-            <h2 class="h1 h1-responsive">Gestion des Missions</h2>
-            <div *ngIf="!(collegueConnecte | async).estAnonyme()">
-                <span>{{(collegueConnecte | async).email}}</span>
-                <span>({{(collegueConnecte | async).roles}})</span>
+<ng-container *ngIf="collegueConnecteObservable | async as coll">
+
+    <head class="row text-center">
+        <div class="col-12">
+            <div class="jumbotron">
+                <h2 class="h1 h1-responsive">Gestion des Missions</h2>
+                <div *ngIf="!coll.estAnonyme()">
+                    <span>{{coll.email}}</span>
+                    <span>{{coll.roles}}</span>
+                </div>
             </div>
         </div>
-    </div>
-</head>
+    </head>
 
+    <app-menu></app-menu>
 
-<app-menu [collegueConnecte]=" collegueConnecte"></app-menu>
+</ng-container>
 
 <main class="row text-center">
     <div class="col-12">

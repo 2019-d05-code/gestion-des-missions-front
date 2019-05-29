@@ -9,5 +9,6 @@ export class MissionDto {
         public villeDepart: string,
         public villeArrivee: string,
         public transport: string,
-        public statut: Statut) {}
+        public statut: Statut,
+        public prime: Number) { }
 }
