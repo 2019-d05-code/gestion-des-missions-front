@@ -25,13 +25,13 @@ import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
-    { path: '**', redirectTo: '/connexion', pathMatch: 'full' },
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
-    { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] }
+    { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: '**', redirectTo: '/connexion', pathMatch: 'full' }
 
 ];
 

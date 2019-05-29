@@ -1,105 +1,112 @@
 <h1>Visualisation des Missions</h1>
 
-<div class="container">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-9">Date de début</div>
-                            <div class="col-3">
-                                <div class="row">
-                                    <i [hidden]="trierPar=='dateDebutDesc'" class="fas fa-sort-up"
-                                        (click)="trierMissionDateDebutDesc()"></i>
-                                </div>
-                                <div class="row">
-                                    <i [hidden]="trierPar=='dateDebutAsc'" class="fas fa-sort-down"
-                                        (click)="trierMissionDateDebutAsc()"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </th>
-                <th scope="col">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-9">Date de fin</div>
-                            <div class="col-3">
-                                <div class="row">
-                                    <i [hidden]="trierPar=='dateFinDesc'" class="fas fa-sort-up"
-                                        (click)="trierMissionDateFinDesc()"></i>
-                                </div>
-                                <div class="row">
-                                    <i [hidden]="trierPar=='dateFinAsc'" class="fas fa-sort-down"
-                                        (click)="trierMissionDateFinAsc()"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </th>
-                <th scope="col">Nature</th>
-                <th scope="col">Départ</th>
-                <th scope="col">Arrivée</th>
-                <th scope="col">Transport</th>
-                <th scope="col">
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-9">Statut</div>
-                            <div class="col-3">
-                                <div class="row">
-                                    <i [hidden]="trierPar=='StatutAsc'" class="fas fa-sort-up"
-                                        (click)="trierMissionStatutAsc()"></i>
-                                </div>
-                                <div class="row"><i [hidden]="trierPar=='StatutDesc'" class="fas fa-sort-down"
-                                        (click)="trierMissionStatutDesc()"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </th>
-                <!-- <th scope="col">Action</th> -->
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let mission of listeMissionDto">
-
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
-                    <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
-                    <td>{{mission.nature}}</td>
-                    <td>{{mission.villeDepart}}</td>
-                    <td>{{mission.villeArrivee}}</td>
-                    <td>{{mission.transport}}</td>
-                    <td>{{mission.statut}}</td>
-                    <td>
-                        <div *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'">
-                            <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
-                                    class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-link"
-                                (click)="supprimerMission(mission.id)"><i class="fa fa-trash"></i></button>
+                    <th scope="col">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-9">Date de début</div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <i [hidden]="trierPar=='dateDebutDesc'" class="fas fa-sort-up"
+                                            (click)="trierMissionDateDebutDesc()"></i>
+                                    </div>
+                                    <div class="row">
+                                        <i [hidden]="trierPar=='dateDebutAsc'" class="fas fa-sort-down"
+                                            (click)="trierMissionDateDebutAsc()"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION' && mission.nature =='CONGEE PAYEE' ">
-
-                            <button class="btn btn-link"><i id="btnright" class="fa fa-eye"
-                                    aria-hidden="true"></i></button>
-
+                    </th>
+                    <th scope="col">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-9">Date de fin</div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <i [hidden]="trierPar=='dateFinDesc'" class="fas fa-sort-up"
+                                            (click)="trierMissionDateFinDesc()"></i>
+                                    </div>
+                                    <div class="row">
+                                        <i [hidden]="trierPar=='dateFinAsc'" class="fas fa-sort-down"
+                                            (click)="trierMissionDateFinAsc()"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div *ngIf="mission.statut == 'VALIDEE' || mission.statut == 'EN_ATTENTE_VALIDATION'">
-
-                            <button class="btn btn-link" (click)="supprimerMission(mission.id)"><i class="fa fa-trash"
-                                    aria-hidden="true"></i></button>
-
+                    </th>
+                    <th scope="col">Nature</th>
+                    <th scope="col">Départ</th>
+                    <th scope="col">Arrivée</th>
+                    <th scope="col">Transport</th>
+                    <th scope="col">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-9">Statut</div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <i [hidden]="trierPar=='StatutAsc'" class="fas fa-sort-up"
+                                            (click)="trierMissionStatutAsc()"></i>
+                                    </div>
+                                    <div class="row"><i [hidden]="trierPar=='StatutDesc'" class="fas fa-sort-down"
+                                            (click)="trierMissionStatutDesc()"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
-                    </td>
-
+                    </th>
+                    <!-- <th scope="col">Action</th> -->
                 </tr>
-            </ng-container>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let mission of listeMissionDto">
+
+                    <tr>
+                        <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
+                        <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
+                        <td>{{mission.nature}}</td>
+                        <td>{{mission.villeDepart}}</td>
+                        <td>{{mission.villeArrivee}}</td>
+                        <td>{{mission.transport}}</td>
+                        <td>{{mission.statut}}</td>
+                        <td>
+                            <div *ngIf="mission.statut == 'INITIALE' || mission.statut == 'REJETEE'">
+                                <button routerLink="/modifcollab/{{mission.id}}" class="btn btn-link"><i id="btnright"
+                                        class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                    class="btn btn-link" (click)="supprimerMission(mission.id)"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+                            <div *ngIf="mission.statut == 'EN_ATTENTE_VALIDATION' && mission.nature =='CONGEE PAYEE' ">
+
+                                <button class="btn btn-link"><i id="btnright" class="fa fa-eye"
+                                        aria-hidden="true"></i></button>
+
+                            </div>
+                            <div *ngIf="mission.statut == 'VALIDEE' || mission.statut == 'EN_ATTENTE_VALIDATION'">
+
+                                <button class="btn btn-link" (click)="supprimerMission(mission.id)"><i
+                                        class="fa fa-trash" aria-hidden="true"></i></button>
+
+                            </div>
 
 
-        </tbody>
-    </table>
-    <button class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link">Nouvelle
-        Mission</button>
+                        </td>
+
+                    </tr>
+                </ng-container>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-12 offset-lg-5 col-lg-2 offset-lg-5">
+        <input class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link"
+            value="Nouvelle Mission" />
+    </div>
+
 </div>
