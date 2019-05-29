@@ -14,8 +14,8 @@ import { FormatDateValidateurDirective } from './validateurs/format-date-validat
 import { FormsModule } from '@angular/forms';
 import { GestionNoteFraisComponent } from './gestion-note-frais/gestion-note-frais.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 import { ManagerGuard } from './manager-validation/manager-guard';
+import { ManagerValidationComponent } from './manager-validation/manager-validation.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MenuComponent } from './menu/menu.component';
 import { ModifierMissionCollaborateurComponent } from './modifier-mission-collaborateur/modifier-mission-collaborateur.component';
@@ -29,8 +29,8 @@ const routes: Routes = [
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
     { path: 'connexion', component: AuthComponent },
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
-    { path: 'frais', component: GestionNoteFraisComponent, canActivate: [StatutConnecteService] },
-    { path: 'frais/:missionId', component: SaisieNoteFraisComponent, canActivate: [StatutConnecteService] },
+    { path: 'noteDeFrais', component: GestionNoteFraisComponent, canActivate: [StatutConnecteService] },
+    { path: 'noteDeFrais/:missionId', component: SaisieNoteFraisComponent, canActivate: [StatutConnecteService] },
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },

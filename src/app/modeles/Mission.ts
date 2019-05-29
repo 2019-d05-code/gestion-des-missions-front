@@ -15,7 +15,7 @@ export class Mission {
     ) { }
 }
 
-export class MissionFrais {
+export class MissionAvecFrais {
 
     constructor(
         public dateDebut: Date,
