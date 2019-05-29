@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { Mission, MissionManager, MissionStatut } from '../modeles/Mission';
-import { Statut } from '../modeles/Statut';
+import { MissionManager, MissionStatut } from '../modeles/Mission';
 
 @Component({
     selector: 'app-manager-validation',

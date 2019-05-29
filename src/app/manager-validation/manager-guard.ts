@@ -19,16 +19,12 @@ export class ManagerGuard implements CanActivate {
 
         return this._authSrv.recupererCollConn()
             .pipe(
-                tap(console.log),
                 map(collConn => collConn.roles.some(el => this.verification(el)))
-                ,
-                tap(console.log)
             );
 
     }
 
-    verification(element)
-    {
-        return  element ===  Profil.Manager;
+    verification(element) {
+        return element === Profil.Manager;
     }
 }
