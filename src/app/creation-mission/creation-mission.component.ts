@@ -19,7 +19,7 @@ export class CreationMissionComponent implements OnInit {
     natures: any = {};
     nature: any;
 
-    mission: MissionSansStatus = new MissionSansStatus(null, null, null, null, null, null, null);
+    mission: MissionSansStatus = new MissionSansStatus(null, null, null, null, null, null, null, null);
     connecte: CollConn;
 
 
