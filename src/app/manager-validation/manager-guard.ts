@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { Subscription, Observable } from 'rxjs';
-import { Collaborateur, CollConn } from '../modeles/Collaborateur';
+import { Observable } from 'rxjs';
 import { Profil } from '../modeles/Profil';
-import { map, tap } from 'rxjs/operators';
-
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ManagerGuard implements CanActivate {
