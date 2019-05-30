@@ -22,12 +22,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AccueilComponent } from './accueil/accueil.component';
+import { PrimeComponent } from './prime/prime.component';
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
     { path: 'creation-mission', component: CreationMissionComponent, canActivate: [StatutConnecteService] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
+    { path: 'prime', component: PrimeComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
     { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
@@ -48,7 +50,8 @@ const routes: Routes = [
         ModifierMissionCollaborateurComponent,
         ManagerValidationComponent,
         PlanningComponent,
-        AccueilComponent
+        AccueilComponent,
+        PrimeComponent
     ],
     imports: [
         BrowserModule,
