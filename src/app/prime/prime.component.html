@@ -1,5 +1,16 @@
-<h1>Visualisation des Missions</h1>
+<br>
+<h1>Récapitulatif des Primes</h1>
+<br>
 
+<select class="col text-left form-control" [(ngModel)]="yearCondition" #yearSort="ngModel" name="yearCondition"
+    (click)="updateMission()" required>
+    <optgroup label="-- Sélectionez la year de la mission"></optgroup>
+    <option *ngFor="let year of listeYears" [value]="year">
+        {{year}}
+    </option>
+</select>
+
+<br>
 <div class="row">
     <div class="col-6">
         <table class="table table-bordered table-striped">
@@ -58,3 +69,11 @@
             </tbody>
         </table>
     </div>
+    <div>
+
+        <fusioncharts width="500" height="300" type="column2d" dataFormat="json" [dataSource]="data">
+        </fusioncharts>
+
+
+    </div>
+</div>
