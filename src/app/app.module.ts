@@ -23,6 +23,17 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AccueilComponent } from './accueil/accueil.component';
 import { PrimeComponent } from './prime/prime.component';
+// Import angular-fusioncharts
+import { FusionChartsModule } from 'angular-fusioncharts';
+
+// Import FusionCharts library
+import * as FusionCharts from 'fusioncharts';
+
+// Load FusionCharts Individual Charts
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+
+// Use fcRoot function to inject FusionCharts library, and the modules you want to use
+FusionChartsModule.fcRoot(FusionCharts, Charts);
 
 const routes: Routes = [
     { path: 'connexion', component: AuthComponent },
@@ -60,6 +71,7 @@ const routes: Routes = [
         MDBBootstrapModule.forRoot(),
         FormsModule,
         BrowserAnimationsModule,
+        FusionChartsModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory
