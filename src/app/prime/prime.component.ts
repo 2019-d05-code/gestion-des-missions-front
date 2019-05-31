@@ -10,8 +10,6 @@ import { CollConn } from '../modeles/Collaborateur';
 import { stringify } from '@angular/compiler/src/util';
 import { PrimeService } from '../services/prime.service';
 import { addYears } from 'date-fns';
-import * as CanvasJS from './canvasjs.min';
-//var CanvasJS = require('./canvasjs.min');
 import { MissingTranslationStrategy } from '@angular/compiler/src/core';
 
 @Component({
