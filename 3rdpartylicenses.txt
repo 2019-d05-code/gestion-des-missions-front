@@ -69,6 +69,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+angular-fusioncharts
+MIT
+
 angular-resizable-element
 MIT
 The MIT License (MIT)
@@ -274,6 +277,9 @@ WTFPL
 
 font-awesome
 (OFL-1.1 AND MIT)
+
+fusioncharts
+http://www.fusioncharts.com/buy/
 
 is-array
 MIT
