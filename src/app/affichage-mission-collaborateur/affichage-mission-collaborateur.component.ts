@@ -59,7 +59,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             err => { alert(`${err.name} : ${err.message}`); }
         );
 
-        this._serv.recupererListesAbscence(email).subscribe(
+        this._serv.recupererListesAbsence(email).subscribe(
             abs => { this.listeAbsence = abs;
                      this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },
             err => { alert(`${err.name} : ${err.message}`); }

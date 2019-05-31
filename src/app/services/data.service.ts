@@ -98,7 +98,7 @@ export class DataService {
         return this._http.post<Collegue>('https://absences-back.cleverapps.io/login', { withCredentials: true });
     }
 
-    recupererListesAbscence(email: string)
+    recupererListesAbsence(email: string)
     {
         return this._http.get<Absence[]>(`https://absences-back.cleverapps.io/gestion-absences/listeAbsencesValidees?email=${email}`, { withCredentials: true });
     }
