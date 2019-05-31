@@ -31,6 +31,7 @@ import * as FusionCharts from 'fusioncharts';
 
 // Load FusionCharts Individual Charts
 import * as Charts from 'fusioncharts/fusioncharts.charts';
+import { NatureComponent } from './nature/nature.component';
 
 // Use fcRoot function to inject FusionCharts library, and the modules you want to use
 FusionChartsModule.fcRoot(FusionCharts, Charts);
@@ -62,7 +63,8 @@ const routes: Routes = [
         ManagerValidationComponent,
         PlanningComponent,
         AccueilComponent,
-        PrimeComponent
+        PrimeComponent,
+        NatureComponent
     ],
     imports: [
         BrowserModule,
