@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FraisService } from './frais.service';
+import { FraisService } from '../services/frais.service';
 import { MissionDtoAvecFrais } from '../modeles/MissionDto';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
@@ -36,6 +36,7 @@ export class GestionNoteFraisComponent implements OnInit {
     selectionnerMission() {
         this.listeMissionsDtoAvecFrais.forEach(mission => {
             this.mission = mission;
+            this.afficherActions(mission);
         });
     }
 

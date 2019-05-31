@@ -1,20 +1,17 @@
 <h2>Saisie des notes de frais</h2>
-<!--
-<ng-container *ngFor="let noteFrais of listeMissionFrais">
-                    -->
+
 <div class="row">
     <div class="col text-center">
-        <li>Date de début : {{mission.dateDebut | date:'dd/MM/yyyy'}}</li>
-        <li>Date de fin : {{mission.dateFin | date:'dd/MM/yyyy'}}</li>
-        <li>Nature : {{mission.nature}}</li>
+        <li>Date de début : {{missionCourante.dateDebut | date:'dd/MM/yyyy'}}</li>
+        <li>Date de fin : {{missionCourante.dateFin | date:'dd/MM/yyyy'}}</li>
+        <li>Nature : {{missionCourante.nature}}</li>
     </div>
     <div class="col text-center">
-        <li>Estimation prime : {{mission.frais}}</li>
-        <li>Ville de départ : {{mission.villeDepart}}</li>
-        <li>Ville d'arrivée : {{mission.villeArrivee}}</li>
+        <li>Estimation prime : {{missionCourante.frais}}</li>
+        <li>Ville de départ : {{missionCourante.villeDepart}}</li>
+        <li>Ville d'arrivée : {{missionCourante.villeArrivee}}</li>
     </div>
 </div>
-
 <div class="container">
     <table class="table table-bordered table-striped">
         <thead>
@@ -26,57 +23,71 @@
             </tr>
         </thead>
         <tbody>
-
-            <tr>
-                <td>{{mission.frais.date}}</td>
-                <td>{{mission.frais.nature}}</td>
-                <td>{{mission.frais.montant}}</td>
-                <td>
-                    <button class="btn btn-link"><i class="fa fa-trash"></i></button>
-                    <button class="btn btn-link"><i class="fa fa-pencil" id="btnright"></i></button>
-                </td>
-            </tr>
-            <!--
-                </ng-container>
-            -->
+            <ng-container *ngFor="let noteDeFrais of listeNotesDeFrais">
+                <tr>
+                    <td>{{noteDeFrais.date}}</td>
+                    <td>{{noteDeFrais.nature}}</td>
+                    <td>{{noteDeFrais.montant}}</td>
+                    <td>
+                        <button class="btn btn-link"><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-link"><i class="fa fa-pencil" id="btnright"></i></button>
+                    </td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
     <div class="row justify-content-end">
-        <p>Ajouter un frais<button class="btn btn-link"><i class="fas fa-plus-square"></i></button></p>
-    </div>
+        <p>Ajouter un frais<button class="btn btn-link relative waves-light" type="button" (click)="basicModal.show()"
+                mdbWavesEffect><i class="fas fa-plus-square"></i></button></p>
+        <form (ngSubmit)="valider()" #createForm="ngForm">
+            <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close pull-right" aria-label="Close"
+                                (click)="basicModal.hide()">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title w-100" id="myModalLabel">Ajout d'une ligne de frais</h4>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="form-group">
+                                <li class="row">
+                                    <label class="col text-right">Date : </label>
+                                    <input class="col form-control" [(ngModel)]="dateFrais" type="date" name="dateFrais"
+                                        #dateFrais2="ngModel" />
+                                </li>
+                                <br>
+                                <li class="row">
+                                    <label class="col text-right">Nature : </label>
+                                    <select class="col text-left form-control" id="nature" [(ngModel)]="natureFrais"
+                                        #nature_id="ngModel" name="nature" required>
+                                        <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
+                                        <option *ngFor="let nature of natures" [value]="nature.name_id">
+                                            {{nature.name}}
+                                        </option>
+                                    </select>
+                                </li>
+                                <br>
+                                <li class="row">
+                                    <label class="col text-right">Montant (€) :</label>
+                                    <div class="col text-left"> <input class="form-control" [(ngModel)]="montantFrais"
+                                            type="text" name="montant" #montant2="ngModel" />
+                                    </div>
 
-
-
-
-
-
-    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
-        mdbWavesEffect>Launch demo modal</button>
-
-    <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="myBasicModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                        (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
-                        changes</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                                (click)="basicModal.hide()" mdbWavesEffect>Annuler</button>
+                            <button type="submit" mdbBtn color="primary" class="relative waves-light"
+                                mdbWavesEffect>Valider</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-
 </div>
-<!--
-</ng-container>
-                    -->
