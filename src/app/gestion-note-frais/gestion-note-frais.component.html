@@ -47,22 +47,19 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let mission of listeMissionsDtoAvecFrais, let i=index">
-
                 <tr>
-                    <td>{{mission.dateDebut | date:'dd/MM/yyyy'}}</td>
-                    <td>{{mission.dateFin | date:'dd/MM/yyyy'}}</td>
-                    <td>{{mission.nature}}</td>
-                    <td>{{mission.villeDepart}}</td>
-                    <td>{{mission.villeArrivee}}</td>
-                    <td>{{mission.transport}}</td>
-                    <td>{{mission.frais}} €</td>
-                    <div>{{afficherActions(listeMissionsDtoAvecFrais[i])}}
-                        <td *ngIf="missionEchue">
-                            <button class="btn btn-link"><i class="fas fa-plus-circle"
-                                    routerLink="/noteDeFrais/{{listeMissionsDtoAvecFrais[i].id}}"></i></button>
-                            <button class="btn btn-link"><i class="far fa-file-pdf"></i></button>
-                        </td>
-                    </div>
+                    <td>{{listeMissionsDtoAvecFrais[i].dateDebut | date:'dd/MM/yyyy'}}</td>
+                    <td>{{listeMissionsDtoAvecFrais[i].dateFin | date:'dd/MM/yyyy'}}</td>
+                    <td>{{listeMissionsDtoAvecFrais[i].nature}}</td>
+                    <td>{{listeMissionsDtoAvecFrais[i].villeDepart}}</td>
+                    <td>{{listeMissionsDtoAvecFrais[i].villeArrivee}}</td>
+                    <td>{{listeMissionsDtoAvecFrais[i].transport}}</td>
+                    <td>{{listeMissionsDtoAvecFrais[i].frais}} €</td>
+                    <td *ngIf="afficherActions(listeMissionsDtoAvecFrais[i])">
+                        <button class="btn btn-link"><i class="fas fa-plus-circle"
+                                routerLink="/noteDeFrais/{{listeMissionsDtoAvecFrais[i].id}}"></i></button>
+                        <button class="btn btn-link"><i class="far fa-file-pdf"></i></button>
+                    </td>
                 </tr>
             </ng-container>
         </tbody>

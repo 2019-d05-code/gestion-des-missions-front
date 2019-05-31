@@ -36,7 +36,6 @@ export class GestionNoteFraisComponent implements OnInit {
     selectionnerMission() {
         this.listeMissionsDtoAvecFrais.forEach(mission => {
             this.mission = mission;
-            this.afficherActions(mission);
         });
     }
 
@@ -90,10 +89,11 @@ export class GestionNoteFraisComponent implements OnInit {
         this.trierPar = valeur;
     }
 
-    afficherActions(mission: MissionDtoAvecFrais): void {
+    afficherActions(mission: MissionDtoAvecFrais): boolean {
         this.missionEchue = false;
         if (new Date(mission.dateFin).getTime() < new Date().getTime()) {
             this.missionEchue = true;
         }
+        return this.missionEchue;
     }
 }

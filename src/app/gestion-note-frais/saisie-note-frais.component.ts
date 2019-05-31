@@ -72,8 +72,7 @@ export class SaisieNoteFraisComponent implements OnInit {
         this._fraisService.ajouterNoteDeFrais(this.noteDeFrais, this.id).subscribe(
             nouvelleNoteDeFrais => {
                 this.noteDeFrais = nouvelleNoteDeFrais;
-                this.recupererListeNotesFrais()
-                //this.router.navigate([`/noteDeFrais/`, { id: this.id }]);
+                this.recupererListeNotesFrais();
             },
             (error: Error) => { alert(`${error.name} -> ${error.message}`); },
             () => { }
