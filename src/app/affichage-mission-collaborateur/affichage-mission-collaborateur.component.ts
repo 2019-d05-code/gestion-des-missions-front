@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
 import { Absence } from '../modeles/Absence';
+import { Collegue } from '../auth/auth.domains';
+import { Statut } from '../modeles/Statut';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -18,9 +20,10 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     messageOk: string;
     trierPar = '';
     listeMission: Mission[] = new Array<Mission>();
-    listeMissionDto: MissionDto[];
-    listeAbsence: Absence[];
+    listeMissionDto: MissionDto[] = new Array<MissionDto>();
+    listeAbsence: Absence[] = new Array<Absence>();
     collegue: CollConn = new CollConn(null, null, null);
+    col: Collegue;
 
     // - constructeur et données d'initialisation de la page -
     constructor(private _serv: DataService, private router: Router, private route: ActivatedRoute,
@@ -32,7 +35,7 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
             this.afficherAbsence(this.collegue.email);
-            this.listeMissionDto.concat(this.listeAbsence); //concatener les deux et faire la transformation abscence -> mission
+            this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } );
         });
     }
 
@@ -46,19 +49,27 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     }
 
     updateMission(email: string): void {
-        this._serv.recupererMissionCollegue(email).subscribe(coll => {
-            this.listeMissionDto = coll;
-        });
+        this._serv.recupererMissionCollegue(email).subscribe(
+            coll => { this.listeMissionDto = coll; });
     }
 
-    afficherAbsence(email: string)
+    afficherAbsence(email: string) {
+        this.authentificationService.verifierAuthentificationAbs().subscribe(
+            col => { this.col = col; },
+            err => { alert(`${err.name} : ${err.message}`); }
+        );
+
+        this._serv.recupererListesAbscence(email).subscribe(
+            abs => { this.listeAbsence = abs;
+                     this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },
+            err => { alert(`${err.name} : ${err.message}`); }
+        );
+    }
+
+    absVersMiss(abs: Absence)
     {
-        this.authentificationService.verifierAuthentificationAbs().subscribe(//connecterAbsence(this.collegue.email, 'superpass').subscribe(
-            col => {},
-            err => {alert(`${err.name} : ${err.message}`);});
-        this._serv.recupererListesAbscence(email).subscribe(abs => {
-            this.listeAbsence = abs;
-        });
+        const miss: MissionDto = new MissionDto(abs.id, abs.dateDebut, abs.dateFin, 'Congé', '-', '-', '-', Statut.VALIDEE, 0);
+        this.listeMissionDto.push(miss);
     }
 
     // - fonction de tri -

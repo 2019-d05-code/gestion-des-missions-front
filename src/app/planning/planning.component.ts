@@ -11,6 +11,8 @@ import { CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Absence } from '../modeles/Absence';
+import { Collegue } from '../auth/auth.domains';
 
 const colors: any = {
     green: { primary: '#008000', secondary: '#00cc00' },
@@ -28,8 +30,10 @@ const colors: any = {
 })
 export class PlanningComponent implements OnInit {
     // - attribut foncrionnel -
-    listeMission: MissionManager[];
+    listeMission: MissionManager[] = new Array<MissionManager>();
     connecte: CollConn;
+    listeAbsence: Absence[] = new Array<Absence>();
+    col: Collegue;
 
     // - attribut calendrier -
     view: CalendarView = CalendarView.Month;
@@ -49,6 +53,8 @@ export class PlanningComponent implements OnInit {
             (valeurObtenue) => {
                 this.connecte = valeurObtenue;
                 this.afficherMission();
+                this.afficherAbsence(this.connecte.email);
+                this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } );
             },
             error => { },
             () => { });
@@ -73,6 +79,25 @@ export class PlanningComponent implements OnInit {
                 })
             ));
 
+    }
+
+    afficherAbsence(email: string) {
+        this._authSrv.verifierAuthentificationAbs().subscribe(
+            col => { this.col = col; },
+            err => { alert(`${err.name} : ${err.message}`); }
+        );
+
+        this._serv.recupererListesAbscence(email).subscribe(
+            abs => { this.listeAbsence = abs;
+                     this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },
+            err => { alert(`${err.name} : ${err.message}`); }
+        );
+    }
+
+    absVersMiss(abs: Absence)
+    {
+        const miss: MissionManager = new MissionManager(abs.id, abs.dateDebut, abs.dateFin, 'Congé', '-', '-', '-');
+        this.listeMission.push(miss);
     }
 
     beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
