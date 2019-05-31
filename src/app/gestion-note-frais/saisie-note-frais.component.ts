@@ -17,6 +17,7 @@ const URL_BACKEND = environment.baseUrl;
 export class SaisieNoteFraisComponent implements OnInit {
 
     id: number;
+    idNoteDeFrais: number;
     missionCourante: MissionDtoAvecFrais = new MissionDtoAvecFrais(null, null, null, null, null, null, null, null, null, null);
     listeNotesDeFrais: Frais[] = new Array();
     noteDeFrais: Frais = this.missionCourante.frais;
@@ -77,5 +78,9 @@ export class SaisieNoteFraisComponent implements OnInit {
             (error: Error) => { alert(`${error.name} -> ${error.message}`); },
             () => { }
         );
+    }
+
+    supprimer(id) {
+        this._fraisService.supprimerNoteDeFrais(id);
     }
 }

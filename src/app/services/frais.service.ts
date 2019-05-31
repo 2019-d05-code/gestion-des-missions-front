@@ -17,6 +17,7 @@ export class FraisService {
     private _listeMissionsDtoAvecFrais = new Subject<MissionDtoAvecFrais[]>();
     private _listeNotesFrais = new Subject<Frais[]>();
     private _idMission: number;
+    private _idNoteDeFrais: number;
     private _missionEnCours: MissionDtoAvecFrais;
     private _noteDeFraisSubject = new Subject<Frais>();
 
@@ -59,6 +60,30 @@ export class FraisService {
             'montant': nouvelleNoteDeFrais.montant
         };
         return this._http.post<Frais>(`${URL_BACKEND}frais/${idMission}`, body, { withCredentials: true }).pipe(
+            tap(noteDeFrais => {
+                this._noteDeFraisSubject.next(noteDeFrais);
+            })
+        );
+    }
+
+    supprimerNoteDeFrais(id: number, idMission?: number): Observable<Frais> {
+        const body = {
+            'id': id
+        };
+        return this._http.delete<Frais>(`${URL_BACKEND}frais/${idMission}`, body, { withCredentials: true }).pipe(
+            tap(id => {
+                this._idNoteDeFrais.next(id);
+            })
+        );
+    }
+
+    modifierNoteDeFrais(noteDeFraisModif: Frais, idMission?: number): Observable<Frais> {
+        const body = {
+            'date': noteDeFraisModif.date,
+            'nature': noteDeFraisModif.nature,
+            'montant': noteDeFraisModif.montant
+        };
+        return this._http.patch<Frais>(`${URL_BACKEND}frais/${idMission}`, body, { withCredentials: true }).pipe(
             tap(noteDeFrais => {
                 this._noteDeFraisSubject.next(noteDeFrais);
             })

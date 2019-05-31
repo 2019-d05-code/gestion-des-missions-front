@@ -23,14 +23,69 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let noteDeFrais of listeNotesDeFrais">
+            <ng-container *ngFor="let noteDeFrais of listeNotesDeFrais, let id=index">
                 <tr>
                     <td>{{noteDeFrais.date}}</td>
                     <td>{{noteDeFrais.nature}}</td>
                     <td>{{noteDeFrais.montant}}</td>
                     <td>
-                        <button class="btn btn-link"><i class="fa fa-trash"></i></button>
-                        <button class="btn btn-link"><i class="fa fa-pencil" id="btnright"></i></button>
+                        <button class="btn btn-link" type="button" (click)="supprimer(id)"><i
+                                class="fa fa-trash"></i></button>
+                        <button class="btn btn-link" (click)="modifModal.show()"><i class="fa fa-pencil"
+                                id="btnright"></i></button>
+                        <form (ngSubmit)="valider()" #createForm="ngForm">
+                            <div mdbModal #modifModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                                aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close pull-right" aria-label="Close"
+                                                (click)="modifModal.hide()">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <h4 class="modal-title w-100" id="myModalLabel">Modification d'une ligne de
+                                                frais</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="form-group">
+                                                <li class="row">
+                                                    <label class="col text-left">Date : </label>
+                                                    <input class="col form-control" [(ngModel)]="dateFrais" type="date"
+                                                        name="dateFrais" #dateFrais2="ngModel" />
+                                                </li>
+                                                <br>
+                                                <li class="row">
+                                                    <label class="col text-left">Nature : </label>
+                                                    <select class="col form-control" id="nature"
+                                                        [(ngModel)]="natureFrais" #nature_id="ngModel" name="nature"
+                                                        required>
+                                                        <optgroup label="-- Sélectionez la nature des frais"></optgroup>
+                                                        <option *ngFor="let nature of natures" [value]="nature.name_id">
+                                                            {{nature.name}}
+                                                        </option>
+                                                    </select>
+                                                </li>
+                                                <br>
+                                                <li class="row">
+                                                    <label class="col text-left">Montant (€) :</label>
+                                                    <div class="col"><input class="form-control"
+                                                            [(ngModel)]="montantFrais" type="text" name="montant"
+                                                            #montant2="ngModel" />
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" mdbBtn color="secondary" class="waves-light"
+                                                aria-label="Close" (click)="modifModal.hide()"
+                                                mdbWavesEffect>Annuler</button>
+                                            <button type="submit" mdbBtn color="primary" class="relative waves-light"
+                                                (click)="modifModal.hide()" mdbWavesEffect>Valider</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </td>
                 </tr>
             </ng-container>
@@ -54,16 +109,16 @@
                         <div class="modal-body">
                             <ul class="form-group">
                                 <li class="row">
-                                    <label class="col text-right">Date : </label>
+                                    <label class="col text-left">Date : </label>
                                     <input class="col form-control" [(ngModel)]="dateFrais" type="date" name="dateFrais"
                                         #dateFrais2="ngModel" />
                                 </li>
                                 <br>
                                 <li class="row">
-                                    <label class="col text-right">Nature : </label>
-                                    <select class="col text-left form-control" id="nature" [(ngModel)]="natureFrais"
+                                    <label class="col text-left">Nature : </label>
+                                    <select class="col form-control" id="nature" [(ngModel)]="natureFrais"
                                         #nature_id="ngModel" name="nature" required>
-                                        <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
+                                        <optgroup label="-- Sélectionez la nature des frais"></optgroup>
                                         <option *ngFor="let nature of natures" [value]="nature.name_id">
                                             {{nature.name}}
                                         </option>
@@ -71,11 +126,10 @@
                                 </li>
                                 <br>
                                 <li class="row">
-                                    <label class="col text-right">Montant (€) :</label>
-                                    <div class="col text-left"> <input class="form-control" [(ngModel)]="montantFrais"
-                                            type="text" name="montant" #montant2="ngModel" />
+                                    <label class="col text-left">Montant (€) :</label>
+                                    <div class="col"><input class="form-control" [(ngModel)]="montantFrais" type="text"
+                                            name="montant" #montant2="ngModel" />
                                     </div>
-
                                 </li>
                             </ul>
                         </div>
