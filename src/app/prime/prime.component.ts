@@ -14,8 +14,8 @@ import { MissingTranslationStrategy } from '@angular/compiler/src/core';
 
 @Component({
     selector: 'app-prime',
-    templateUrl: `./nature.component.html`,
-    styleUrls: [`./nature.component.css`]
+    templateUrl: `./prime.component.html`,
+    styleUrls: [`./prime.component.css`]
 })
 export class PrimeComponent implements OnInit {
 

@@ -1,0 +1,53 @@
+<br>
+<h1>Natures de Mission</h1>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nature</th>
+                    <th scope="col">Facturee</th>
+                    <th scope="col">Prime</th>
+                    <th scope="col">TJM (€)</th>
+                    <th scope="col">% Prime</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let nature of listeNature">
+
+                    <tr>
+                        <td>{{nature.nomNature}}</td>
+                        <td>{{nature.facturee| bool}}</td>
+                        <td>{{nature.prime | bool}}</td>
+                        <td>{{nature.tauxJournalierMoyen}}</td>
+                        <td>{{nature.pourcentPrime}}</td>
+
+
+
+                               <td>
+                            <div >
+                                <button routerLink="/modifnature/{{nature.id}}" class="btn btn-link"><i id="btnright"
+                                        class="fa fa-pencil" aria-hidden="true"></i></button> <button
+                                    class="btn btn-link" (click)="supprimerNature(nature.id)"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                </ng-container>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-12 offset-lg-5 col-lg-2 offset-lg-5">
+        <label>Ajouter une nature de mission</label>
+        <input class="btn btn-primary" routerLink="/creation-nature" routerLinkActive="active-link"
+            value="+" />
+    </div>
+
+</div>
