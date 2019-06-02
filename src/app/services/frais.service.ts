@@ -70,13 +70,15 @@ export class FraisService {
         return this._http.delete<Frais>(`${URL_BACKEND}frais/${idMission}`, { withCredentials: true })
     }
 
-    modifierNoteDeFrais(noteDeFraisModif: Frais, idMission?: number): Observable<Frais> {
+    modifierNoteDeFrais(noteDeFraisModif: Frais, idNoteDeFrais?: number): Observable<Frais> {
         const body = {
+            'id' : idNoteDeFrais,
             'date': noteDeFraisModif.date,
             'nature': noteDeFraisModif.nature,
-            'montant': noteDeFraisModif.montant
+            'montant': noteDeFraisModif.montant,
+            'idMiss': noteDeFraisModif.idMiss
         };
-        return this._http.patch<Frais>(`${URL_BACKEND}frais/${idMission}`, body, { withCredentials: true }).pipe(
+        return this._http.put<Frais>(`${URL_BACKEND}frais/${noteDeFraisModif.idMiss}`, body, { withCredentials: true }).pipe(
             tap(noteDeFrais => {
                 this._noteDeFraisSubject.next(noteDeFrais);
             })

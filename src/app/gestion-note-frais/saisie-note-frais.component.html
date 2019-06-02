@@ -29,11 +29,11 @@
                     <td>{{noteDeFrais.nature}}</td>
                     <td>{{noteDeFrais.montant}}</td>
                     <td>
-                        <button class="btn btn-link" type="button" (click)="supprimer(id)"><i
+                        <button class="btn btn-link" type="button" (click)="supprimer(noteDeFrais.id)"><i
                                 class="fa fa-trash"></i></button>
                         <button class="btn btn-link" (click)="modifModal.show()"><i class="fa fa-pencil"
                                 id="btnright"></i></button>
-                        <form (ngSubmit)="validerModif(id)" #createForm="ngForm">
+                        <form (ngSubmit)="validerModif(noteDeFrais.id)" #createForm="ngForm">
                             <div mdbModal #modifModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
                                 aria-labelledby="myBasicModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">

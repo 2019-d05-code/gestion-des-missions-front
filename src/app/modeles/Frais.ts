@@ -4,5 +4,6 @@ export class Frais {
         public date: Date,
         public nature: string,
         public montant: number = 0,
+        public idMiss?: number
     ) { }
 }

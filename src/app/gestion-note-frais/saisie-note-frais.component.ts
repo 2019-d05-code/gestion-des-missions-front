@@ -35,10 +35,10 @@ export class SaisieNoteFraisComponent implements OnInit {
             name_id: 0,
             name: 'Hôtel'
         }, {
-            name_id: 1,
+            name_id: 2,
             name: 'Petit-déjeuner'
         }, {
-            name_id: 2,
+            name_id: 1,
             name: 'Restaurant'
         }, {
             name_id: 3,
@@ -80,9 +80,9 @@ export class SaisieNoteFraisComponent implements OnInit {
         );
     }
 
-    validerModif(idNoteDeFrais) {
-        this.noteDeFrais = new Frais(this.dateFrais, this.natureFrais, this.montantFrais);
-        this._fraisService.modifierNoteDeFrais(this.noteDeFrais, idNoteDeFrais).subscribe(
+    validerModif(id) {
+        this.noteDeFrais = new Frais(this.dateFrais, this.natureFrais, this.montantFrais, this.id);
+        this._fraisService.modifierNoteDeFrais(this.noteDeFrais, id).subscribe(
             noteDeFraisModif => {
                 this.noteDeFrais = noteDeFraisModif;
                 this.recupererListeNotesFrais();
@@ -92,8 +92,7 @@ export class SaisieNoteFraisComponent implements OnInit {
         );
     }
 
-    supprimer(idNoteDeFrais) {
-        this._fraisService.supprimerNoteDeFrais(idNoteDeFrais);
-        this.recupererListeNotesFrais();
+    supprimer(id) {
+        this._fraisService.supprimerNoteDeFrais(id).subscribe(() => this.recupererListeNotesFrais());
     }
 }
