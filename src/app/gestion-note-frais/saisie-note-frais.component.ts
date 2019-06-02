@@ -16,6 +16,8 @@ const URL_BACKEND = environment.baseUrl;
 })
 export class SaisieNoteFraisComponent implements OnInit {
 
+    messageErreur: string = "";
+
     id: number;
     idNoteDeFrais: number;
     missionCourante: MissionDtoAvecFrais = new MissionDtoAvecFrais(null, null, null, null, null, null, null, null, null, null);
@@ -55,7 +57,7 @@ export class SaisieNoteFraisComponent implements OnInit {
     recupererMissionParId(): void {
         this._http.get<MissionDtoAvecFrais>(`${URL_BACKEND}mission/${this.id}`).subscribe(
             (mission: MissionDtoAvecFrais) => { this.missionCourante = mission; },
-            (error: Error) => { alert(`${error.name} : ${error.message}`); },
+            error => this.messageErreur = error.message,
             () => { }
         );
     }
@@ -63,7 +65,7 @@ export class SaisieNoteFraisComponent implements OnInit {
     recupererListeNotesFrais(): void {
         this._http.get<Frais[]>(`${URL_BACKEND}frais/${this.id}`).subscribe(
             (listeNotesDeFrais: Frais[]) => { this.listeNotesDeFrais = listeNotesDeFrais; },
-            (error: Error) => { alert(`${error.name} : ${error.message}`); },
+            error => this.messageErreur = error.message,
             () => { }
         );
     }
@@ -75,7 +77,7 @@ export class SaisieNoteFraisComponent implements OnInit {
                 this.noteDeFrais = nouvelleNoteDeFrais;
                 this.recupererListeNotesFrais();
             },
-            (error: Error) => { alert(`${error.name} -> ${error.message}`); },
+            error => this.messageErreur = error.message,
             () => { }
         );
     }
@@ -87,7 +89,7 @@ export class SaisieNoteFraisComponent implements OnInit {
                 this.noteDeFrais = noteDeFraisModif;
                 this.recupererListeNotesFrais();
             },
-            (error: Error) => { alert(`${error.name} -> ${error.message}`); },
+            error => this.messageErreur = error.message,
             () => { }
         );
     }
