@@ -57,7 +57,7 @@ export class SaisieNoteFraisComponent implements OnInit {
     recupererMissionParId(): void {
         this._http.get<MissionDtoAvecFrais>(`${URL_BACKEND}mission/${this.id}`).subscribe(
             (mission: MissionDtoAvecFrais) => { this.missionCourante = mission; },
-            error => this.messageErreur = error.message,
+            error => this.messageErreur = error.error,
             () => { }
         );
     }
@@ -65,7 +65,7 @@ export class SaisieNoteFraisComponent implements OnInit {
     recupererListeNotesFrais(): void {
         this._http.get<Frais[]>(`${URL_BACKEND}frais/${this.id}`).subscribe(
             (listeNotesDeFrais: Frais[]) => { this.listeNotesDeFrais = listeNotesDeFrais; },
-            error => this.messageErreur = error.message,
+            error => this.messageErreur = error.error,
             () => { }
         );
     }
@@ -77,7 +77,7 @@ export class SaisieNoteFraisComponent implements OnInit {
                 this.noteDeFrais = nouvelleNoteDeFrais;
                 this.recupererListeNotesFrais();
             },
-            error => this.messageErreur = error.message,
+            error => this.messageErreur = error.error,
             () => { }
         );
     }
@@ -89,7 +89,7 @@ export class SaisieNoteFraisComponent implements OnInit {
                 this.noteDeFrais = noteDeFraisModif;
                 this.recupererListeNotesFrais();
             },
-            error => this.messageErreur = error.message,
+            error => this.messageErreur = error.error,
             () => { }
         );
     }
