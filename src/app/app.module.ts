@@ -24,10 +24,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SaisieNoteFraisComponent } from './gestion-note-frais/saisie-note-frais.component';
 import { StatutConnecteService } from './auth/statut-connecte.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { AccueilComponent } from './accueil/accueil.component';
 import { PrimeComponent } from './prime/prime.component';
 // Import angular-fusioncharts
 import { FusionChartsModule } from 'angular-fusioncharts';
