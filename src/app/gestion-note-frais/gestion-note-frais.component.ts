@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FraisService } from '../services/frais.service';
-import { MissionDtoAvecFrais } from '../modeles/MissionDto';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
+import { Component, OnInit } from '@angular/core';
+import { FraisService } from '../services/frais.service';
+import { HttpClient } from '@angular/common/http';
+import { MissionDtoAvecFrais } from '../modeles/MissionDto';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { environment } from '../../environments/environment';
+import { Frais } from '../modeles/Frais';
+const URL_BACKEND = environment.baseUrl;
 
 @Component({
     selector: 'app-gestion-note-frais',
@@ -12,17 +17,21 @@ import { CollConn } from '../modeles/Collaborateur';
 })
 export class GestionNoteFraisComponent implements OnInit {
 
-    id: number;
-    trierPar = '';
     collegue: CollConn = new CollConn(null, null, null);
+    id: number;
     listeMissionsDtoAvecFrais: MissionDtoAvecFrais[];
+    listeNotesDeFrais: Frais[] = new Array();
     mission: MissionDtoAvecFrais;
     missionEchue = false;
+    missionCourante: MissionDtoAvecFrais = new MissionDtoAvecFrais(null, null, null, null, null, null, null, null, null, null);
+    montantPrime;
+    trierPar = '';
 
     constructor(
         private route: ActivatedRoute,
         private _authentificationService: AuthService,
         private _fraisService: FraisService,
+        private _http: HttpClient,
     ) { }
 
     ngOnInit() {
@@ -33,15 +42,23 @@ export class GestionNoteFraisComponent implements OnInit {
         });
     }
 
-    selectionnerMission() {
-        this.listeMissionsDtoAvecFrais.forEach(mission => {
-            this.mission = mission;
-        });
+    calculPrime(): void {
+        this.montantPrime = 0;
+        this.listeNotesDeFrais.forEach(noteDeFrais => {
+            this.montantPrime += noteDeFrais.montant;
+        })
+        this.missionCourante.prime = this.montantPrime.toFixed(2);
     }
 
     updateMissionAvecFrais(email: string): void {
         this._fraisService.recupererListeMissionsFraisParCollegue(email).subscribe(coll => {
             this.listeMissionsDtoAvecFrais = coll;
+        });
+    }
+
+    selectionnerMission() {
+        this.listeMissionsDtoAvecFrais.forEach(mission => {
+            this.mission = mission;
         });
     }
 
@@ -95,5 +112,24 @@ export class GestionNoteFraisComponent implements OnInit {
             this.missionEchue = true;
         }
         return this.missionEchue;
+    }
+
+    recupererListeNotesFrais(idMission): void {
+        this._http.get<Frais[]>(`${URL_BACKEND}frais/${idMission}`).subscribe(
+            (listeNotesDeFrais: Frais[]) => {
+                this.listeNotesDeFrais = listeNotesDeFrais;
+                this.calculPrime();
+            },
+            (error: Error) => { },
+            () => { }
+        );
+    }
+
+    recupererMissionParId(): void {
+        this._http.get<MissionDtoAvecFrais>(`${URL_BACKEND}mission/${this.id}`).subscribe(
+            (mission: MissionDtoAvecFrais) => { this.missionCourante = mission; },
+            (error: Error) => { },
+            () => { }
+        );
     }
 }
