@@ -80,7 +80,20 @@ export class SaisieNoteFraisComponent implements OnInit {
         );
     }
 
-    supprimer(id) {
-        this._fraisService.supprimerNoteDeFrais(id);
+    validerModif(idNoteDeFrais) {
+        this.noteDeFrais = new Frais(this.dateFrais, this.natureFrais, this.montantFrais);
+        this._fraisService.modifierNoteDeFrais(this.noteDeFrais, idNoteDeFrais).subscribe(
+            noteDeFraisModif => {
+                this.noteDeFrais = noteDeFraisModif;
+                this.recupererListeNotesFrais();
+            },
+            (error: Error) => { alert(`${error.name} -> ${error.message}`); },
+            () => { }
+        );
+    }
+
+    supprimer(idNoteDeFrais) {
+        this._fraisService.supprimerNoteDeFrais(idNoteDeFrais);
+        this.recupererListeNotesFrais();
     }
 }

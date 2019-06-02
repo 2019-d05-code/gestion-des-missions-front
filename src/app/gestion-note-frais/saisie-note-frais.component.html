@@ -33,7 +33,7 @@
                                 class="fa fa-trash"></i></button>
                         <button class="btn btn-link" (click)="modifModal.show()"><i class="fa fa-pencil"
                                 id="btnright"></i></button>
-                        <form (ngSubmit)="valider()" #createForm="ngForm">
+                        <form (ngSubmit)="validerModif(id)" #createForm="ngForm">
                             <div mdbModal #modifModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
                                 aria-labelledby="myBasicModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">

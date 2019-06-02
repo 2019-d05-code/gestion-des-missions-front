@@ -66,15 +66,8 @@ export class FraisService {
         );
     }
 
-    supprimerNoteDeFrais(id: number, idMission?: number): Observable<Frais> {
-        const body = {
-            'id': id
-        };
-        return this._http.delete<Frais>(`${URL_BACKEND}frais/${idMission}`, body, { withCredentials: true }).pipe(
-            tap(id => {
-                this._idNoteDeFrais.next(id);
-            })
-        );
+    supprimerNoteDeFrais(idMission?: number): Observable<Frais> {
+        return this._http.delete<Frais>(`${URL_BACKEND}frais/${idMission}`, { withCredentials: true })
     }
 
     modifierNoteDeFrais(noteDeFraisModif: Frais, idMission?: number): Observable<Frais> {
