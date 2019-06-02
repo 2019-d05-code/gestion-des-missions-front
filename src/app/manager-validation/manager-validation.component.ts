@@ -12,6 +12,8 @@ export class ManagerValidationComponent implements OnInit {
     miss: MissionStatut = new MissionStatut(null, null);
     statut: any = {};
 
+    messageErreur: string = "";
+
     constructor(private _serv: DataService) { }
 
     ngOnInit() {
@@ -21,7 +23,7 @@ export class ManagerValidationComponent implements OnInit {
     afficherListe() {
         this._serv.recupererMissionManager()
             .subscribe(coll => { this.listeMission = coll; },
-                (error: Error) => { });
+                error => this.messageErreur = error.error);
     }
 
     valider(i: number) {
@@ -31,7 +33,7 @@ export class ManagerValidationComponent implements OnInit {
         this._serv.changerStatutMission(this.miss).subscribe(miss => {
             this.afficherListe();
         },
-            (error: Error) => { },
+            error => this.messageErreur = error.error,
             () => { });
     }
 
@@ -42,7 +44,7 @@ export class ManagerValidationComponent implements OnInit {
         this._serv.changerStatutMission(this.miss).subscribe(miss => {
             this.afficherListe();
         },
-            (error: Error) => { },
+            error => this.messageErreur = error.error,
             () => { });
     }
 

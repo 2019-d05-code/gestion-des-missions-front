@@ -1,5 +1,9 @@
-<br>
+<br />
 <h1>Planning des Missions</h1>
+
+<div class="error">
+    {{messageErreur}}
+</div>
 
 <ng-container *ngFor="let mission of listeMission, let i=index">
     <p>{{mission.dateDebut}}</p>

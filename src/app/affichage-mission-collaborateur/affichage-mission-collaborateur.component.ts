@@ -3,11 +3,8 @@ import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
 import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -15,6 +12,9 @@ import { stringify } from '@angular/compiler/src/util';
     styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
+
+    messageErreur: string = "";
+
     id: Number;
     messageOk: string;
     trierPar = '';
@@ -32,7 +32,8 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.collegue = collegue;
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
-        });
+        },
+            error => this.messageErreur = error.error);
     }
 
     supprimerMission(id: number): void {
@@ -46,7 +47,9 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     updateMission(email: string): void {
         this._serv.recupererMissionCollegue(email).subscribe(coll => {
             this.listeMissionDto = coll;
-        });
+        },
+            error => this.messageErreur = error.error
+        );
     }
 
     trierMissionDateDebutAsc() {
