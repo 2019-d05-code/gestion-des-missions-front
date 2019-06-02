@@ -1,9 +1,8 @@
 import { NomNature } from './NomNature';
 
-export class Nature {
+export class NatureSansId {
 
     constructor(
-        public id: Number,
         public nomNature: string,
         public facturee: boolean,
         public prime: boolean,

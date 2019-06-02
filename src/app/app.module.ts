@@ -25,6 +25,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SaisieNoteFraisComponent } from './gestion-note-frais/saisie-note-frais.component';
 import { StatutConnecteService } from './auth/statut-connecte.service';
 import { PrimeComponent } from './prime/prime.component';
+import { NatureComponent } from './nature/nature.component';
 // Import angular-fusioncharts
 import { FusionChartsModule } from 'angular-fusioncharts';
 
@@ -33,7 +34,9 @@ import * as FusionCharts from 'fusioncharts';
 
 // Load FusionCharts Individual Charts
 import * as Charts from 'fusioncharts/fusioncharts.charts';
-import { NatureComponent } from './nature/nature.component';
+import { CreationNatureComponent } from './creation-nature/creation-nature.component';
+import { PipeBool } from './pipes/pipeBool';
+
 
 // Use fcRoot function to inject FusionCharts library, and the modules you want to use
 FusionChartsModule.fcRoot(FusionCharts, Charts);
@@ -48,11 +51,19 @@ const routes: Routes = [
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: 'prime', component: PrimeComponent, canActivate: [StatutConnecteService] },
     { path: 'accueil', component: AccueilComponent, canActivate: [StatutConnecteService] },
+    { path: 'nature', component: NatureComponent, canActivate: [StatutConnecteService] },
+    { path: 'creation-nature', component: CreationNatureComponent, canActivate: [StatutConnecteService] },
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+
+    //{ path: 'modifnature/:id', component: ModifierNatureComponent, canActivate: [StatutConnecteService] },
+    
+
+
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
     { path: '**', redirectTo: '/connexion', pathMatch: 'full' },
+
 ];
 
 @NgModule({
@@ -73,7 +84,9 @@ const routes: Routes = [
         SaisieNoteFraisComponent,
         AccueilComponent,
         PrimeComponent,
-        NatureComponent
+        NatureComponent,
+        CreationNatureComponent,
+        PipeBool
     ],
     imports: [
         BrowserAnimationsModule,
