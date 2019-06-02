@@ -3,11 +3,8 @@ import { DataService } from '../services/data.service';
 import { Mission } from '../modeles/Mission';
 import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Collegue } from '../auth/auth.domains';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',

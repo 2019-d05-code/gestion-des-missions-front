@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { Profil } from '../modeles/Profil';
-import { CollConn } from '../modeles/Collaborateur';
 import { Collegue } from '../auth/auth.domains';
 
 @Component({
