@@ -11,6 +11,9 @@ import { NomNature } from '../modeles/NomNature';
     styleUrls: [`./modifier-mission-collaborateur.component.css`]
 })
 export class ModifierMissionCollaborateurComponent implements OnInit {
+
+    messageErreur: string = "";
+
     id: Number;
     mission: MissionDto = new MissionDto(null, null, null, null, null, null, null, null, null);
     natures: any = {};
@@ -60,7 +63,7 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
                     this.mission = nouvelleMission;
                     this.router.navigate(['/mission']);
                 },
-                (error: Error) => { alert(`${error.name} : ${error.message}`); },
+                error => this.messageErreur = error.error,
                 () => { }
             );
     }
@@ -72,7 +75,7 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
                 this.transport = Transport[this.mission.transport];
                 this.nature = NomNature[this.mission.nature];
             },
-                (error: Error) => { });
+                error => this.messageErreur = error.error)
     }
 }
 
