@@ -14,6 +14,7 @@ import { NomNature } from '../modeles/NomNature';
 })
 export class CreationMissionComponent implements OnInit {
 
+    messageErreur: string = "";
     transports: any = {};
     natures: any = {};
     nature: any;
@@ -67,7 +68,7 @@ export class CreationMissionComponent implements OnInit {
                     this.mission = nouvelleMission;
                     this.router.navigate(['/mission']);
                 },
-                error => { alert(error.error); },
+                error => { this.messageErreur = error.error },
                 () => { }
             );
 
@@ -76,7 +77,7 @@ export class CreationMissionComponent implements OnInit {
     ngOnInit() {
         this._authSrv.recupererCollConn().subscribe(
             (valeurObtenue) => { this.connecte = valeurObtenue; },
-            error => { alert(error.error); },
+            error => { this.messageErreur = error.error },
             () => { });
     }
 }

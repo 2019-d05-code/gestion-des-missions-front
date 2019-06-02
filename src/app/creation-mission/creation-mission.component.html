@@ -4,8 +4,9 @@
     <div class="row">
         <div class="col-lg-9 col-sm-12 mb-4 d-flex justify-content-center">
             <div class="container-fluid text-center">
-                <!-- <div class="text-center"> -->
-                <h2>Demande de mission</h2>
+                <div class="error">
+                    {{messageErreur}}
+                </div>
                 <form appDateDebutValidateur appDateFinValidateur (ngSubmit)="valider()" #createForm="ngForm">
                     <ul class="form-group">
                         <li class="row">
