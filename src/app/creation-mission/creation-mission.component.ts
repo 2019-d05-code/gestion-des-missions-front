@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Mission, MissionSansStatus } from '../modeles/Mission';
+import { MissionSansStatus } from '../modeles/Mission';
 import { DataService } from '../services/data.service';
 import { Transport } from '../modeles/Transport';
 import { Router } from '@angular/router';
-import { Nature } from '../modeles/Nature';
-import { Collaborateur, CollConn } from '../modeles/Collaborateur';
+import { CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
 import { NomNature } from '../modeles/NomNature';
 
@@ -68,7 +67,7 @@ export class CreationMissionComponent implements OnInit {
                     this.mission = nouvelleMission;
                     this.router.navigate(['/mission']);
                 },
-                error => { },
+                error => { alert(error.error); },
                 () => { }
             );
 
