@@ -41,6 +41,8 @@ export class PlanningComponent implements OnInit {
     weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
     events: Observable<CalendarEvent[]>;
 
+    messageErreur: string = "";
+
     constructor(private _serv: DataService, private _authSrv: AuthService) { }
 
     ngOnInit() {
@@ -50,7 +52,7 @@ export class PlanningComponent implements OnInit {
                 this.connecte = valeurObtenue;
                 this.afficherMission();
             },
-            error => { },
+            error => this.messageErreur = error.error,
             () => { });
     }
 

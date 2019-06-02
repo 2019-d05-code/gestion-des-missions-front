@@ -12,6 +12,9 @@ import { CollConn } from '../modeles/Collaborateur';
     styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
+
+    messageErreur: string = "";
+
     id: Number;
     messageOk: string;
     trierPar = '';
@@ -29,7 +32,8 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.collegue = collegue;
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
-        });
+        },
+            error => this.messageErreur = error.error);
     }
 
     supprimerMission(id: number): void {
@@ -43,7 +47,9 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     updateMission(email: string): void {
         this._serv.recupererMissionCollegue(email).subscribe(coll => {
             this.listeMissionDto = coll;
-        });
+        },
+            error => this.messageErreur = error.error
+        );
     }
 
     trierMissionDateDebutAsc() {

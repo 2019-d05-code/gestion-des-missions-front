@@ -4,8 +4,9 @@
     <div class="row">
         <div class="col-lg-9 col-sm-12 mb-4 d-flex justify-content-center">
             <div class="container-fluid text-center">
-                <!-- <div class="text-center"> -->
-                <h2>Demande de mission</h2>
+                <div class="error">
+                    {{messageErreur}}
+                </div>
                 <form appDateDebutValidateur appDateFinValidateur (ngSubmit)="valider()" #createForm="ngForm">
                     <ul class="form-group">
                         <li class="row">
@@ -19,7 +20,7 @@
                                 {{createForm.errors.dateDebut}}
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Date de fin : </label>
                             <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
@@ -29,7 +30,7 @@
                                 {{createForm.errors.dateFin}}
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Nature : </label>
                             <select class="col text-left form-control" id="nature" [ngModelOptions]="{updateOn:'blur'}"
@@ -43,7 +44,7 @@
                                 Le champ doit être sélectionné !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Ville de départ :</label>
                             <input class="col text-left form-control" [ngModelOptions]="{updateOn:'blur'}"
@@ -53,7 +54,7 @@
                                 Le champ doit être rempli !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Ville d'arrivée :</label>
                             <input class="col text-left form-control" [ngModelOptions]="{updateOn:'blur'}"
@@ -63,7 +64,7 @@
                                 Le champ doit être rempli !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Transport : </label>
                             <select class="col form-control" id="selectTransport" [ngModelOptions]="{updateOn:'blur'}"
@@ -77,18 +78,19 @@
                                 Le champ doit être sélectionné !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Estimation prime :</label>
                             <div class="col text-left"> <input class="form-control" [ngModelOptions]="{updateOn:'blur'}"
-                                    [(ngModel)]="mission.prime" type="text" name="prime" #prime="ngModel" required /> <pre> €</pre>
+                                    [(ngModel)]="mission.prime" type="text" name="prime" #prime="ngModel" required />
+                                <pre> €</pre>
                             </div>
                             <div class="col-12 error" *ngIf="(prime.dirty && prime.invalid)">
                                 Le champ doit être rempli !
                             </div>
 
                         </li>
-                        <br>
+                        <br />
                         <li class="row justify-content-center">
                             <button class=" btn btn-danger float-right" routerLink="/mission"
                                 routerLinkActive="active-link">Annuler</button>
