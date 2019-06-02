@@ -3,7 +3,7 @@ import { NatureSansId } from '../modeles/NatureSansId';
 import { NatureService } from '../services/nature.service';
 import { Router } from '@angular/router';
 import { NomNature } from '../modeles/NomNature';
-import { BoolValuer, BoolValuer2, BoolValuer3 } from '../modeles/BoolValuer';
+import { BoolValuer} from '../modeles/BoolValuer';
 
 @Component({
   selector: 'app-creation-nature',
