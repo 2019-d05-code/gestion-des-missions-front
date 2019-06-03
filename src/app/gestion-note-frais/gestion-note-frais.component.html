@@ -59,7 +59,7 @@
                         <div *ngIf="afficherActions(mission)">
                             <button class="btn btn-link"><i class="fas fa-plus-circle"
                                     routerLink="/noteDeFrais/{{mission.id}}"></i></button>
-                            <button class="btn btn-link"><i class="far fa-file-pdf"></i></button>
+                            <button class="btn btn-link"><i class="far fa-file-pdf" (click)="alertJS()"></i></button>
                         </div>
                     </td>
                 </tr>

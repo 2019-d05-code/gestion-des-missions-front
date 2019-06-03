@@ -138,4 +138,10 @@ export class GestionNoteFraisComponent implements OnInit {
             () => { }
         );
     }
+
+    alertJS() {
+        alert("Cette fonctionnalité arrivera sous peu, merci de patienter !");
+    }
+
+
 }
