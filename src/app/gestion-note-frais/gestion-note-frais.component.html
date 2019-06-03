@@ -55,10 +55,12 @@
                     <td>{{listeMissionsDtoAvecFrais[i].villeArrivee}}</td>
                     <td>{{listeMissionsDtoAvecFrais[i].transport}}</td>
                     <td>{{listeMissionsDtoAvecFrais[i].prime}} €</td>
-                    <td *ngIf="afficherActions(listeMissionsDtoAvecFrais[i])">
-                        <button class="btn btn-link"><i class="fas fa-plus-circle"
-                                routerLink="/noteDeFrais/{{listeMissionsDtoAvecFrais[i].id}}"></i></button>
-                        <button class="btn btn-link"><i class="far fa-file-pdf"></i></button>
+                    <td>
+                        <div *ngIf="afficherActions(listeMissionsDtoAvecFrais[i])">
+                            <button class="btn btn-link"><i class="fas fa-plus-circle"
+                                    routerLink="/noteDeFrais/{{listeMissionsDtoAvecFrais[i].id}}"></i></button>
+                            <button class="btn btn-link"><i class="far fa-file-pdf"></i></button>
+                        </div>
                     </td>
                 </tr>
             </ng-container>
