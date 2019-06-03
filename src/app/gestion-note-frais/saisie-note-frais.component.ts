@@ -27,6 +27,7 @@ export class SaisieNoteFraisComponent implements OnInit {
     dateFrais;
     natureFrais;
     montantFrais;
+    montantPrime;
 
     constructor(
         private route: ActivatedRoute,
@@ -96,5 +97,13 @@ export class SaisieNoteFraisComponent implements OnInit {
 
     supprimer(id) {
         this._fraisService.supprimerNoteDeFrais(id).subscribe(() => this.recupererListeNotesFrais());
+    }
+
+    calculPrime(): void {
+        this.montantPrime = 0;
+        this.listeNotesDeFrais.forEach(noteDeFrais => {
+            this.montantPrime += noteDeFrais.montant;
+        })
+        this.missionCourante.prime = this.montantPrime.toFixed(2);
     }
 }
