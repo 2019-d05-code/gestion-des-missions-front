@@ -36,6 +36,7 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import { CreationNatureComponent } from './creation-nature/creation-nature.component';
 import { PipeBool } from './pipes/pipeBool';
+import { ModifNatureComponent } from './modif-nature/modif-nature.component';
 
 
 // Use fcRoot function to inject FusionCharts library, and the modules you want to use
@@ -56,9 +57,8 @@ const routes: Routes = [
     { path: 'manager', component: ManagerValidationComponent, canActivate: [ManagerGuard] },
     { path: 'mission', component: AffichageMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
     { path: 'modifcollab/:id', component: ModifierMissionCollaborateurComponent, canActivate: [StatutConnecteService] },
+    { path: 'modifnature/:id', component: ModifNatureComponent, canActivate: [StatutConnecteService] },
 
-    //{ path: 'modifnature/:id', component: ModifierNatureComponent, canActivate: [StatutConnecteService] },
-    
 
 
     { path: 'planning', component: PlanningComponent, canActivate: [StatutConnecteService] },
@@ -86,7 +86,8 @@ const routes: Routes = [
         PrimeComponent,
         NatureComponent,
         CreationNatureComponent,
-        PipeBool
+        PipeBool,
+        ModifNatureComponent
     ],
     imports: [
         BrowserAnimationsModule,

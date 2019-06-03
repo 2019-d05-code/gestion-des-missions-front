@@ -15,6 +15,7 @@ const URL_BACKEND = environment.baseUrl;
 export class NatureService {
     private _subjectNature = new Subject<NatureSansId>();
     private _natureList = new Subject<Nature[]>();
+    private _natureForModif = new Subject<Nature>();
     boolValue: boolean;
     constructor(private _http: HttpClient) { }
 
@@ -42,6 +43,14 @@ export class NatureService {
     supprimerNature(id: Number): Observable<Nature> {
         return this._http.delete<Nature>(`${URL_BACKEND}nature/${id}`, { withCredentials: true });
 
+    }
+
+    recupererNatureAvecId(id: Number): Observable<Nature> {
+        return this._http.get<Nature>(`${URL_BACKEND}nature/${id}`, { withCredentials: true }).pipe(
+            tap(miss => {
+                this._natureForModif.next(miss);
+            })
+        );
     }
 
 }

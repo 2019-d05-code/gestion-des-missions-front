@@ -12,13 +12,12 @@ import { NomNature } from '../modeles/NomNature';
 })
 export class ModifierMissionCollaborateurComponent implements OnInit {
 
-    messageErreur: string = "";
-
     id: Number;
     mission: MissionDto = new MissionDto(null, null, null, null, null, null, null, null, null);
     natures: any = {};
     transports: any = {};
-
+    messageErreur = '';
+    messageOk = '';
     nature: any;
     transport: any;
 
@@ -61,9 +60,17 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
             .subscribe(
                 nouvelleMission => {
                     this.mission = nouvelleMission;
-                    this.router.navigate(['/mission']);
+                    this.messageErreur = undefined;
+                    this.messageOk = 'Modifier de Mission successful';
+                    setTimeout(() => this.messageOk = undefined, 4000);
+                    setTimeout(() => this.router.navigate(['/mission']), 6000);
+
                 },
-                error => this.messageErreur = error.error,
+                error => {
+                    this.messageOk = undefined;
+                    this.messageErreur = `${error.error}`;
+                    setTimeout(() => this.messageErreur = undefined, 5000);
+                },
                 () => { }
             );
     }
@@ -75,7 +82,11 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
                 this.transport = Transport[this.mission.transport];
                 this.nature = NomNature[this.mission.nature];
             },
-                error => this.messageErreur = error.error)
+                error => {
+                    this.messageOk = undefined;
+                    this.messageErreur = `${error.error}`;
+                    setTimeout(() => this.messageErreur = undefined, 5000);
+                });
     }
 }
 
