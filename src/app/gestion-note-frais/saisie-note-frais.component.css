@@ -1,0 +1,35 @@
+li
+{
+    list-style-type: none;
+}
+
+.btn .fa  {
+    border: none;
+    color:red;
+    padding: 4px 4px;
+    font-size: 16px;
+    cursor: pointer;
+    background: none;
+  }
+
+ #btnright {
+    border: none;
+    color:green;
+    padding: 4px 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .btn .fas  {
+    border: none;
+    color:blue;
+    padding: 4px 4px;
+    font-size: 42px;
+    cursor: pointer;
+    background: none;
+  }
+
+  p {
+    font-weight: bold;
+    font-size: 23px;
+  }

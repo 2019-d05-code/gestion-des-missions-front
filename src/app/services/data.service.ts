@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
 import { Mission, MissionManager, MissionSansStatus } from '../modeles/Mission';
+import { MissionDto } from '../modeles/MissionDto';
 
 import { environment } from '../../environments/environment';
+<<<<<<< HEAD
 import { MissionDto } from '../modeles/MissionDto';
 import { Collegue } from '../auth/auth.domains';
 import { Absence } from '../modeles/Absence';
+=======
+>>>>>>> master
 const URL_BACKEND = environment.baseUrl;
 
 @Injectable({

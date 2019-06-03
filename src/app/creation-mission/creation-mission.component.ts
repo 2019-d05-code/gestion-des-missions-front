@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Mission, MissionSansStatus } from '../modeles/Mission';
+import { MissionSansStatus } from '../modeles/Mission';
 import { DataService } from '../services/data.service';
 import { Transport } from '../modeles/Transport';
 import { Router } from '@angular/router';
-import { Nature } from '../modeles/Nature';
-import { Collaborateur, CollConn } from '../modeles/Collaborateur';
+import { CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
 import { NomNature } from '../modeles/NomNature';
 
@@ -15,6 +14,8 @@ import { NomNature } from '../modeles/NomNature';
 })
 export class CreationMissionComponent implements OnInit {
 
+    messageErreur = '';
+    messageOk = '';
     transports: any = {};
     natures: any = {};
     nature: any;
@@ -66,9 +67,17 @@ export class CreationMissionComponent implements OnInit {
             .subscribe(
                 nouvelleMission => {
                     this.mission = nouvelleMission;
-                    this.router.navigate(['/mission']);
+                    this.messageErreur = undefined;
+                this.messageOk = 'Addition de Mission successful';
+                setTimeout(() => this.messageOk = undefined, 4000);
+                setTimeout(() => this.router.navigate(['/mission']), 6000);
+
                 },
-                error => { },
+                error => {
+                    this.messageOk = undefined;
+                    this.messageErreur = `${error.error}`;
+                setTimeout(() => this.messageErreur = undefined, 5000);
+            },
                 () => { }
             );
 
@@ -77,7 +86,11 @@ export class CreationMissionComponent implements OnInit {
     ngOnInit() {
         this._authSrv.recupererCollConn().subscribe(
             (valeurObtenue) => { this.connecte = valeurObtenue; },
-            error => { alert(error.error); },
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
             () => { });
     }
 }

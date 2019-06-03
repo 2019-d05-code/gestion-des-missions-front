@@ -5,9 +5,12 @@ import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
+<<<<<<< HEAD
 import { Absence } from '../modeles/Absence';
 import { Collegue } from '../auth/auth.domains';
 import { Statut } from '../modeles/Statut';
+=======
+>>>>>>> master
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -15,9 +18,15 @@ import { Statut } from '../modeles/Statut';
     styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
+<<<<<<< HEAD
     // - attribut -
+=======
+
+    messageErreur = '';
+
+>>>>>>> master
     id: Number;
-    messageOk: string;
+    messageOk = '';
     trierPar = '';
     listeMission: Mission[] = new Array<Mission>();
     listeMissionDto: MissionDto[] = new Array<MissionDto>();
@@ -34,20 +43,38 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.collegue = collegue;
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
+<<<<<<< HEAD
             this.afficherAbsence(this.collegue.email);
         });
+=======
+        },
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
+        );
+>>>>>>> master
     }
 
     // - methode appelant les requetes du back -
     supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
-            this.messageOk = 'Suppression de la mission réussie';
-            setTimeout(() => this.messageOk = undefined, 1000);
             this.updateMission(this.collegue.email);
-        });
+            this.messageErreur = undefined;
+            this.messageOk = 'Suppression de la mission réussie';
+            setTimeout(() => this.messageOk = undefined, 4000);
+        },
+        error => {
+            this.messageOk = undefined;
+            this.messageErreur = `${error.error}`;
+        setTimeout(() => this.messageErreur = undefined, 5000);
+    },
+        );
     }
 
     updateMission(email: string): void {
+<<<<<<< HEAD
         this._serv.recupererMissionCollegue(email).subscribe(
             coll => { this.listeMissionDto = coll; });
     }
@@ -64,6 +91,17 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     {
         const miss: MissionDto = new MissionDto(abs.id, abs.dateDebut, abs.dateFin, 'Congé', '-', '-', '-', Statut.VALIDEE, 0);
         this.listeMissionDto.push(miss);
+=======
+        this._serv.recupererMissionCollegue(email).subscribe(coll => {
+            this.listeMissionDto = coll;
+        },
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
+        );
+>>>>>>> master
     }
 
     // - fonction de tri -

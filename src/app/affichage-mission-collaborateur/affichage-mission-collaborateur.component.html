@@ -1,5 +1,9 @@
-<br>
+<br />
 <h1>Visualisation des Missions</h1>
+
+<div class="error">
+    {{messageErreur}}
+</div>
 
 <div class="row">
     <div class="col-12">
@@ -106,7 +110,12 @@
             </tbody>
         </table>
     </div>
-
+    <div *ngIf="messageErreur" class="alert alert-danger">
+        <p>{{ messageErreur }}</p>
+      </div>
+      <div *ngIf="messageOk" class="alert alert-success">
+        <p>{{ messageOk }}</p>
+      </div>
     <div class="col-12 offset-lg-5 col-lg-2 offset-lg-5">
         <input class="btn btn-primary" routerLink="/creation-mission" routerLinkActive="active-link"
             value="Nouvelle Mission" />

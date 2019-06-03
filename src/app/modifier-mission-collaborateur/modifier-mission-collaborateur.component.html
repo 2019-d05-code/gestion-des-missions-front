@@ -1,9 +1,13 @@
+<br />
+<h1>Demande de Mission</h1>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-9 col-sm-12 mb-4 d-flex justify-content-center">
             <div class="container-fluid text-center">
-                <!-- <div class="text-center"> -->
-                <h2>modification de mission</h2>
+                <div class="error">
+                    {{messageErreur}}
+                </div>
                 <form appDateFinValidateur appDateDebutValidateur (ngSubmit)="valider()" #modifForm="ngForm">
                     <ul class="form-group">
                         <li class="row">
@@ -14,7 +18,7 @@
                                 {{modifForm.errors.dateDebut}}
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Date de fin : </label>
                             <input class="col form-control" [(ngModel)]="mission.dateFin" type="date" name="dateFin"
@@ -23,7 +27,7 @@
                                 {{modifForm.errors.dateFin}}
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Nature : </label>
                             <select class="col text-left form-control" id="nature" [ngModelOptions]="{updateOn:'blur'}"
@@ -37,7 +41,7 @@
                                 Le champ doit être sélectionné !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Ville de départ :</label>
                             <input class="col text-left form-control" [(ngModel)]="mission.villeDepart" type="text"
@@ -46,7 +50,7 @@
                                 Le champ doit être rempli !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Ville d'arrivée :</label>
                             <input class="col text-left form-control" [(ngModel)]="mission.villeArrivee" type="text"
@@ -55,7 +59,7 @@
                                 Le champ doit être rempli !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Transport : </label>
                             <select class="col form-control" id="transport" [(ngModel)]="transport"
@@ -69,7 +73,7 @@
                                 Le champ doit être sélectionné !
                             </div>
                         </li>
-                        <br>
+                        <br />
                         <li class="row">
                             <label class="col text-right">Estimation prime :</label>
                             <p class="col text-left form-control"> <input id="prime" [(ngModel)]="mission.prime"
@@ -78,6 +82,13 @@
                                 Le champ doit être rempli !
                             </div>
                         </li>
+                        <br />
+                        <div *ngIf="messageErreur" class="alert alert-danger">
+                            <p>{{ messageErreur }}</p>
+                          </div>
+                          <div *ngIf="messageOk" class="alert alert-success">
+                            <p>{{ messageOk }}</p>
+                          </div>
                         <br>
                         <li class="row justify-content-center">
                             <button class=" btn btn-danger float-right" routerLink="/mission"

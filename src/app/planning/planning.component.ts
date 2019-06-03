@@ -48,6 +48,8 @@ export class PlanningComponent implements OnInit {
     events: Observable<CalendarEvent[]>;
     eventAbs: Observable<CalendarEvent[]>;
 
+    messageErreur: string = "";
+
     constructor(private _serv: DataService, private _authSrv: AuthService) { }
 
     ngOnInit() {
@@ -59,7 +61,7 @@ export class PlanningComponent implements OnInit {
                 this.afficherAbsence(this.connecte.email);
                 //this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } );
             },
-            error => { },
+            error => this.messageErreur = error.error,
             () => { });
     }
 

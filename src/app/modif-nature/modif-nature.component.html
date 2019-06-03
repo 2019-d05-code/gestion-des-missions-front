@@ -1,0 +1,146 @@
+<h1>Demande de Nature</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9 col-sm-12 mb-4 d-flex justify-content-center">
+            <div class="container-fluid text-center">
+                <!-- <div class="text-center"> -->
+
+                <form appDateDebutValidateur appDateFinValidateur (ngSubmit)="valider()" #createForm="ngForm">
+                    <ul class="form-group">
+                        <li class="row">
+                            <label class="col text-right">Nature : </label>
+                            <select class="col text-left form-control" id="nature" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="nature" #nature_id="ngModel" name="nature" required>
+                                <optgroup label="-- Sélectionez la nature de la mission"></optgroup>
+                                <option *ngFor="let nature of natures" [value]="nature.name_id">
+                                    {{nature.name}}
+                                </option>
+                            </select>
+                            <div class="col-12 error" *ngIf="nature_id.invalid && nature_id.dirty">
+                                Le champ doit être sélectionné !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Facturee : </label>
+                            <select class="col form-control" id="selectFacturee" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="bool" #facturee_id="ngModel" name="facturee" required>
+                                <optgroup label="-- Choisissez un type de boolean"></optgroup>
+                                <option *ngFor="let facturee of boolValuer" [value]="facturee.name_id">
+                                    {{facturee.name}}
+                                </option>
+                            </select>
+                            <div class="col-12 error" *ngIf="facturee_id.invalid && facturee_id.dirty">
+                                Le champ doit être sélectionné !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Prime :</label>
+                            <select class="col form-control" id="selectPrime" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="bool2" name="prime" #prime_id="ngModel" required>
+                                <optgroup label="-- Choisissez un type de boolean"></optgroup>
+                                <option *ngFor="let prime of boolValuer" [value]="prime.name_id">
+                                    {{prime.name}}
+                                </option>
+                            </select>
+                            <div class="col-12 error" *ngIf="(prime_id.dirty && prime_id.invalid)">
+                                Le champ doit être rempli !
+                            </div>
+
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">TauxJournalierMoyen : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="natureMission.tauxJournalierMoyen" type="text" name="tauxJournalierMoyen"
+                                #tauxJournalierMoyen_id="ngModel" required />
+
+                            <div class="col-12 error" *ngIf="tauxJournalierMoyen_id.invalid && tauxJournalierMoyen_id.dirty">
+                                <!-- {{createForm.errors.tauxJournalierMoyen}} -->
+                                Le champ doit être rempli !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">PourcentPrime : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="natureMission.pourcentPrime" type="text" name="pourcentPrime"
+                                #pourcentPrime_id="ngModel" required />
+
+                            <div class="col-12 error" *ngIf="pourcentPrime_id.invalid && pourcentPrime_id.dirty">
+                                <!-- {{createForm.errors.tauxJournalierMoyen}} -->
+                                Le champ doit être rempli !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">PlafondQuotidien : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="natureMission.plafondQuotidien" type="text" name="plafondQuotidien"
+                                #plafondQuotidien_id="ngModel" required />
+
+                            <div class="col-12 error" *ngIf="plafondQuotidien_id.invalid && plafondQuotidien_id.dirty">
+                                <!-- {{createForm.errors.tauxJournalierMoyen}} -->
+                                Le champ doit être rempli !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">DepassementFrais : </label>
+                            <select class="col form-control" id="selectDepassementFrais"
+                                [ngModelOptions]="{updateOn:'blur'}" [(ngModel)]="boolValuer.name_id"
+                                #depassement_id="ngModel" name="depassement" required>
+                                <optgroup label="-- Choisissez un type de boolean"></optgroup>
+                                <option *ngFor="let depassement of boolValuer" [value]="depassement.name_id">
+                                    {{depassement.name}}
+                                </option>
+                            </select>
+                            <div class="col-12 error" *ngIf="depassement_id.invalid && depassement_id.dirty">
+                                Le champ doit être sélectionné !
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Date de début : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="natureMission.dateDebut" type="date" name="dateDebut" #dateDebut="ngModel"
+                                required />
+
+                            <div class="col-12 error"
+                                *ngIf="createForm.errors && createForm.errors.dateDebut && dateDebut.dirty">
+                                {{createForm.errors.dateDebut}}
+                            </div>
+                        </li>
+                        <br>
+                        <li class="row">
+                            <label class="col text-right">Date de fin : </label>
+                            <input class="col form-control" [ngModelOptions]="{updateOn:'blur'}"
+                                [(ngModel)]="natureMission.dateFin" type="date" name="dateFin" #dateFin="ngModel"
+                                required />
+                            <br>
+                            <div class="col-12 error" *ngIf="createForm.errors && createForm.errors.dateFin">
+                                {{createForm.errors.dateFin}}
+                            </div>
+                        </li>
+                        <br>
+                        <div *ngIf="messageErreur" class="alert alert-danger">
+                            <p>{{ messageErreur }}</p>
+                          </div>
+                          <div *ngIf="messageOk" class="alert alert-success">
+                            <p>{{ messageOk }}</p>
+                          </div>
+                            <br>
+                        <li class="row justify-content-center">
+                            <button class=" btn btn-danger float-right" routerLink="/nature"
+                                routerLinkActive="active-link">Annuler</button>
+                            <button class=" btn btn-success float-left" type="submit"
+                                [disabled]="createForm.invalid">Valider</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

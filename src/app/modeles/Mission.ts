@@ -1,4 +1,5 @@
 import { Statut } from './Statut';
+import { Frais } from './Frais';
 
 export class Mission {
 
@@ -10,6 +11,20 @@ export class Mission {
         public villeArrivee: string,
         public transport: string,
         public statut: Statut,
+        public emailColl: string,
+    ) { }
+}
+
+export class MissionAvecFrais {
+
+    constructor(
+        public dateDebut: Date,
+        public dateFin: Date,
+        public nature: string,
+        public villeDepart: string,
+        public villeArrivee: string,
+        public transport: string,
+        public frais: Frais,
         public emailColl: string,
     ) { }
 }
