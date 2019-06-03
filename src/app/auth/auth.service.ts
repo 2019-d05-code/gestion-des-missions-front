@@ -115,4 +115,32 @@ export class AuthService {
         return this._http.get<any>(`${environment.baseUrl}me`, { withCredentials: true })
             .pipe(map(col => new CollConn(col.email, col.nom, col.prenom, col.roles)));
     }
+
+    // connecter
+    connecterAbsence(email: string, mdp: string): Observable<Collegue> {
+
+        const config = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+        };
+
+        return this._http.post('https://absences-back.cleverapps.io/login',
+            new HttpParams().set('username', email).set('password', mdp), config)
+            .pipe(
+                map(colServeur => new Collegue(colServeur)),
+                tap(col => this.collegueConnecteSub.next(col))
+            );
+    }
+
+    verifierAuthentificationAbs(): Observable<Collegue> {
+        return this.collegueConnecteSub.getValue().estAnonyme() ?
+            this._http.get<Collegue>('https://absences-back.cleverapps.io/me', { withCredentials: true })
+                .pipe(
+                    map(colServeur => new Collegue(colServeur)),
+                    tap(col => this.collegueConnecteSub.next(col)),
+                    catchError(err => of(COLLEGUE_ANONYME))
+                ) : of(this.collegueConnecteSub.getValue())
+            ;
+    }
 }

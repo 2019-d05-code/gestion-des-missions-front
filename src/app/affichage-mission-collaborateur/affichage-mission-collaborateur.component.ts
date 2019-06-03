@@ -5,6 +5,10 @@ import { MissionDto } from '../modeles/MissionDto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { CollConn } from '../modeles/Collaborateur';
+import { Absence } from '../modeles/Absence';
+import { Collegue } from '../auth/auth.domains';
+import { Statut } from '../modeles/Statut';
+
 
 @Component({
     selector: 'app-affichage-mission-collaborateur',
@@ -12,18 +16,18 @@ import { CollConn } from '../modeles/Collaborateur';
     styleUrls: ['./affichage-mission-collaborateur.component.css']
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
-
+    // - attribut -
     messageErreur = '';
-
     id: Number;
     messageOk = '';
     trierPar = '';
-
     listeMission: Mission[] = new Array<Mission>();
-    listeMissionDto: MissionDto[];
-
+    listeMissionDto: MissionDto[] = new Array<MissionDto>();
+    listeAbsence: Absence[] = new Array<Absence>();
     collegue: CollConn = new CollConn(null, null, null);
+    col: Collegue;
 
+    // - constructeur et données d'initialisation de la page -
     constructor(private _serv: DataService, private router: Router, private route: ActivatedRoute,
         private authentificationService: AuthService) { }
 
@@ -32,6 +36,8 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.collegue = collegue;
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
+
+            this.afficherAbsence(this.collegue.email);
         },
             error => {
                 this.messageOk = undefined;
@@ -39,8 +45,10 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             setTimeout(() => this.messageErreur = undefined, 5000);
         },
         );
+
     }
 
+    // - methode appelant les requetes du back -
     supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
             this.updateMission(this.collegue.email);
@@ -57,17 +65,29 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     }
 
     updateMission(email: string): void {
-        this._serv.recupererMissionCollegue(email).subscribe(coll => {
-            this.listeMissionDto = coll;
-        },
-            error => {
+        this._serv.recupererMissionCollegue(email).subscribe(
+            coll => { this.listeMissionDto = coll; });
+    }
+
+    afficherAbsence(email: string) {
+        this._serv.recupererListesAbsence(email).subscribe(
+            liste => { this.listeAbsence = liste;
+                     this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },
+            err => {
                 this.messageOk = undefined;
-                this.messageErreur = `${error.error}`;
+                this.messageErreur = `${err.error}`;
             setTimeout(() => this.messageErreur = undefined, 5000);
-        },
+        }
         );
     }
 
+    absVersMiss(abs: Absence)
+    {
+        const miss: MissionDto = new MissionDto(abs.id, abs.dateDebut, abs.dateFin, 'Congé', '-', '-', '-', Statut.VALIDEE, 0);
+        this.listeMissionDto.push(miss);
+    }
+
+    // - fonction de tri -
     trierMissionDateDebutAsc() {
         this.listeMissionDto.sort(
             (missiona: MissionDto, missionb: MissionDto) => {

@@ -3,5 +3,6 @@ export enum NomNature {
     Conseil,
     Expertise,
     Technique,
-    Formation
+    Formation,
+    Congé
 }

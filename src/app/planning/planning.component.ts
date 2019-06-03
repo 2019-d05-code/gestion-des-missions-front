@@ -10,7 +10,11 @@ import { MissionManager } from '../modeles/Mission';
 import { CollConn } from '../modeles/Collaborateur';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, flatMap } from 'rxjs/operators';
+import { Absence } from '../modeles/Absence';
+import { Collegue } from '../auth/auth.domains';
+import { MissionDto } from '../modeles/MissionDto';
+import { Statut } from '../modeles/Statut';
 
 const colors: any = {
     green: { primary: '#008000', secondary: '#00cc00' },
@@ -28,8 +32,10 @@ const colors: any = {
 })
 export class PlanningComponent implements OnInit {
     // - attribut foncrionnel -
-    listeMission: MissionManager[];
+    listeMission: MissionDto[] = new Array<MissionDto>();
     connecte: CollConn;
+    listeAbsence: Absence[] = new Array<Absence>();
+    col: Collegue;
 
     // - attribut calendrier -
     view: CalendarView = CalendarView.Month;
@@ -40,6 +46,7 @@ export class PlanningComponent implements OnInit {
     weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
     weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
     events: Observable<CalendarEvent[]>;
+    eventAbs: Observable<CalendarEvent[]>;
 
     messageErreur: string = "";
 
@@ -51,6 +58,8 @@ export class PlanningComponent implements OnInit {
             (valeurObtenue) => {
                 this.connecte = valeurObtenue;
                 this.afficherMission();
+                this.afficherAbsence(this.connecte.email);
+                //this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } );
             },
             error => this.messageErreur = error.error,
             () => { });
@@ -59,8 +68,14 @@ export class PlanningComponent implements OnInit {
     afficherMission() {
         // recuperation de la liste des missions du collegue
         this.events = this._serv.recupererMissionCollegue(this.connecte.email)
-            .pipe(map(
-                liste => liste.map(mission => {
+            .pipe(tap( liste => {
+
+
+            } ),
+
+
+
+                map(liste => liste.map(mission => {
                     let couleur = colors.yellow;
                     if (mission.nature === 'Congé') { couleur = colors.red; }
                     else { couleur = colors.blue; }
@@ -75,6 +90,21 @@ export class PlanningComponent implements OnInit {
                 })
             ));
 
+    }
+
+    afficherAbsence(email: string) {
+    this._serv.recupererListesAbsence(this.connecte.email)
+            .subscribe(
+            abs => { this.listeAbsence = abs;
+                     this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },
+            err => { alert(`${err.name} : ${err.message}`); }
+        );
+    }
+
+    absVersMiss(abs: Absence)
+    {
+        const miss: MissionDto = new MissionDto(abs.id, abs.dateDebut, abs.dateFin, 'Congé', '-', '-', '-', Statut.VALIDEE, 0);
+        this.listeMission.push(miss);
     }
 
     beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
