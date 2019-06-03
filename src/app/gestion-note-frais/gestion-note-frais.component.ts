@@ -42,17 +42,22 @@ export class GestionNoteFraisComponent implements OnInit {
         });
     }
 
-    calculPrime(): void {
+    calculPrime(id): void {
         this.montantPrime = 0;
         this.listeNotesDeFrais.forEach(noteDeFrais => {
             this.montantPrime += noteDeFrais.montant;
         })
-        this.missionCourante.prime = this.montantPrime.toFixed(2);
+
+        this.listeMissionsDtoAvecFrais.filter(mission => mission.id == id).forEach(mission => mission.prime = this.montantPrime.toFixed(2));
     }
 
     updateMissionAvecFrais(email: string): void {
         this._fraisService.recupererListeMissionsFraisParCollegue(email).subscribe(coll => {
             this.listeMissionsDtoAvecFrais = coll;
+
+            for (let mission of this.listeMissionsDtoAvecFrais) {
+                this.recupererListeNotesFrais(mission.id);
+            }
         });
     }
 
@@ -117,8 +122,9 @@ export class GestionNoteFraisComponent implements OnInit {
     recupererListeNotesFrais(idMission): void {
         this._http.get<Frais[]>(`${URL_BACKEND}frais/${idMission}`).subscribe(
             (listeNotesDeFrais: Frais[]) => {
+                console.log(idMission);
                 this.listeNotesDeFrais = listeNotesDeFrais;
-                this.calculPrime();
+                this.calculPrime(idMission);
             },
             (error: Error) => { },
             () => { }
