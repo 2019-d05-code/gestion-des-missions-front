@@ -25,11 +25,25 @@ export class AuthComponent implements OnInit {
         this._authSrv.connecter(this.collegue.email, this.collegue.motDePasse)
             .subscribe(
                 // en cas de succès, redirection vers la page /tech
-                col => this._router.navigate(['/accueil']),
+                col => {
+                    this._authSrv.connecterAbsence(this.collegue.email, this.collegue.motDePasse)
+                        .subscribe(
+                            // en cas de succès, redirection vers la page /tech
+                            col => {
+                                this._router.navigate(['/accueil']);
+                            },
+
+                            // en cas d'erreur, affichage d'un message d'erreur
+                            err => this.err = true
+                        );
+
+                },
 
                 // en cas d'erreur, affichage d'un message d'erreur
                 err => this.err = true
             );
+
+
     }
 
 }

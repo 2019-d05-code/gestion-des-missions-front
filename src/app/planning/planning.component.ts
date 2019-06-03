@@ -55,8 +55,8 @@ export class PlanningComponent implements OnInit {
         this._authSrv.recupererCollConn().subscribe(
             (valeurObtenue) => {
                 this.connecte = valeurObtenue;
-                this.afficherAbsence(this.connecte.email);
                 this.afficherMission();
+                this.afficherAbsence(this.connecte.email);
                 //this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } );
             },
             error => { },
@@ -66,7 +66,13 @@ export class PlanningComponent implements OnInit {
     afficherMission() {
         // recuperation de la liste des missions du collegue
         this.events = this._serv.recupererMissionCollegue(this.connecte.email)
-            .pipe(tap( liste => liste = this.listeMission ),
+            .pipe(tap( liste => {
+
+
+            } ),
+
+
+
                 map(liste => liste.map(mission => {
                     let couleur = colors.yellow;
                     if (mission.nature === 'Congé') { couleur = colors.red; }
@@ -85,22 +91,7 @@ export class PlanningComponent implements OnInit {
     }
 
     afficherAbsence(email: string) {
-        /*this.eventAbs = */this._serv.recupererListesAbsence(this.connecte.email)
-            /*.pipe(map(
-                liste =>
-                liste.map(mission => {
-                    let couleur = colors.yellow;
-                    if (mission.type === 'Congé') { couleur = colors.red; }
-                    else { couleur = colors.blue; }
-
-                    // ajout des evenements dans le calendrier
-                    return <CalendarEvent>{
-                        start: startOfDay(mission.dateDebut),
-                        end: endOfDay(mission.dateFin),
-                        title: `${mission.type}`,
-                        color: couleur,
-                    };
-                })*/
+    this._serv.recupererListesAbsence(this.connecte.email)
             .subscribe(
             abs => { this.listeAbsence = abs;
                      this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },

@@ -35,7 +35,6 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
             this.afficherAbsence(this.collegue.email);
-            this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } );
         });
     }
 
@@ -54,13 +53,8 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
     }
 
     afficherAbsence(email: string) {
-        this.authentificationService.verifierAuthentificationAbs().subscribe(
-            col => { this.col = col; },
-            err => { alert(`${err.name} : ${err.message}`); }
-        );
-
         this._serv.recupererListesAbsence(email).subscribe(
-            abs => { this.listeAbsence = abs;
+            liste => { this.listeAbsence = liste;
                      this.listeAbsence.forEach(abs => {this.absVersMiss(abs); } ); },
             err => { alert(`${err.name} : ${err.message}`); }
         );
