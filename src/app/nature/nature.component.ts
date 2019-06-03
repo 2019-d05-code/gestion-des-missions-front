@@ -10,15 +10,15 @@ import { Nature } from '../modeles/Nature';
     styleUrls: [`./nature.component.css`]
 })
 export class NatureComponent implements OnInit {
-     id: number;
+    id: number;
     listeNature: Nature[];
     messageErreur = '';
-messageOk = '';
-    constructor(private _serv: NatureService , private router: Router, private route: ActivatedRoute
-        ) { }
+    messageOk = '';
+    constructor(private _serv: NatureService, private router: Router, private route: ActivatedRoute
+    ) { }
 
     ngOnInit() {
-        this.updateNature() ;
+        this.updateNature();
         this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     }
 
@@ -35,11 +35,11 @@ messageOk = '';
             this.messageOk = 'Suppression de la mission réussie';
             setTimeout(() => this.messageOk = undefined, 4000);
         },
-        error => {
-            this.messageOk = undefined;
-            this.messageErreur = `${error.error}`;
-        setTimeout(() => this.messageErreur = undefined, 5000);
-    },
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+                setTimeout(() => this.messageErreur = undefined, 4000);
+            },
         );
     }
 
