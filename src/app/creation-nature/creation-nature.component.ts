@@ -8,7 +8,7 @@ import { BoolValuer} from '../modeles/BoolValuer';
 @Component({
   selector: 'app-creation-nature',
   templateUrl: `./creation-nature.component.html`,
-  styles: ['./creation-nature.component.css']
+  styleUrls: ['./creation-nature.component.css']
 })
 export class CreationNatureComponent implements OnInit {
 natureMission: NatureSansId = new NatureSansId(null, null, null, null, null, null, null, null, null);
@@ -17,6 +17,8 @@ boolValuer: any = {};
 nature: any;
 bool: any;
 bool2: any ;
+messageErreur = '';
+messageOk = '';
   constructor(private _service: NatureService, private router: Router) {
     this.boolValuer = [{
         name_id: 0,
@@ -56,9 +58,16 @@ valider() {
         .subscribe(
             nouvelleMission => {
                 this.natureMission = nouvelleMission;
-                this.router.navigate(['/nature']);
+                this.messageErreur = undefined;
+                this.messageOk = 'Addition de Nature successful';
+                setTimeout(() => this.messageOk = undefined, 4000);
+                setTimeout(() => this.router.navigate(['/nature']), 6000);
             },
-            error => { },
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
             () => { }
         );
 

@@ -12,7 +12,8 @@ import { Nature } from '../modeles/Nature';
 export class NatureComponent implements OnInit {
      id: number;
     listeNature: Nature[];
-    messageOk: string;
+    messageErreur = '';
+messageOk = '';
     constructor(private _serv: NatureService , private router: Router, private route: ActivatedRoute
         ) { }
 
@@ -29,10 +30,17 @@ export class NatureComponent implements OnInit {
 
     supprimerNature(id: number): void {
         this._serv.supprimerNature(id).subscribe(() => {
-            this.messageOk = 'Suppression de la mission réussie';
-            setTimeout(() => this.messageOk = undefined, 1000);
             this.updateNature();
-        });
+            this.messageErreur = undefined;
+            this.messageOk = 'Suppression de la mission réussie';
+            setTimeout(() => this.messageOk = undefined, 4000);
+        },
+        error => {
+            this.messageOk = undefined;
+            this.messageErreur = `${error.error}`;
+        setTimeout(() => this.messageErreur = undefined, 5000);
+    },
+        );
     }
 
 }

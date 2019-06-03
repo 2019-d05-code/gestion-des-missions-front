@@ -13,10 +13,10 @@ import { CollConn } from '../modeles/Collaborateur';
 })
 export class AffichageMissionCollaborateurComponent implements OnInit {
 
-    messageErreur: string = "";
+    messageErreur = '';
 
     id: Number;
-    messageOk: string;
+    messageOk = '';
     trierPar = '';
 
     listeMission: Mission[] = new Array<Mission>();
@@ -33,22 +33,38 @@ export class AffichageMissionCollaborateurComponent implements OnInit {
             this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.updateMission(this.collegue.email);
         },
-            error => this.messageErreur = error.error);
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
+        );
     }
 
     supprimerMission(id: number): void {
         this._serv.supprimerMission(id).subscribe(() => {
-            this.messageOk = 'Suppression de la mission réussie';
-            setTimeout(() => this.messageOk = undefined, 1000);
             this.updateMission(this.collegue.email);
-        });
+            this.messageErreur = undefined;
+            this.messageOk = 'Suppression de la mission réussie';
+            setTimeout(() => this.messageOk = undefined, 4000);
+        },
+        error => {
+            this.messageOk = undefined;
+            this.messageErreur = `${error.error}`;
+        setTimeout(() => this.messageErreur = undefined, 5000);
+    },
+        );
     }
 
     updateMission(email: string): void {
         this._serv.recupererMissionCollegue(email).subscribe(coll => {
             this.listeMissionDto = coll;
         },
-            error => this.messageErreur = error.error
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
         );
     }
 

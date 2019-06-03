@@ -14,7 +14,8 @@ import { NomNature } from '../modeles/NomNature';
 })
 export class CreationMissionComponent implements OnInit {
 
-    messageErreur: string = "";
+    messageErreur = '';
+    messageOk = '';
     transports: any = {};
     natures: any = {};
     nature: any;
@@ -66,9 +67,17 @@ export class CreationMissionComponent implements OnInit {
             .subscribe(
                 nouvelleMission => {
                     this.mission = nouvelleMission;
-                    this.router.navigate(['/mission']);
+                    this.messageErreur = undefined;
+                this.messageOk = 'Addition de Mission successful';
+                setTimeout(() => this.messageOk = undefined, 4000);
+                setTimeout(() => this.router.navigate(['/mission']), 6000);
+
                 },
-                error => { this.messageErreur = error.error },
+                error => {
+                    this.messageOk = undefined;
+                    this.messageErreur = `${error.error}`;
+                setTimeout(() => this.messageErreur = undefined, 5000);
+            },
                 () => { }
             );
 
@@ -77,7 +86,11 @@ export class CreationMissionComponent implements OnInit {
     ngOnInit() {
         this._authSrv.recupererCollConn().subscribe(
             (valeurObtenue) => { this.connecte = valeurObtenue; },
-            error => { this.messageErreur = error.error },
+            error => {
+                this.messageOk = undefined;
+                this.messageErreur = `${error.error}`;
+            setTimeout(() => this.messageErreur = undefined, 5000);
+        },
             () => { });
     }
 }
