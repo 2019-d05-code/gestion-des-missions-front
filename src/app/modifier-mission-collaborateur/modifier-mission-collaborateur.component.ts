@@ -61,16 +61,16 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
                 nouvelleMission => {
                     this.mission = nouvelleMission;
                     this.messageErreur = undefined;
-                this.messageOk = 'Modifier de Mission successful';
-                setTimeout(() => this.messageOk = undefined, 4000);
-                setTimeout(() => this.router.navigate(['/mission']), 6000);
+                    this.messageOk = 'Modifier de Mission successful';
+                    setTimeout(() => this.messageOk = undefined, 4000);
+                    setTimeout(() => this.router.navigate(['/mission']), 6000);
 
                 },
                 error => {
                     this.messageOk = undefined;
                     this.messageErreur = `${error.error}`;
-                setTimeout(() => this.messageErreur = undefined, 5000);
-            },
+                    setTimeout(() => this.messageErreur = undefined, 5000);
+                },
                 () => { }
             );
     }
@@ -85,8 +85,8 @@ export class ModifierMissionCollaborateurComponent implements OnInit {
                 error => {
                     this.messageOk = undefined;
                     this.messageErreur = `${error.error}`;
-                setTimeout(() => this.messageErreur = undefined, 5000);
-            },
+                    setTimeout(() => this.messageErreur = undefined, 5000);
+                });
     }
 }
 
